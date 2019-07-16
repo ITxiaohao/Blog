@@ -10,7 +10,7 @@
     "dev": "./node_modules/.bin/vuepress dev .",
     "build": "./node_modules/.bin/vuepress build .",
     "deploy": "bash deploy.sh",
-    "commit": "git-cz",
+    "commit": "git-cz && git push",
     "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0",
     "release": "release-it",
     "version": "npm run release && npm run changelog"
@@ -19,7 +19,6 @@
   "author": "Zsh",
   "license": "MIT",
   "dependencies": {
-    "husky": "^3.0.0",
     "prettier": "^1.18.2",
     "vuepress": "^1.0.2"
   },
@@ -29,6 +28,7 @@
     "conventional-changelog-cli": "^2.0.21",
     "conventional-changelog-custom-config": "^0.1.4",
     "cz-conventional-changelog": "^2.1.0",
+    "husky": "^3.0.0",
     "release-it": "^12.3.3"
   },
   "husky": {

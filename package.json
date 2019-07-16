@@ -1,0 +1,47 @@
+{
+  "name": "vuepress-zsh",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "./node_modules/.bin/prettier --check ./**/*.md",
+    "lint": "./node_modules/.bin/prettier --write ./**/*.md",
+    "dev": "./node_modules/.bin/vuepress dev .",
+    "build": "./node_modules/.bin/vuepress build .",
+    "deploy": "bash deploy.sh",
+    "commit": "git-cz",
+    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0",
+    "release": "release-it",
+    "version": "npm run release && npm run changelog"
+  },
+  "keywords": [],
+  "author": "Zsh",
+  "license": "MIT",
+  "dependencies": {
+    "husky": "^3.0.0",
+    "prettier": "^1.18.2",
+    "vuepress": "^1.0.2"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.2",
+    "commitizen": "^3.1.1",
+    "conventional-changelog-cli": "^2.0.21",
+    "conventional-changelog-custom-config": "^0.1.4",
+    "cz-conventional-changelog": "^2.1.0",
+    "release-it": "^12.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "changelog": {
+    "emojis": true
+  }
+}

@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.2",
+    "@vuepress/plugin-pwa": "^1.0.0-rc.1",
     "commitizen": "^3.1.1",
     "conventional-changelog-cli": "^2.0.21",
     "conventional-changelog-custom-config": "^0.1.4",

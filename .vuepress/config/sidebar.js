@@ -1,6 +1,44 @@
-// const { generateWebpack } = require('./utils')
-// const webpack4 = generateWebpack()
-// console.log('webpack4', webpack4)
+// const { generateFileName } = require('./utils')
+// console.log('webpack4', generateOrderFileName('/webpack4'))
+// console.log('小程序', generateFileName('/前端知识体系/小程序'))
+const git = [
+  {
+    title: 'Git',
+    collapsable: false,
+    children: ['从 commit 规范化到发布自定义 CHANGELOG 模版.md', 'tag.md']
+  }
+]
+
+const frontendFrame = [
+  {
+    title: 'Vue',
+    collapsable: false,
+    children: ['Vue/Vue-Cli3.md']
+  },
+  {
+    title: '小程序',
+    collapsable: false,
+    children: [
+      '小程序/注意事项及踩过的坑.md',
+      '小程序/多张图片上传及表单提交.md',
+      '小程序/小程序更新机制.md',
+      '小程序/用 Promise 封装 wx-request.md'
+    ]
+  }
+]
+
+const frontend = [
+  {
+    title: 'JavaScript',
+    collapsable: false,
+    children: ['JS/JavaScript 基础-上.md']
+  },
+  {
+    title: 'ES6',
+    collapsable: false,
+    children: ['ES6/Promise.md', 'ES6/Proxy.md']
+  }
+]
 
 const webpack4 = [
   {
@@ -37,5 +75,8 @@ const webpack4 = [
 ]
 
 module.exports = {
+  '/Git/': git,
+  '/前端知识体系/': frontend,
+  '/前端框架/': frontendFrame,
   '/webpack4/': webpack4
 }

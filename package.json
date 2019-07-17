@@ -20,7 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "prettier": "^1.18.2",
-    "vuepress": "^1.0.2"
+    "vuepress": "^1.0.2",
+    "vuepress-plugin-comment": "^0.5.4"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.2",

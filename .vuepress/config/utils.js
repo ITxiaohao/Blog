@@ -25,19 +25,7 @@ function generateOrderFileName(path) {
 
 function generateFileName(path) {
   const oldFiles = fs.readdirSync(process.cwd() + path)
-  let arr = []
-  for (let i = 0; i < oldFiles.length; i++) {
-    let obj = {}
-    obj.fileName = oldFiles[i]
-    let index = oldFiles[i].slice(0, 2)
-    if (index.includes('：')) {
-      index = index.slice(0, 1)
-    }
-    obj.index = Number(index)
-    arr.push(obj)
-  }
-
-  return arr
+  return oldFiles
 }
 
 function sortNum(index) {

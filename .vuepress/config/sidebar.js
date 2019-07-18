@@ -1,6 +1,15 @@
 // const { generateFileName } = require('./utils')
 // console.log('webpack4', generateOrderFileName('/webpack4'))
 // console.log('小程序', generateFileName('/前端知识体系/小程序'))
+
+const server = [
+  {
+    title: '服务器部署',
+    collapsable: false,
+    children: ['Jenkins.md', 'Nginx.md']
+  }
+]
+
 const git = [
   {
     title: 'Git',
@@ -75,6 +84,7 @@ const webpack4 = [
 ]
 
 module.exports = {
+  '/服务器部署/': server,
   '/Git/': git,
   '/前端知识体系/': frontend,
   '/前端框架/': frontendFrame,

@@ -31,6 +31,11 @@ footer: MIT Licensed | Copyright © 2019 Zsh
 
 - [24 个实例入门并掌握 Webpack4](/passages/webpack4-learn-introduction/)
 
+## 🎮 服务器部署
+
+- [Jenkins](/passages/server-jenkins/)
+- [Nginx](/passages/server-nginx/)
+
 <style scoped>
 main ul:not(:last-child) {
   line-height: 2.5;

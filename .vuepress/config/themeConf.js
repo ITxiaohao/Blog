@@ -66,8 +66,25 @@ module.exports = {
               link: '/passages/git-commit/'
             }
           ]
+        },
+        {
+          text: '服务器部署',
+          items: [
+            {
+              text: 'Jenkins',
+              link: '/passages/server-jenkins/'
+            },
+            {
+              text: 'Nginx',
+              link: '/passages/server-nginx/'
+            }
+          ]
         }
       ]
+    },
+    {
+      text: '关于我',
+      link: '/about/'
     }
   ]
 }

@@ -14,6 +14,9 @@ module.exports = {
   themeConfig: themeConf,
   plugins: [
     require('./plugins/my-router'),
+    '@vuepress/back-to-top',
+    '@vuepress/medium-zoom',
+    ['@vuepress/google-analytics', { ga: 'UA-144131352-1' }],
     [
       '@vuepress/pwa',
       {

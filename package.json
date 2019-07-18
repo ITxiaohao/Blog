@@ -24,9 +24,11 @@
     "vuepress-plugin-comment": "^0.5.4"
   },
   "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.0.2",
+    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+    "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
+    "@vuepress/plugin-medium-zoom": "^1.0.0-rc.1",
     "@vuepress/plugin-pwa": "^1.0.0-rc.1",
-    "commitizen": "^3.1.1",
+    "commitizen": "^3.1.2",
     "conventional-changelog-cli": "^2.0.21",
     "conventional-changelog-custom-config": "^0.1.4",
     "cz-conventional-changelog": "^2.1.0",

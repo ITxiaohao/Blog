@@ -1,6 +1,6 @@
 ---
-title: 'Nginx'
-permalink: 'server-nginx'
+title: "Nginx"
+permalink: "server-nginx"
 ---
 
 ## 基本命令

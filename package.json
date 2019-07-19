@@ -10,10 +10,10 @@
     "dev": "./node_modules/.bin/vuepress dev .",
     "build": "./node_modules/.bin/vuepress build .",
     "deploy": "bash deploy.sh",
-    "commit": "git-cz && git push",
-    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0",
-    "release": "release-it",
-    "version": "npm run release && npm run changelog"
+    "cz": "git-cz && git push",
+    "cg": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0",
+    "r": "release-it",
+    "v": "npm run release && npm run changelog"
   },
   "keywords": [],
   "author": "Zsh",
@@ -24,15 +24,15 @@
     "vuepress-plugin-comment": "^0.5.4"
   },
   "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
-    "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
-    "@vuepress/plugin-medium-zoom": "^1.0.0-rc.1",
-    "@vuepress/plugin-pwa": "^1.0.0-rc.1",
-    "commitizen": "^3.1.2",
+    "@vuepress/plugin-back-to-top": "^1.0.2",
+    "@vuepress/plugin-google-analytics": "^1.0.2",
+    "@vuepress/plugin-medium-zoom": "^1.0.2",
+    "@vuepress/plugin-pwa": "^1.0.2",
+    "commitizen": "^4.0.1",
     "conventional-changelog-cli": "^2.0.21",
-    "conventional-changelog-custom-config": "^0.1.4",
+    "conventional-changelog-custom-config": "^0.2.0",
     "cz-conventional-changelog": "^2.1.0",
-    "husky": "^3.0.0",
+    "husky": "^3.0.1",
     "release-it": "^12.3.3"
   },
   "husky": {

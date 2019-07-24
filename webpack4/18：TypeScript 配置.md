@@ -12,13 +12,13 @@ permalink: 'webpack4-typescript'
 
 ```ts
 class Greeter {
-	greeting: string
-	constructor(message: string) {
-		this.greeting = message
-	}
-	greet() {
-		return 'Hello, ' + this.greeting
-	}
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  greet() {
+    return 'Hello, ' + this.greeting
+  }
 }
 
 let greeter = new Greeter('world')
@@ -36,21 +36,21 @@ npm i ts-loader typescript -D
 const path = require('path')
 
 module.exports = {
-	mode: 'production',
-	entry: './src/index.ts',
-	module: {
-		rules: [
-			{
-				test: /\.ts?$/,
-				use: 'ts-loader',
-				exclude: /node_modules/
-			}
-		]
-	},
-	output: {
-		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist')
-	}
+  mode: 'production',
+  entry: './src/index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
 }
 ```
 
@@ -58,9 +58,9 @@ module.exports = {
 
 ```json
 {
-	"scripts": {
-		"build": "webpack"
-	}
+  "scripts": {
+    "build": "webpack"
+  }
 }
 ```
 
@@ -78,12 +78,12 @@ module.exports = {
 
 ```json
 {
-	"compileerOptions": {
-		"outDir": "./dist", // 写不写都行
-		"module": "es6", // 用 es6 模块引入 import
-		"target": "es5", // 打包成 es5
-		"allowJs": true // 允许在 ts 中也能引入 js 的文件
-	}
+  "compileerOptions": {
+    "outDir": "./dist", // 写不写都行
+    "module": "es6", // 用 es6 模块引入 import
+    "target": "es5", // 打包成 es5
+    "allowJs": true // 允许在 ts 中也能引入 js 的文件
+  }
 }
 ```
 
@@ -101,13 +101,13 @@ npm i lodash
 import _ from 'lodash'
 
 class Greeter {
-	greeting: string
-	constructor(message: string) {
-		this.greeting = message
-	}
-	greet() {
-		return _.join()
-	}
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  greet() {
+    return _.join()
+  }
 }
 
 let greeter = new Greeter('world')

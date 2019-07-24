@@ -19,15 +19,15 @@ permalink: 'webpack4-tree-shaking'
 ```js
 // util.js
 export function a() {
-	return 'this is function "a"'
+  return 'this is function "a"'
 }
 
 export function b() {
-	return 'this is function "b"'
+  return 'this is function "b"'
 }
 
 export function c() {
-	return 'this is function "c"'
+  return 'this is function "c"'
 }
 ```
 

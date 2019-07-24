@@ -27,7 +27,7 @@ const EventEmitter = require('events')
 const event = new EventEmitter()
 // 创建监听器
 event.on('messageLogged', function() {
-	console.log('Listener called')
+  console.log('Listener called')
 })
 // 发起事件
 event.emit('messageLogged')
@@ -45,8 +45,8 @@ const EventEmitter = require('events')
 const event = new EventEmitter()
 // 创建监听器
 event.on('messageLogged', arg => {
-	// 约定俗成一般用 arg，或者用 e、eventArg
-	console.log('Listener called', arg)
+  // 约定俗成一般用 arg，或者用 e、eventArg
+  console.log('Listener called', arg)
 })
 // 发起事件
 event.emit('messageLogged', { id: 1, url: 'http://' })
@@ -60,7 +60,7 @@ const EventEmitter = require('events')
 const event = new EventEmitter()
 // 创建监听器
 event.on('messageLogged', arg => {
-	console.log('Listener called', arg)
+  console.log('Listener called', arg)
 })
 const log = require('./logger')
 log('message')
@@ -72,10 +72,10 @@ const EventEmitter = require('events')
 const emitter = new EventEmitter()
 var url = 'http://mylogger.io/log'
 function log(message) {
-	// Send an HTTP request
-	console.log(message)
-	// 发起事件
-	emitter.emit('messageLogged', { id: 1, url: 'http://' })
+  // Send an HTTP request
+  console.log(message)
+  // 发起事件
+  emitter.emit('messageLogged', { id: 1, url: 'http://' })
 }
 module.exports = log
 ```
@@ -91,12 +91,12 @@ module.exports = log
 const EventEmitter = require('events')
 var url = 'http://mylogger.io/log'
 class Logger extends EventEmitter {
-	log(message) {
-		// Send an HTTP request
-		console.log(message)
-		// 发起事件
-		this.emit('messageLogged', { id: 1, url: 'http://' })
-	}
+  log(message) {
+    // Send an HTTP request
+    console.log(message)
+    // 发起事件
+    this.emit('messageLogged', { id: 1, url: 'http://' })
+  }
 }
 module.exports = Logger // 导出 Logger 类
 ```
@@ -112,7 +112,7 @@ const Logger = require('./logger')
 const logger = new Logger()
 // 创建监听器
 logger.on('messageLogged', arg => {
-	console.log('Listener called', arg)
+  console.log('Listener called', arg)
 })
 logger.log('message')
 ```
@@ -140,7 +140,7 @@ console.log('Listening on port 3000')
 const http = require('http')
 const server = http.createServer()
 server.on('connection', () => {
-	console.log('New connection')
+  console.log('New connection')
 })
 server.listen(3000)
 console.log('Listening on port 3000')
@@ -158,13 +158,13 @@ const server = http.createServer((req, res) => {})
 // ** http.js
 const http = require('http')
 const server = http.createServer((req, res) => {
-	if (req.url === '/') {
-		res.write('hello world')
-		res.end()
-	}
+  if (req.url === '/') {
+    res.write('hello world')
+    res.end()
+  }
 })
 server.on('connection', () => {
-	console.log('New connection')
+  console.log('New connection')
 })
 server.listen(3000)
 console.log('Listening on port 3000')

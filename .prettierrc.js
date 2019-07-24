@@ -3,7 +3,7 @@ module.exports = {
 	// tab 缩进大小,默认为 2
 	tabWidth: 2,
 	// 使用 tab 缩进，默认 false
-	useTabs: true,
+	useTabs: false,
 	// 使用分号, 默认 true
 	semi: false,
 	// 使用单引号, 默认 false(在 jsx 中配置无效, 默认都是双引号)

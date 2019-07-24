@@ -10,9 +10,9 @@ permalink: 'webpack4-lazyLoading-prefetching'
 
 ```js
 document.addEventListener('click', function() {
-	import(/* webpackChunkName: 'use-lodash'*/ 'lodash').then(function(_) {
-		console.log(_.join(['3', '4']))
-	})
+  import(/* webpackChunkName: 'use-lodash'*/ 'lodash').then(function(_) {
+    console.log(_.join(['3', '4']))
+  })
 })
 ```
 
@@ -38,9 +38,9 @@ import 后面返回的是一个 then，说明这是一个 **promise** 类型，�
 
 ```js
 document.addEventListener('click', function() {
-	const element = document.createElement('div')
-	element.innerHTML = 'Hello World'
-	document.body.appendChild(element)
+  const element = document.createElement('div')
+  element.innerHTML = 'Hello World'
+  document.body.appendChild(element)
 })
 ```
 
@@ -66,9 +66,9 @@ document.addEventListener('click', function() {
 
 ```js
 function handleClick() {
-	const element = document.createElement('div')
-	element.innerHTML = 'Dell Lee'
-	document.body.appendChild(element)
+  const element = document.createElement('div')
+  element.innerHTML = 'Dell Lee'
+  document.body.appendChild(element)
 }
 
 export default handleClick
@@ -78,9 +78,9 @@ export default handleClick
 
 ```js
 document.addEventListener('click', () => {
-	import('./click.js').then(({ default: func }) => {
-		func()
-	})
+  import('./click.js').then(({ default: func }) => {
+    func()
+  })
 })
 ```
 
@@ -110,9 +110,9 @@ document.addEventListener('click', () => {
 
 ```js
 document.addEventListener('click', () => {
-	import(/* webpackPrefetch: true */ './click.js').then(({ default: func }) => {
-		func()
-	})
+  import(/* webpackPrefetch: true */ './click.js').then(({ default: func }) => {
+    func()
+  })
 })
 ```
 

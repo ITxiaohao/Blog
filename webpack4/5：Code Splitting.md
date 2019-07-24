@@ -10,18 +10,18 @@ permalink: 'webpack4-code-splitting'
 
 ```json
 {
-	"scripts": {
-		"dev": "webpack --mode development",
-		"build": "webpack --mode production"
-	},
-	"devDependencies": {
-		"clean-webpack-plugin": "^2.0.0",
-		"webpack": "^4.29.6",
-		"webpack-cli": "^3.2.3"
-	},
-	"dependencies": {
-		"lodash": "^4.17.11"
-	}
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^2.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
 }
 ```
 
@@ -45,16 +45,16 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-	entry: {
-		main: './src/index.js'
-	},
-	output: {
-		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
-		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
-		filename: '[name].bundle.js', // 代码打包后的文件名
-		chunkFilename: '[name].js' // 代码拆分后的文件名
-	},
-	plugins: [new CleanWebpackPlugin()]
+  entry: {
+    main: './src/index.js'
+  },
+  output: {
+    publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+    path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+    filename: '[name].bundle.js', // 代码打包后的文件名
+    chunkFilename: '[name].js' // 代码拆分后的文件名
+  },
+  plugins: [new CleanWebpackPlugin()]
 }
 ```
 
@@ -67,16 +67,16 @@ module.exports = {
 ```html
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>代码分割</title>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>代码分割</title>
+  </head>
 
-	<body>
-		<script src="./dist/main.bundle.js"></script>
-	</body>
+  <body>
+    <script src="./dist/main.bundle.js"></script>
+  </body>
 </html>
 ```
 
@@ -116,21 +116,21 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-	entry: {
-		main: './src/index.js'
-	},
-	output: {
-		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
-		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
-		filename: '[name].bundle.js', // 代码打包后的文件名
-		chunkFilename: '[name].js' // 代码拆分后的文件名
-	},
-	optimization: {
-		splitChunks: {
-			chunks: 'all'
-		}
-	},
-	plugins: [new CleanWebpackPlugin()]
+  entry: {
+    main: './src/index.js'
+  },
+  output: {
+    publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+    path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+    filename: '[name].bundle.js', // 代码打包后的文件名
+    chunkFilename: '[name].js' // 代码拆分后的文件名
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+  plugins: [new CleanWebpackPlugin()]
 }
 ```
 
@@ -189,16 +189,16 @@ optimization: {
 
 ```js
 function getComponent() {
-	// 使用 异步的形式导入 lodash，default: _ 表示用 _ 代指 lodash
-	return import('lodash').then(({ default: _ }) => {
-		var element = document.createElement('div')
-		element.innerHTML = _.join(['hello', 'world'], '-')
-		return element
-	})
+  // 使用 异步的形式导入 lodash，default: _ 表示用 _ 代指 lodash
+  return import('lodash').then(({ default: _ }) => {
+    var element = document.createElement('div')
+    element.innerHTML = _.join(['hello', 'world'], '-')
+    return element
+  })
 }
 
 getComponent().then(element => {
-	document.body.appendChild(element)
+  document.body.appendChild(element)
 })
 ```
 
@@ -317,15 +317,15 @@ getComponent().then(element => {
 ```js
 // 异步代码
 import(/* webpackChunkName: 'a'*/ './a').then(function(a) {
-	console.log(a)
+  console.log(a)
 })
 
 import(/* webpackChunkName: 'b'*/ './b').then(function(b) {
-	console.log(b)
+  console.log(b)
 })
 
 import(/* webpackChunkName: 'use-lodash'*/ 'lodash').then(function(_) {
-	console.log(_.join(['1', '2']))
+  console.log(_.join(['1', '2']))
 })
 ```
 

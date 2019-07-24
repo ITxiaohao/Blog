@@ -9,17 +9,17 @@ Proxy 这个词的原意是代理，用在这里表示由它来 **「代理」**
 
 ```js {4,8}
 var obj = new Proxy(
-	{},
-	{
-		get: function(target, key, receiver) {
-			console.log(`getting ${key}!`)
-			return Reflect.get(target, key, receiver)
-		},
-		set: function(target, key, value, receiver) {
-			console.log(`setting ${key}!`)
-			return Reflect.set(target, key, value, receiver)
-		}
-	}
+  {},
+  {
+    get: function(target, key, receiver) {
+      console.log(`getting ${key}!`)
+      return Reflect.get(target, key, receiver)
+    },
+    set: function(target, key, value, receiver) {
+      console.log(`setting ${key}!`)
+      return Reflect.set(target, key, value, receiver)
+    }
+  }
 )
 
 obj.count = 1

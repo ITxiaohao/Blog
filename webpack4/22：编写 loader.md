@@ -12,7 +12,7 @@ permalink: 'webpack4-loader'
 
 ```js
 module.exports = function(source) {
-	return source.replace('world', 'loader')
+  return source.replace('world', 'loader')
 }
 ```
 
@@ -24,22 +24,22 @@ source 参数就是我们的源代码，这里是将源码中的 world 替换成
 const path = require('path')
 
 module.exports = {
-	mode: 'development',
-	entry: {
-		main: './src/index.js'
-	},
-	module: {
-		rules: [
-			{
-				test: /.js/,
-				use: [path.resolve(__dirname, './loaders/replaceLoader.js')] // 引入自定义 loader
-			}
-		]
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js'
-	}
+  mode: 'development',
+  entry: {
+    main: './src/index.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /.js/,
+        use: [path.resolve(__dirname, './loaders/replaceLoader.js')] // 引入自定义 loader
+      }
+    ]
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  }
 }
 ```
 
@@ -55,29 +55,29 @@ module.exports = {
 const path = require('path')
 
 module.exports = {
-	mode: 'development',
-	entry: {
-		main: './src/index.js'
-	},
-	module: {
-		rules: [
-			{
-				test: /.js/,
-				use: [
-					{
-						loader: path.resolve(__dirname, './loaders/replaceLoader.js'),
-						options: {
-							name: 'xh'
-						}
-					}
-				]
-			}
-		]
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js'
-	}
+  mode: 'development',
+  entry: {
+    main: './src/index.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /.js/,
+        use: [
+          {
+            loader: path.resolve(__dirname, './loaders/replaceLoader.js'),
+            options: {
+              name: 'xh'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  }
 }
 ```
 
@@ -85,8 +85,8 @@ module.exports = {
 
 ```js
 module.exports = function(source) {
-	console.log(this.query)
-	return source.replace('world', this.query.name)
+  console.log(this.query)
+  return source.replace('world', this.query.name)
 }
 ```
 
@@ -106,9 +106,9 @@ module.exports = function(source) {
 const loaderUtils = require('loader-utils')
 
 module.exports = function(source) {
-	const options = loaderUtils.getOptions(this)
-	console.log(options)
-	return source.replace('world', options.name)
+  const options = loaderUtils.getOptions(this)
+  console.log(options)
+  return source.replace('world', options.name)
 }
 ```
 
@@ -131,10 +131,10 @@ this.callback(
 const loaderUtils = require('loader-utils')
 
 module.exports = function(source) {
-	const options = loaderUtils.getOptions(this)
-	const result = source.replace('world', options.name)
+  const options = loaderUtils.getOptions(this)
+  const result = source.replace('world', options.name)
 
-	this.callback(null, result)
+  this.callback(null, result)
 }
 ```
 
@@ -146,12 +146,12 @@ module.exports = function(source) {
 const loaderUtils = require('loader-utils')
 
 module.exports = function(source) {
-	const options = loaderUtils.getOptions(this)
+  const options = loaderUtils.getOptions(this)
 
-	setTimeout(() => {
-		const result = source.replace('world', options.name)
-		return result
-	}, 1000)
+  setTimeout(() => {
+    const result = source.replace('world', options.name)
+    return result
+  }, 1000)
 }
 ```
 
@@ -163,14 +163,14 @@ module.exports = function(source) {
 const loaderUtils = require('loader-utils')
 
 module.exports = function(source) {
-	const options = loaderUtils.getOptions(this)
+  const options = loaderUtils.getOptions(this)
 
-	const callback = this.async()
+  const callback = this.async()
 
-	setTimeout(() => {
-		const result = source.replace('world', options.name)
-		callback(null, result)
-	}, 1000)
+  setTimeout(() => {
+    const result = source.replace('world', options.name)
+    callback(null, result)
+  }, 1000)
 }
 ```
 
@@ -183,17 +183,17 @@ module.exports = function(source) {
 
 const loaderUtils = require('loader-utils')
 module.exports = function(source) {
-	const options = loaderUtils.getOptions(this)
-	const callback = this.async()
-	setTimeout(() => {
-		const result = source.replace('world', options.name)
-		callback(null, result)
-	}, 1000)
+  const options = loaderUtils.getOptions(this)
+  const callback = this.async()
+  setTimeout(() => {
+    const result = source.replace('world', options.name)
+    callback(null, result)
+  }, 1000)
 }
 
 // replaceLoader.js
 module.exports = function(source) {
-	return source.replace('xh', 'world')
+  return source.replace('xh', 'world')
 }
 ```
 
@@ -201,22 +201,22 @@ module.exports = function(source) {
 
 ```js
 module: {
-	rules: [
-		{
-			test: /.js/,
-			use: [
-				{
-					loader: path.resolve(__dirname, './loaders/replaceLoader.js')
-				},
-				{
-					loader: path.resolve(__dirname, './loaders/replaceLoaderAsync.js'),
-					options: {
-						name: 'xh'
-					}
-				}
-			]
-		}
-	]
+  rules: [
+    {
+      test: /.js/,
+      use: [
+        {
+          loader: path.resolve(__dirname, './loaders/replaceLoader.js')
+        },
+        {
+          loader: path.resolve(__dirname, './loaders/replaceLoaderAsync.js'),
+          options: {
+            name: 'xh'
+          }
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -230,34 +230,34 @@ module: {
 const path = require('path')
 
 module.exports = {
-	mode: 'development',
-	entry: {
-		main: './src/index.js'
-	},
-	resolveLoader: {
-		modules: ['node_modules', './loaders']
-	},
-	module: {
-		rules: [
-			{
-				test: /.js/,
-				use: [
-					{
-						loader: 'replaceLoader.js'
-					},
-					{
-						loader: 'replaceLoaderAsync.js',
-						options: {
-							name: 'xh'
-						}
-					}
-				]
-			}
-		]
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js'
-	}
+  mode: 'development',
+  entry: {
+    main: './src/index.js'
+  },
+  resolveLoader: {
+    modules: ['node_modules', './loaders']
+  },
+  module: {
+    rules: [
+      {
+        test: /.js/,
+        use: [
+          {
+            loader: 'replaceLoader.js'
+          },
+          {
+            loader: 'replaceLoaderAsync.js',
+            options: {
+              name: 'xh'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  }
 }
 ```

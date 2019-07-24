@@ -16,11 +16,11 @@ permalink: 'webpack4-pwa'
 
 ```json {3}
 {
-	"scripts": {
-		"start": "http-server dist",
-		"dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
-		"build": "webpack --config ./build/webpack.prod.conf.js"
-	}
+  "scripts": {
+    "start": "http-server dist",
+    "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
+    "build": "webpack --config ./build/webpack.prod.conf.js"
+  }
 }
 ```
 
@@ -54,13 +54,13 @@ npm i workbox-webpack-plugin -D
 const WorkboxPlugin = require('workbox-webpack-plugin') // 引入 PWA 插件
 
 const prodConfig = {
-	plugins: [
-		// 配置 PWA
-		new WorkboxPlugin.GenerateSW({
-			clientsClaim: true,
-			skipWaiting: true
-		})
-	]
+  plugins: [
+    // 配置 PWA
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    })
+  ]
 }
 ```
 
@@ -75,16 +75,16 @@ const prodConfig = {
 ```js
 // 判断该浏览器支不支持 serviceWorker
 if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker
-			.register('/service-worker.js')
-			.then(registration => {
-				console.log('service-worker registed')
-			})
-			.catch(error => {
-				console.log('service-worker registed error')
-			})
-	})
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then(registration => {
+        console.log('service-worker registed')
+      })
+      .catch(error => {
+        console.log('service-worker registed error')
+      })
+  })
 }
 ```
 

@@ -15,20 +15,20 @@ webpack 支持 ES6, CommonJS, AMD 规范
 ```js
 // minus.js
 module.exports = function(a, b) {
-	return a - b
+  return a - b
 }
 
 // multi.js
 define(function(require, factory) {
-	'use strict'
-	return function(a, b) {
-		return a * b
-	}
+  'use strict'
+  return function(a, b) {
+    return a * b
+  }
 })
 
 // sum.js
 export default function(a, b) {
-	return a + b
+  return a + b
 }
 ```
 
@@ -49,7 +49,7 @@ console.log('minus(1, 2) = ', minus(1, 2))
 
 // AMD
 require(['./vendor/multi'], function(multi) {
-	console.log('multi(1, 2) = ', multi(1, 2))
+  console.log('multi(1, 2) = ', multi(1, 2))
 })
 ```
 
@@ -61,14 +61,14 @@ webpack.config.js 是 webpack **默认**的配置文件名，在根目录下创�
 const path = require('path')
 
 module.exports = {
-	entry: {
-		app: './app.js' // 需要打包的文件入口
-	},
-	output: {
-		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
-		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
-		filename: 'bundle.js' // 打包后生产的 js 文件
-	}
+  entry: {
+    app: './app.js' // 需要打包的文件入口
+  },
+  output: {
+    publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+    path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+    filename: 'bundle.js' // 打包后生产的 js 文件
+  }
 }
 ```
 
@@ -85,14 +85,14 @@ console.log('__dirname: ', __dirname)
 console.log('path.resolve: ', path.resolve(__dirname, 'dist'))
 
 module.exports = {
-	entry: {
-		app: './app.js' // 需要打包的文件入口
-	},
-	output: {
-		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
-		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
-		filename: 'bundle.js' // 打包后生产的 js 文件
-	}
+  entry: {
+    app: './app.js' // 需要打包的文件入口
+  },
+  output: {
+    publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+    path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+    filename: 'bundle.js' // 打包后生产的 js 文件
+  }
 }
 ```
 
@@ -126,17 +126,17 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-	entry: {
-		app: './app.js' // 需要打包的文件入口
-	},
-	output: {
-		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
-		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
-		filename: 'bundle.js' // 打包后生产的 js 文件
-	},
-	plugins: [
-		new CleanWebpackPlugin() // 默认情况下，此插件将删除 webpack output.path目录中的所有文件，以及每次成功重建后所有未使用的 webpack 资产。
-	]
+  entry: {
+    app: './app.js' // 需要打包的文件入口
+  },
+  output: {
+    publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+    path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+    filename: 'bundle.js' // 打包后生产的 js 文件
+  },
+  plugins: [
+    new CleanWebpackPlugin() // 默认情况下，此插件将删除 webpack output.path目录中的所有文件，以及每次成功重建后所有未使用的 webpack 资产。
+  ]
 }
 ```
 

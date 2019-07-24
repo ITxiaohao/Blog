@@ -100,12 +100,12 @@ ToPrimitive([]) == 0
 
 ```js
 let a = {
-	valueOf() {
-		return 0
-	},
-	toString() {
-		return '1'
-	}
+  valueOf() {
+    return 0
+  },
+  toString() {
+    return '1'
+  }
 }
 a > -1 // true
 ```
@@ -148,24 +148,24 @@ this 实际上是在函数被调用时发生的绑定，它指向什么完全取
 
 ```js
 function baz() {
-	// 当前调用栈是：baz
-	// 因此，当前调用位置是全局作用域
-	console.log('baz')
-	bar() // <-- bar 的调用位置
+  // 当前调用栈是：baz
+  // 因此，当前调用位置是全局作用域
+  console.log('baz')
+  bar() // <-- bar 的调用位置
 }
 
 function bar() {
-	// 当前调用栈是 baz -> bar
-	// 因此，当前调用位置在 baz 中
-	console.log('bar')
-	foo() // <-- foo 的调用位置
+  // 当前调用栈是 baz -> bar
+  // 因此，当前调用位置在 baz 中
+  console.log('bar')
+  foo() // <-- foo 的调用位置
 }
 
 function foo() {
-	// 当前调用栈是 baz -> bar -> foo
-	// 因此，当前调用位置在 bar 中
-	debugger
-	console.log('foo')
+  // 当前调用栈是 baz -> bar -> foo
+  // 因此，当前调用位置在 bar 中
+  debugger
+  console.log('foo')
 }
 
 baz() // <-- baz 的调用位置
@@ -193,7 +193,7 @@ baz() // <-- baz 的调用位置
 
 ```js
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var a = 2
 foo() // 2
@@ -209,9 +209,9 @@ foo() // 2
 
 ```js
 function foo() {
-	'use strict'
-	console.log(this) // undefined
-	console.log(this.a) // TypeError: Cannot read property 'a' of undefined
+  'use strict'
+  console.log(this) // undefined
+  console.log(this.a) // TypeError: Cannot read property 'a' of undefined
 }
 var a = 2
 foo()
@@ -225,11 +225,11 @@ foo()
 
 ```js
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var obj = {
-	a: 2,
-	foo: foo
+  a: 2,
+  foo: foo
 }
 obj.foo() // 2
 ```
@@ -246,16 +246,16 @@ obj.foo() // 2
 
 ```js
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var obj2 = {
-	a: 42,
-	foo: foo
+  a: 42,
+  foo: foo
 }
 
 var obj1 = {
-	a: 2,
-	obj2: obj2
+  a: 2,
+  obj2: obj2
 }
 obj1.obj2.foo() // 42，最终是调用了 obj2.foo，this 指向 obj2
 ```
@@ -266,11 +266,11 @@ obj1.obj2.foo() // 42，最终是调用了 obj2.foo，this 指向 obj2
 
 ```js
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var obj = {
-	a: 2,
-	foo: foo
+  a: 2,
+  foo: foo
 }
 
 var bar = obj.foo // 函数别名！！
@@ -298,10 +298,10 @@ bar() // "oops, global"
 
 ```js
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var obj = {
-	a: 2
+  a: 2
 }
 foo.call(obj) // 2
 ```
@@ -316,13 +316,13 @@ foo.call(obj) // 2
 
 ```js {8}
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var obj = {
-	a: 2
+  a: 2
 }
 var bar = function() {
-	foo.call(obj)
+  foo.call(obj)
 }
 
 bar() // 2
@@ -345,14 +345,14 @@ bar.call(window) // 2
 
 ```js
 function foo(something) {
-	console.log(this.a, something)
-	return this.a + something
+  console.log(this.a, something)
+  return this.a + something
 }
 var obj = {
-	a: 2
+  a: 2
 }
 var bar = function() {
-	return foo.apply(obj, arguments)
+  return foo.apply(obj, arguments)
 }
 var b = bar(3) // 2 3
 console.log(b) // 5
@@ -362,12 +362,12 @@ console.log(b) // 5
 
 ```js
 function foo(something) {
-	console.log(this.a, something)
-	return this.a + something
+  console.log(this.a, something)
+  return this.a + something
 }
 
 var obj = {
-	a: 2
+  a: 2
 }
 
 var bar = foo.bind(obj)
@@ -388,10 +388,10 @@ bind(..) 会返回一个硬编码的新函数，它会把参数设置为 this �
 
 ```js
 function foo(el) {
-	console.log(el, this.id)
+  console.log(el, this.id)
 }
 var obj = {
-	id: 'awesome'
+  id: 'awesome'
 }
 
 ;[1, 2, 3].forEach(foo, obj)
@@ -419,7 +419,7 @@ JavaScript 中 new 的机制实际上和面向类的语言完全不同
 
 ```js
 function foo(a) {
-	this.a = a
+  this.a = a
 }
 
 var bar = new foo(2)
@@ -438,16 +438,16 @@ console.log(bar.a) // 2
 
 ```js
 function foo() {
-	console.log(this.a)
+  console.log(this.a)
 }
 var objl = {
-	a: 2,
-	foo: foo
+  a: 2,
+  foo: foo
 }
 
 var obj2 = {
-	a: 3,
-	foo: foo
+  a: 3,
+  foo: foo
 }
 objl.foo() // 2
 obj2.foo() // 3
@@ -525,7 +525,7 @@ console.log(b) // 1
 
 ```js
 let a = {
-	age: 1
+  age: 1
 }
 
 let b = a
@@ -562,7 +562,7 @@ console.log(brr) // [ 1, 2, 3, 4 ]
 
 ```js {5}
 let a = {
-	age: 1
+  age: 1
 }
 
 let b = Object.assign({}, a)
@@ -576,7 +576,7 @@ console.log('b.age', b.age) // 1
 
 ```js {5}
 let a = {
-	age: 1
+  age: 1
 }
 
 let b = { ...a }
@@ -622,10 +622,10 @@ console.log(brr) // [ 1, 2, 3 ]
 
 ```js {8,10}
 let a = {
-	age: 1,
-	city: {
-		name: 'fz'
-	}
+  age: 1,
+  city: {
+    name: 'fz'
+  }
 }
 
 let b = Object.assign({}, a)
@@ -644,10 +644,10 @@ console.log('b.city.name', b.city.name) // sz
 
 ```js {8,13}
 let a = {
-	age: 1,
-	city: {
-		name: 'fz'
-	}
+  age: 1,
+  city: {
+    name: 'fz'
+  }
 }
 
 let b = JSON.parse(JSON.stringify(a))
@@ -688,9 +688,9 @@ undefined、任意的函数以及 symbol 值，在序列化过程中会被忽略
 
 ```js
 var obj1 = {
-	a: 1,
-	b: { f: { g: 1 } },
-	c: [1, 2, 3]
+  a: 1,
+  b: { f: { g: 1 } },
+  c: [1, 2, 3]
 }
 var obj2 = _.cloneDeep(obj1)
 console.log(obj1.b.f === obj2.b.f) // false
@@ -700,58 +700,58 @@ console.log(obj1.b.f === obj2.b.f) // false
 
 ```js
 var obj1 = {
-	a: 1,
-	b: {
-		f: {
-			g: 1
-		}
-	},
-	c: [1, 2, 3]
+  a: 1,
+  b: {
+    f: {
+      g: 1
+    }
+  },
+  c: [1, 2, 3]
 }
 
 function getType(obj) {
-	// tostring 会返回对应不同的标签的构造函数
-	var toString = Object.prototype.toString
-	var map = {
-		'[object Boolean]': 'boolean',
-		'[object Number]': 'number',
-		'[object String]': 'string',
-		'[object Function]': 'function',
-		'[object Array]': 'array',
-		'[object Date]': 'date',
-		'[object RegExp]': 'regExp',
-		'[object Undefined]': 'undefined',
-		'[object Null]': 'null',
-		'[object Object]': 'object'
-	}
-	// 判断是否为 DOM 元素
-	if (obj instanceof Element) {
-		return 'element'
-	}
-	return map[toString.call(obj)]
+  // tostring 会返回对应不同的标签的构造函数
+  var toString = Object.prototype.toString
+  var map = {
+    '[object Boolean]': 'boolean',
+    '[object Number]': 'number',
+    '[object String]': 'string',
+    '[object Function]': 'function',
+    '[object Array]': 'array',
+    '[object Date]': 'date',
+    '[object RegExp]': 'regExp',
+    '[object Undefined]': 'undefined',
+    '[object Null]': 'null',
+    '[object Object]': 'object'
+  }
+  // 判断是否为 DOM 元素
+  if (obj instanceof Element) {
+    return 'element'
+  }
+  return map[toString.call(obj)]
 }
 
 function deepClone(data) {
-	var type = getType(data)
-	var obj
-	if (type === 'array') {
-		obj = []
-	} else if (type === 'object') {
-		obj = {}
-	} else {
-		//不再具有下一层次
-		return data
-	}
-	if (type === 'array') {
-		for (var i = 0, len = data.length; i < len; i++) {
-			obj.push(deepClone(data[i]))
-		}
-	} else if (type === 'object') {
-		for (var key in data) {
-			obj[key] = deepClone(data[key])
-		}
-	}
-	return obj
+  var type = getType(data)
+  var obj
+  if (type === 'array') {
+    obj = []
+  } else if (type === 'object') {
+    obj = {}
+  } else {
+    //不再具有下一层次
+    return data
+  }
+  if (type === 'array') {
+    for (var i = 0, len = data.length; i < len; i++) {
+      obj.push(deepClone(data[i]))
+    }
+  } else if (type === 'object') {
+    for (var key in data) {
+      obj[key] = deepClone(data[key])
+    }
+  }
+  return obj
 }
 
 let obj2 = deepClone(obj1)
@@ -797,7 +797,7 @@ console.log(newArray) // [ 1, 2, 4 ]
 const arr = [1, 2, 3]
 let total = 0
 for (let i = 0; i < arr.length; i++) {
-	total += arr[i]
+  total += arr[i]
 }
 console.log(total) // 6
 ```
@@ -822,8 +822,8 @@ const sum = arr.reduce((acc, current) => acc + current, 0) // 6
 const arr = [1, 2, 3]
 const mapArray = arr.map(value => value * 2)
 const reduceArray = arr.reduce((acc, current) => {
-	acc.push(current * 2)
-	return acc
+  acc.push(current * 2)
+  return acc
 }, [])
 console.log(mapArray, reduceArray) // [ 2, 4, 6 ] [ 2, 4, 6 ]
 ```

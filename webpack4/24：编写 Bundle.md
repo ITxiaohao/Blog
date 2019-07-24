@@ -33,8 +33,8 @@ console.log(message)
 const fs = require('fs')
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	console.log(content)
+  const content = fs.readFileSync(filename, 'utf-8')
+  console.log(content)
 }
 
 moduleAnalyser('./src/index.js')
@@ -61,12 +61,12 @@ const fs = require('fs')
 const parser = require('@babel/parser')
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	console.log(
-		parser.parse(content, {
-			sourceType: 'module'
-		})
-	)
+  const content = fs.readFileSync(filename, 'utf-8')
+  console.log(
+    parser.parse(content, {
+      sourceType: 'module'
+    })
+  )
 }
 
 moduleAnalyser('./src/index.js')
@@ -83,11 +83,11 @@ const fs = require('fs')
 const parser = require('@babel/parser')
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	const ast = parser.parse(content, {
-		sourceType: 'module'
-	})
-	console.log(ast.program.body)
+  const content = fs.readFileSync(filename, 'utf-8')
+  const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+  console.log(ast.program.body)
 }
 
 moduleAnalyser('./src/index.js')
@@ -111,15 +111,15 @@ const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	const ast = parser.parse(content, {
-		sourceType: 'module'
-	})
-	traverse(ast, {
-		ImportDeclaration({ node }) {
-			console.log(node)
-		}
-	})
+  const content = fs.readFileSync(filename, 'utf-8')
+  const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+  traverse(ast, {
+    ImportDeclaration({ node }) {
+      console.log(node)
+    }
+  })
 }
 
 moduleAnalyser('./src/index.js')
@@ -135,17 +135,17 @@ const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	const ast = parser.parse(content, {
-		sourceType: 'module'
-	})
-	const dependencise = []
-	traverse(ast, {
-		ImportDeclaration({ node }) {
-			dependencise.push(node.source.value)
-		}
-	})
-	console.log(dependencise)
+  const content = fs.readFileSync(filename, 'utf-8')
+  const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+  const dependencise = []
+  traverse(ast, {
+    ImportDeclaration({ node }) {
+      dependencise.push(node.source.value)
+    }
+  })
+  console.log(dependencise)
 }
 
 moduleAnalyser('./src/index.js')
@@ -166,19 +166,19 @@ const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	const ast = parser.parse(content, {
-		sourceType: 'module'
-	})
-	const dependencise = []
-	traverse(ast, {
-		ImportDeclaration({ node }) {
-			const dirname = path.dirname(filename)
-			console.log(dirname)
-			dependencise.push(node.source.value)
-		}
-	})
-	// console.log(dependencise)
+  const content = fs.readFileSync(filename, 'utf-8')
+  const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+  const dependencise = []
+  traverse(ast, {
+    ImportDeclaration({ node }) {
+      const dirname = path.dirname(filename)
+      console.log(dirname)
+      dependencise.push(node.source.value)
+    }
+  })
+  // console.log(dependencise)
 }
 
 moduleAnalyser('./src/index.js')
@@ -221,24 +221,24 @@ const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	const ast = parser.parse(content, {
-		sourceType: 'module'
-	})
-	const dependencise = {}
-	traverse(ast, {
-		ImportDeclaration({ node }) {
-			const dirname = path.dirname(filename)
-			const newFile = '.\\' + path.join(dirname, node.source.value)
-			console.log('newFile', newFile)
-			dependencise[node.source.value] = newFile
-		}
-	})
-	console.log(dependencise)
-	return {
-		filename,
-		dependencise
-	}
+  const content = fs.readFileSync(filename, 'utf-8')
+  const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+  const dependencise = {}
+  traverse(ast, {
+    ImportDeclaration({ node }) {
+      const dirname = path.dirname(filename)
+      const newFile = '.\\' + path.join(dirname, node.source.value)
+      console.log('newFile', newFile)
+      dependencise[node.source.value] = newFile
+    }
+  })
+  console.log(dependencise)
+  return {
+    filename,
+    dependencise
+  }
 }
 
 moduleAnalyser('./src/index.js')
@@ -259,7 +259,7 @@ newFile .\src\message.js
 var _message = _interopRequireDefault(require('./message.js'))
 
 function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { default: obj }
+  return obj && obj.__esModule ? obj : { default: obj }
 }
 
 console.log(_message.default)
@@ -273,26 +273,26 @@ const traverse = require('@babel/traverse').default
 const babel = require('@babel/core')
 
 const moduleAnalyser = filename => {
-	const content = fs.readFileSync(filename, 'utf-8')
-	const ast = parser.parse(content, {
-		sourceType: 'module'
-	})
-	const dependencise = {}
-	traverse(ast, {
-		ImportDeclaration({ node }) {
-			const dirname = path.dirname(filename)
-			const newFile = '.\\' + path.join(dirname, node.source.value)
-			dependencise[node.source.value] = newFile
-		}
-	})
-	const { code } = babel.transformFromAst(ast, null, {
-		presets: ['@babel/preset-env']
-	})
-	return {
-		filename,
-		dependencise,
-		code
-	}
+  const content = fs.readFileSync(filename, 'utf-8')
+  const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+  const dependencise = {}
+  traverse(ast, {
+    ImportDeclaration({ node }) {
+      const dirname = path.dirname(filename)
+      const newFile = '.\\' + path.join(dirname, node.source.value)
+      dependencise[node.source.value] = newFile
+    }
+  })
+  const { code } = babel.transformFromAst(ast, null, {
+    presets: ['@babel/preset-env']
+  })
+  return {
+    filename,
+    dependencise,
+    code
+  }
 }
 
 const moduleInfo = moduleAnalyser('./src/index.js')
@@ -317,21 +317,21 @@ console.log(moduleInfo)
 ```js
 // 依赖图谱
 const makeDependenciesGraph = entry => {
-	const entryModule = moduleAnalyser(entry)
-	const graphArray = [entryModule]
-	for (let i = 0; i < graphArray.length; i++) {
-		const item = graphArray[i]
-		const { dependencise } = item
-		// 如果入口文件有依赖就去做循环依赖，对每一个依赖做分析
-		if (dependencise) {
-			for (const j in dependencise) {
-				if (dependencise.hasOwnProperty(j)) {
-					graphArray.push(moduleAnalyser(dependencise[j]))
-				}
-			}
-		}
-	}
-	console.log('graphArray = ', graphArray)
+  const entryModule = moduleAnalyser(entry)
+  const graphArray = [entryModule]
+  for (let i = 0; i < graphArray.length; i++) {
+    const item = graphArray[i]
+    const { dependencise } = item
+    // 如果入口文件有依赖就去做循环依赖，对每一个依赖做分析
+    if (dependencise) {
+      for (const j in dependencise) {
+        if (dependencise.hasOwnProperty(j)) {
+          graphArray.push(moduleAnalyser(dependencise[j]))
+        }
+      }
+    }
+  }
+  console.log('graphArray = ', graphArray)
 }
 ```
 
@@ -344,32 +344,32 @@ const makeDependenciesGraph = entry => {
 ```js
 // 依赖图谱
 const makeDependenciesGraph = entry => {
-	const entryModule = moduleAnalyser(entry)
-	const graphArray = [entryModule]
-	for (let i = 0; i < graphArray.length; i++) {
-		const item = graphArray[i]
-		const { dependencise } = item
-		// 如果入口文件有依赖就去做循环依赖，对每一个依赖做分析
-		if (dependencise) {
-			for (const j in dependencise) {
-				if (dependencise.hasOwnProperty(j)) {
-					graphArray.push(moduleAnalyser(dependencise[j]))
-				}
-			}
-		}
-	}
-	// console.log('graphArray = ', graphArray)
+  const entryModule = moduleAnalyser(entry)
+  const graphArray = [entryModule]
+  for (let i = 0; i < graphArray.length; i++) {
+    const item = graphArray[i]
+    const { dependencise } = item
+    // 如果入口文件有依赖就去做循环依赖，对每一个依赖做分析
+    if (dependencise) {
+      for (const j in dependencise) {
+        if (dependencise.hasOwnProperty(j)) {
+          graphArray.push(moduleAnalyser(dependencise[j]))
+        }
+      }
+    }
+  }
+  // console.log('graphArray = ', graphArray)
 
-	// 创建一个对象，将分析后的结果放入
-	const graph = {}
-	graphArray.forEach(item => {
-		graph[item.filename] = {
-			dependencise: item.dependencise,
-			code: item.code
-		}
-	})
-	console.log('graph = ', graph)
-	return graph
+  // 创建一个对象，将分析后的结果放入
+  const graph = {}
+  graphArray.forEach(item => {
+    graph[item.filename] = {
+      dependencise: item.dependencise,
+      code: item.code
+    }
+  })
+  console.log('graph = ', graph)
+  return graph
 }
 ```
 
@@ -392,9 +392,9 @@ console.log(graghInfo)
 
 ```js
 const generateCode = entry => {
-	// makeDependenciesGraph 返回的是一个对象，需要转换成字符串
-	const graph = JSON.stringify(makeDependenciesGraph(entry))
-	return `
+  // makeDependenciesGraph 返回的是一个对象，需要转换成字符串
+  const graph = JSON.stringify(makeDependenciesGraph(entry))
+  return `
     (function (graph) {
 
     })(${graph})
@@ -411,25 +411,25 @@ console.log(code)
 
 ```js {6}
 let graph = {
-	'./src/index.js': {
-		dependencise: { './message.js': '.\\src\\message.js' },
-		code: `
+  './src/index.js': {
+    dependencise: { './message.js': '.\\src\\message.js' },
+    code: `
       "use strict";\n\n
        var _message = _interopRequireDefault(require("./message.js"));\n\n
        function _interopRequireDefault(obj){ return obj && obj.__esModule ? obj : { default: obj }; } \n\n
        console.log(_message.default);
       `
-	},
-	'.\\src\\message.js': {
-		dependencise: { './word.js': '.\\src\\word.js' },
-		code:
-			'"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.default = void 0;\n\nvar _word = require("./word.js");\n\nvar message = "say ".concat(_word.word);\nvar _default = message;\nexports.default = _default;'
-	},
-	'.\\src\\word.js': {
-		dependencise: {},
-		code:
-			'"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.word = void 0;\nvar word = \'hello\';\nexports.word = word;'
-	}
+  },
+  '.\\src\\message.js': {
+    dependencise: { './word.js': '.\\src\\word.js' },
+    code:
+      '"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.default = void 0;\n\nvar _word = require("./word.js");\n\nvar message = "say ".concat(_word.word);\nvar _default = message;\nexports.default = _default;'
+  },
+  '.\\src\\word.js': {
+    dependencise: {},
+    code:
+      '"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.word = void 0;\nvar word = \'hello\';\nexports.word = word;'
+  }
 }
 ```
 
@@ -437,10 +437,10 @@ let graph = {
 
 ```js
 const generateCode = entry => {
-	console.log(makeDependenciesGraph(entry))
-	// makeDependenciesGraph 返回的是一个对象，需要转换成字符串
-	const graph = JSON.stringify(makeDependenciesGraph(entry))
-	return `
+  console.log(makeDependenciesGraph(entry))
+  // makeDependenciesGraph 返回的是一个对象，需要转换成字符串
+  const graph = JSON.stringify(makeDependenciesGraph(entry))
+  return `
     (function (graph) {
       // 定义 require 方法
       function require(module) {
@@ -459,15 +459,15 @@ graph 是依赖图谱，拿到 entry 后去执行 `./src/index.js` 中的 code�
 
 ```js {5,6,7,8}
 let graph = {
-	'./src/index.js': {
-		dependencise: { './message.js': '.\\src\\message.js' },
-		code: `
+  './src/index.js': {
+    dependencise: { './message.js': '.\\src\\message.js' },
+    code: `
       "use strict";\n\n
        var _message = _interopRequireDefault(require("./message.js"));\n\n
        function _interopRequireDefault(obj){ return obj && obj.__esModule ? obj : { default: obj }; } \n\n
        console.log(_message.default);
       `
-	}
+  }
 }
 ```
 
@@ -493,7 +493,7 @@ return `
 'use strict'
 var _message = _interopRequireDefault(require('./message.js'))
 function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { default: obj }
+  return obj && obj.__esModule ? obj : { default: obj }
 }
 console.log(_message.default)
 ```
@@ -540,15 +540,15 @@ return `
 
 ```js {3}
 let graph = {
-	'./src/index.js': {
-		dependencise: { './message.js': '.\\src\\message.js' },
-		code: `
+  './src/index.js': {
+    dependencise: { './message.js': '.\\src\\message.js' },
+    code: `
       "use strict";\n\n
        var _message = _interopRequireDefault(require("./message.js"));\n\n
        function _interopRequireDefault(obj){ return obj && obj.__esModule ? obj : { default: obj }; } \n\n
        console.log(_message.default);
       `
-	}
+  }
 }
 ```
 
@@ -582,33 +582,33 @@ return `
 
 ```js
 ;(function(graph) {
-	function require(module) {
-		function localRequire(relativePath) {
-			return require(graph[module].dependencise[relativePath])
-		}
-		var exports = {}
-		;(function(require, exports, code) {
-			eval(code)
-		})(localRequire, exports, graph[module].code)
-		return exports
-	}
-	require('./src/index.js')
+  function require(module) {
+    function localRequire(relativePath) {
+      return require(graph[module].dependencise[relativePath])
+    }
+    var exports = {}
+    ;(function(require, exports, code) {
+      eval(code)
+    })(localRequire, exports, graph[module].code)
+    return exports
+  }
+  require('./src/index.js')
 })({
-	'./src/index.js': {
-		dependencise: { './message.js': '.\\src\\message.js' },
-		code:
-			'"use strict";\n\nvar _message = _interopRequireDefault(require("./message.js"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nconsole.log(_message.default);'
-	},
-	'.\\src\\message.js': {
-		dependencise: { './word.js': '.\\src\\word.js' },
-		code:
-			'"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.default = void 0;\n\nvar _word = require("./word.js");\n\nvar message = "say ".concat(_word.word);\nvar _default = message;\nexports.default = _default;'
-	},
-	'.\\src\\word.js': {
-		dependencise: {},
-		code:
-			'"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.word = void 0;\nvar word = \'hello\';\nexports.word = word;'
-	}
+  './src/index.js': {
+    dependencise: { './message.js': '.\\src\\message.js' },
+    code:
+      '"use strict";\n\nvar _message = _interopRequireDefault(require("./message.js"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nconsole.log(_message.default);'
+  },
+  '.\\src\\message.js': {
+    dependencise: { './word.js': '.\\src\\word.js' },
+    code:
+      '"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.default = void 0;\n\nvar _word = require("./word.js");\n\nvar message = "say ".concat(_word.word);\nvar _default = message;\nexports.default = _default;'
+  },
+  '.\\src\\word.js': {
+    dependencise: {},
+    code:
+      '"use strict";\n\nObject.defineProperty(exports, "__esModule", {\n  value: true\n});\nexports.word = void 0;\nvar word = \'hello\';\nexports.word = word;'
+  }
 })
 ```
 

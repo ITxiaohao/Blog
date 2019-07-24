@@ -114,42 +114,42 @@ vue create vue-cli3-learn
 
 ```vue
 <template>
-	<svg :class="svgClass" aria-hidden="true"><use :xlink:href="iconName" /></svg>
+  <svg :class="svgClass" aria-hidden="true"><use :xlink:href="iconName" /></svg>
 </template>
 <script>
 export default {
-	name: 'SvgIcon',
-	props: {
-		iconClass: {
-			type: String,
-			required: true
-		},
-		className: {
-			type: String,
-			default: ''
-		}
-	},
-	computed: {
-		iconName() {
-			return `#icon-${this.iconClass}`
-		},
-		svgClass() {
-			if (this.className) {
-				return 'svg-icon ' + this.className
-			} else {
-				return 'svg-icon'
-			}
-		}
-	}
+  name: 'SvgIcon',
+  props: {
+    iconClass: {
+      type: String,
+      required: true
+    },
+    className: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    iconName() {
+      return `#icon-${this.iconClass}`
+    },
+    svgClass() {
+      if (this.className) {
+        return 'svg-icon ' + this.className
+      } else {
+        return 'svg-icon'
+      }
+    }
+  }
 }
 </script>
 <style scoped>
 .svg-icon {
-	width: 1em;
-	height: 1em;
-	vertical-align: -0.15em;
-	fill: currentColor;
-	overflow: hidden;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>
 ```
@@ -185,26 +185,26 @@ npm install svg-sprite-loader --save-dev
 ```js
 const path = require('path')
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 module.exports = {
-	chainWebpack: config => {
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-	}
+  chainWebpack: config => {
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+  }
 }
 ```
 
@@ -228,32 +228,32 @@ npm install axios
 import axios from 'axios'
 // 创建axios 实例
 const service = axios.create({
-	baseURL: process.env.BASE_API, // api 的 base_url
-	timeout: 5000 // 请求超时时间
+  baseURL: process.env.BASE_API, // api 的 base_url
+  timeout: 5000 // 请求超时时间
 })
 // request 拦截器
 service.interceptors.request.use(
-	config => {
-		// 这里可以自定义一些 config 配置
-		return config
-	},
-	error => {
-		// 这里处理一些请求出错的情况
-		console.log(error)
-		Promise.reject(error)
-	}
+  config => {
+    // 这里可以自定义一些 config 配置
+    return config
+  },
+  error => {
+    // 这里处理一些请求出错的情况
+    console.log(error)
+    Promise.reject(error)
+  }
 )
 // response 拦截器
 service.interceptors.response.use(
-	response => {
-		const res = response.data
-		// 这里处理一些 response 正常返回时的逻辑
-		return res
-	},
-	error => {
-		// 这里处理一些 response 出错时的逻辑
-		return Promise.reject(error)
-	}
+  response => {
+    const res = response.data
+    // 这里处理一些 response 正常返回时的逻辑
+    return res
+  },
+  error => {
+    // 这里处理一些 response 出错时的逻辑
+    return Promise.reject(error)
+  }
 )
 export default service
 ```
@@ -263,32 +263,32 @@ export default service
 ```js
 const path = require('path')
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 module.exports = {
-	chainWebpack: config => {
-		// 配置别名
-		config.resolve.alias
-			.set('@', resolve('src'))
-			.set('api', resolve('src/api'))
-			.set('static', resolve('src/static'))
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('api', resolve('src/api'))
+      .set('static', resolve('src/static'))
 
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-	}
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+  }
 }
 ```
 
@@ -298,14 +298,14 @@ module.exports = {
 import request from '@/utils/request' // 引入对 axios 封装的 request 文件
 
 export function login(username, password) {
-	return request({
-		url: '/login',
-		method: 'post',
-		data: {
-			username,
-			password
-		}
-	})
+  return request({
+    url: '/login',
+    method: 'post',
+    data: {
+      username,
+      password
+    }
+  })
 }
 ```
 
@@ -315,14 +315,14 @@ export function login(username, password) {
 import { login } from 'api/login' // 引入 login 方法
 
 export default {
-	created() {
-		let username = 'root'
-		let password = 123456
-		// 调用 login 方法
-		login(username, password).then(res => {
-			console.log(res)
-		})
-	}
+  created() {
+    let username = 'root'
+    let password = 123456
+    // 调用 login 方法
+    login(username, password).then(res => {
+      console.log(res)
+    })
+  }
 }
 ```
 
@@ -344,49 +344,49 @@ export default {
 ```js
 const path = require('path')
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 module.exports = {
-	chainWebpack: config => {
-		// 配置别名
-		config.resolve.alias
-			.set('@$', resolve('src'))
-			.set('api', resolve('src/api'))
-			.set('static', resolve('src/static'))
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@$', resolve('src'))
+      .set('api', resolve('src/api'))
+      .set('static', resolve('src/static'))
 
-		// 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
-		config.plugin('define').tap(args => {
-			const argv = process.argv
-			const mode = argv[argv.indexOf('--project-mode') + 1]
-			args[0]['process.env'].MODE = `"${mode}"`
-			switch (args[0]['process.env'].MODE) {
-				case '"test"':
-					args[0]['process.env'].BASE_API = '"/test"' // 测试环境前缀
-					break
-				case '"dev"':
-					args[0]['process.env'].BASE_API = '"/api"' // 开发环境前缀
-					break
-			}
-			console.log(args) // 输出后没问题记得注释掉
-			return args
-		})
+    // 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
+    config.plugin('define').tap(args => {
+      const argv = process.argv
+      const mode = argv[argv.indexOf('--project-mode') + 1]
+      args[0]['process.env'].MODE = `"${mode}"`
+      switch (args[0]['process.env'].MODE) {
+        case '"test"':
+          args[0]['process.env'].BASE_API = '"/test"' // 测试环境前缀
+          break
+        case '"dev"':
+          args[0]['process.env'].BASE_API = '"/api"' // 开发环境前缀
+          break
+      }
+      console.log(args) // 输出后没问题记得注释掉
+      return args
+    })
 
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-	}
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+  }
 }
 ```
 
@@ -422,76 +422,76 @@ module.exports = {
 const path = require('path')
 
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 
 module.exports = {
-	chainWebpack: config => {
-		// 配置别名
-		config.resolve.alias
-			.set('@$', resolve('src'))
-			.set('api', resolve('src/api'))
-			.set('static', resolve('src/static'))
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@$', resolve('src'))
+      .set('api', resolve('src/api'))
+      .set('static', resolve('src/static'))
 
-		// 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
-		config.plugin('define').tap(args => {
-			const argv = process.argv
-			const mode = argv[argv.indexOf('--project-mode') + 1]
-			args[0]['process.env'].MODE = `"${mode}"`
-			switch (args[0]['process.env'].MODE) {
-				case '"test"':
-					args[0]['process.env'].BASE_API = '"/test"'
-					break
-				case '"dev"':
-					args[0]['process.env'].BASE_API = '"/api"'
-					break
-			}
-			return args
-		})
+    // 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
+    config.plugin('define').tap(args => {
+      const argv = process.argv
+      const mode = argv[argv.indexOf('--project-mode') + 1]
+      args[0]['process.env'].MODE = `"${mode}"`
+      switch (args[0]['process.env'].MODE) {
+        case '"test"':
+          args[0]['process.env'].BASE_API = '"/test"'
+          break
+        case '"dev"':
+          args[0]['process.env'].BASE_API = '"/api"'
+          break
+      }
+      return args
+    })
 
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
 
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
 
-		// 使用 webpack4 新特性来拆分代码
-		config.optimization.splitChunks({
-			chunks: 'all',
-			cacheGroups: {
-				libs: {
-					name: 'chunk-libs',
-					test: /[\\/]node_modules[\\/]/,
-					priority: 10,
-					chunks: 'initial' // 只打包初始时依赖的第三方
-				},
-				elementUI: {
-					name: 'chunk-elementUI', // 单独将 elementUI 拆包
-					priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-					test: /[\\/]node_modules[\\/]element-ui[\\/]/
-				},
-				commons: {
-					name: 'chunk-commons',
-					test: resolve('src/components'), // 可自定义拓展你的规则
-					minChunks: 3, // 最小公用次数
-					priority: 5,
-					reuseExistingChunk: true // 公共模块必开启
-				}
-			}
-		})
-		config.optimization.runtimeChunk('single')
-	}
+    // 使用 webpack4 新特性来拆分代码
+    config.optimization.splitChunks({
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        },
+        elementUI: {
+          name: 'chunk-elementUI', // 单独将 elementUI 拆包
+          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        },
+        commons: {
+          name: 'chunk-commons',
+          test: resolve('src/components'), // 可自定义拓展你的规则
+          minChunks: 3, // 最小公用次数
+          priority: 5,
+          reuseExistingChunk: true // 公共模块必开启
+        }
+      }
+    })
+    config.optimization.runtimeChunk('single')
+  }
 }
 ```
 
@@ -529,9 +529,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
-	state: {},
-	mutations: {},
-	actions: {}
+  state: {},
+  mutations: {},
+  actions: {}
 })
 ```
 
@@ -550,10 +550,10 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-	modules: {
-		app
-	},
-	getters
+  modules: {
+    app
+  },
+  getters
 })
 
 export default store
@@ -579,13 +579,13 @@ npm i js-cookie
 import Cookies from 'js-cookie'
 const TokenKey = 'token'
 export function getToken() {
-	return Cookies.get(TokenKey)
+  return Cookies.get(TokenKey)
 }
 export function setToken(token) {
-	return Cookies.set(TokenKey, token)
+  return Cookies.set(TokenKey, token)
 }
 export function removeToken() {
-	return Cookies.remove(TokenKey)
+  return Cookies.remove(TokenKey)
 }
 ```
 
@@ -596,43 +596,43 @@ import { login } from 'api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
-	state: {
-		token: getToken()
-	},
+  state: {
+    token: getToken()
+  },
 
-	mutations: {
-		SET_TOKEN: (state, token) => {
-			state.token = token
-		}
-	},
+  mutations: {
+    SET_TOKEN: (state, token) => {
+      state.token = token
+    }
+  },
 
-	actions: {
-		// 登录
-		Login({ commit }, userInfo) {
-			return new Promise((resolve, reject) => {
-				login(userInfo.userName, userInfo.password)
-					.then(response => {
-						const data = response.data
-						setToken(data.token)
-						// 将 token 存入 vuex 的 state 中
-						commit('SET_TOKEN', data.token)
-						resolve()
-					})
-					.catch(error => {
-						reject(error)
-					})
-			})
-		},
+  actions: {
+    // 登录
+    Login({ commit }, userInfo) {
+      return new Promise((resolve, reject) => {
+        login(userInfo.userName, userInfo.password)
+          .then(response => {
+            const data = response.data
+            setToken(data.token)
+            // 将 token 存入 vuex 的 state 中
+            commit('SET_TOKEN', data.token)
+            resolve()
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
 
-		// 前端 登出
-		FedLogOut({ commit }) {
-			return new Promise(resolve => {
-				commit('SET_TOKEN', '')
-				removeToken()
-				resolve()
-			})
-		}
-	}
+    // 前端 登出
+    FedLogOut({ commit }) {
+      return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        resolve()
+      })
+    }
+  }
 }
 
 export default user
@@ -654,29 +654,29 @@ import 'nprogress/nprogress.css' // 进度条样式
 import { Message } from 'element-ui'
 const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
-	NProgress.start()
-	// 通过 token 来做拦截
-	if (getToken()) {
-		if (to.path === '/login') {
-			next({
-				path: '/'
-			})
-			NProgress.done()
-		} else {
-			next()
-		}
-	} else {
-		// 判断要进的路由是否在不重定向的白名单内
-		if (whiteList.includes(to.path)) {
-			next()
-		} else {
-			next('/login')
-			NProgress.done()
-		}
-	}
+  NProgress.start()
+  // 通过 token 来做拦截
+  if (getToken()) {
+    if (to.path === '/login') {
+      next({
+        path: '/'
+      })
+      NProgress.done()
+    } else {
+      next()
+    }
+  } else {
+    // 判断要进的路由是否在不重定向的白名单内
+    if (whiteList.includes(to.path)) {
+      next()
+    } else {
+      next('/login')
+      NProgress.done()
+    }
+  }
 })
 router.afterEach(() => {
-	NProgress.done() // 结束Progress
+  NProgress.done() // 结束Progress
 })
 ```
 
@@ -726,162 +726,162 @@ npm run build
 const path = require('path')
 
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 
 // cdn 预加载使用
 const externals = {
-	vue: 'Vue',
-	'vue-router': 'VueRouter',
-	vuex: 'Vuex',
-	axios: 'axios',
-	'element-ui': 'ELEMENT',
-	'js-cookie': 'Cookies',
-	nprogress: 'NProgress'
+  vue: 'Vue',
+  'vue-router': 'VueRouter',
+  vuex: 'Vuex',
+  axios: 'axios',
+  'element-ui': 'ELEMENT',
+  'js-cookie': 'Cookies',
+  nprogress: 'NProgress'
 }
 
 const cdn = {
-	// 开发环境
-	dev: {
-		css: [
-			'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-		],
-		js: []
-	},
-	// 生产环境
-	build: {
-		css: [
-			'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-		],
-		js: [
-			'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
-			'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
-			'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
-			'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
-			'https://unpkg.com/element-ui/lib/index.js',
-			'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
-		]
-	}
+  // 开发环境
+  dev: {
+    css: [
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+    ],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: [
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+    ],
+    js: [
+      'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
+      'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
+      'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
+      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
+      'https://unpkg.com/element-ui/lib/index.js',
+      'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
+    ]
+  }
 }
 
 module.exports = {
-	chainWebpack: config => {
-		// 配置别名
-		config.resolve.alias
-			.set('@', resolve('src'))
-			.set('api', resolve('src/api'))
-			.set('static', resolve('src/static'))
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('api', resolve('src/api'))
+      .set('static', resolve('src/static'))
 
-		// 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
-		config.plugin('define').tap(args => {
-			const argv = process.argv
-			const mode = argv[argv.indexOf('--project-mode') + 1]
-			args[0]['process.env'].MODE = `"${mode}"`
-			switch (args[0]['process.env'].MODE) {
-				case '"test"':
-					args[0]['process.env'].BASE_API = '"/test"'
-					break
-				case '"dev"':
-					args[0]['process.env'].BASE_API = '"/api"'
-					break
-			}
-			return args
-		})
+    // 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
+    config.plugin('define').tap(args => {
+      const argv = process.argv
+      const mode = argv[argv.indexOf('--project-mode') + 1]
+      args[0]['process.env'].MODE = `"${mode}"`
+      switch (args[0]['process.env'].MODE) {
+        case '"test"':
+          args[0]['process.env'].BASE_API = '"/test"'
+          break
+        case '"dev"':
+          args[0]['process.env'].BASE_API = '"/api"'
+          break
+      }
+      return args
+    })
 
-		/**
-		 * 添加 CDN 参数到 htmlWebpackPlugin 配置中，详见 public/index.html 修改
-		 */
-		config.plugin('html').tap(args => {
-			if (process.env.NODE_ENV === 'production') {
-				args[0].cdn = cdn.build
-			}
-			if (process.env.NODE_ENV === 'development') {
-				args[0].cdn = cdn.dev
-			}
-			return args
-		})
+    /**
+     * 添加 CDN 参数到 htmlWebpackPlugin 配置中，详见 public/index.html 修改
+     */
+    config.plugin('html').tap(args => {
+      if (process.env.NODE_ENV === 'production') {
+        args[0].cdn = cdn.build
+      }
+      if (process.env.NODE_ENV === 'development') {
+        args[0].cdn = cdn.dev
+      }
+      return args
+    })
 
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
 
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
 
-		// 使用 webpack4 新特性来拆分代码
-		config.optimization.splitChunks({
-			chunks: 'all',
-			cacheGroups: {
-				libs: {
-					name: 'chunk-libs',
-					test: /[\\/]node_modules[\\/]/,
-					priority: 10,
-					chunks: 'initial' // 只打包初始时依赖的第三方
-				},
-				elementUI: {
-					name: 'chunk-elementUI', // 单独将 elementUI 拆包
-					priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-					test: /[\\/]node_modules[\\/]element-ui[\\/]/
-				},
-				commons: {
-					name: 'chunk-commons',
-					test: resolve('src/components'), // 可自定义拓展你的规则
-					minChunks: 3, // 最小公用次数
-					priority: 5,
-					reuseExistingChunk: true
-				}
-			}
-		})
-		config.optimization.runtimeChunk('single')
-	},
+    // 使用 webpack4 新特性来拆分代码
+    config.optimization.splitChunks({
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        },
+        elementUI: {
+          name: 'chunk-elementUI', // 单独将 elementUI 拆包
+          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        },
+        commons: {
+          name: 'chunk-commons',
+          test: resolve('src/components'), // 可自定义拓展你的规则
+          minChunks: 3, // 最小公用次数
+          priority: 5,
+          reuseExistingChunk: true
+        }
+      }
+    })
+    config.optimization.runtimeChunk('single')
+  },
 
-	// 修改 webpack config, 使其不打包 externals 下的资源
-	configureWebpack: () => {
-		const myConfig = {}
-		if (process.env.NODE_ENV === 'production') {
-			// 1. 生产环境 npm 包转 CDN
-			myConfig.externals = externals
-		}
-		if (process.env.NODE_ENV === 'development') {
-			/**
-			 * 关闭 host check，方便使用 ngrok 之类的内网转发工具
-			 */
-			myConfig.devServer = {
-				disableHostCheck: true,
-				hot: true,
-				port: 8081, // 端口号
-				host: '0.0.0.0',
-				https: false,
-				open: false, // 是否自动启动浏览器
-				compress: true, // 是否启用 gzip 压缩
-				// 代理跨域
-				proxy: {
-					'/api': {
-						target: 'http://10.18.72.30:20080/',
-						ws: true,
-						changeOrigin: true,
-						pathRewrite: {
-							'^/api': ''
-						}
-					}
-				}
-			}
-		}
-		return myConfig
-	}
+  // 修改 webpack config, 使其不打包 externals 下的资源
+  configureWebpack: () => {
+    const myConfig = {}
+    if (process.env.NODE_ENV === 'production') {
+      // 1. 生产环境 npm 包转 CDN
+      myConfig.externals = externals
+    }
+    if (process.env.NODE_ENV === 'development') {
+      /**
+       * 关闭 host check，方便使用 ngrok 之类的内网转发工具
+       */
+      myConfig.devServer = {
+        disableHostCheck: true,
+        hot: true,
+        port: 8081, // 端口号
+        host: '0.0.0.0',
+        https: false,
+        open: false, // 是否自动启动浏览器
+        compress: true, // 是否启用 gzip 压缩
+        // 代理跨域
+        proxy: {
+          '/api': {
+            target: 'http://10.18.72.30:20080/',
+            ws: true,
+            changeOrigin: true,
+            pathRewrite: {
+              '^/api': ''
+            }
+          }
+        }
+      }
+    }
+    return myConfig
+  }
 }
 ```
 
@@ -891,51 +891,51 @@ module.exports = {
 <!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-		<link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
 
-		<!-- 使用CDN加速的CSS文件，配置在vue.config.js下 -->
-		<% for (var i in
-		htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
-		<link
-			href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
-			rel="preload"
-			as="style"
-		/>
-		<link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
-		<% } %>
+    <!-- 使用CDN加速的CSS文件，配置在vue.config.js下 -->
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+      rel="preload"
+      as="style"
+    />
+    <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
+    <% } %>
 
-		<!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
-		<% for (var i in
-		htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
-		<link
-			href="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
-			rel="preload"
-			as="script"
-		/>
-		<% } %>
+    <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
+      rel="preload"
+      as="script"
+    />
+    <% } %>
 
-		<title>vue-cli3-learn</title>
-	</head>
+    <title>vue-cli3-learn</title>
+  </head>
 
-	<body>
-		<noscript>
-			<strong
-				>We're sorry but vue-project-demo doesn't work properly without
-				JavaScript enabled. Please enable it to continue.</strong
-			>
-		</noscript>
-		<div id="app"></div>
-		<!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
-		<% for (var i in
-		htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
-		<script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
-		<% } %>
-		<!-- built files will be auto injected -->
-	</body>
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but vue-project-demo doesn't work properly without
+        JavaScript enabled. Please enable it to continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
+    <!-- built files will be auto injected -->
+  </body>
 </html>
 ```
 
@@ -978,45 +978,45 @@ const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 
 // cdn 预加载使用
 const externals = {
-	vue: 'Vue',
-	'vue-router': 'VueRouter',
-	vuex: 'Vuex',
-	axios: 'axios',
-	'element-ui': 'ELEMENT',
-	'js-cookie': 'Cookies',
-	nprogress: 'NProgress'
+  vue: 'Vue',
+  'vue-router': 'VueRouter',
+  vuex: 'Vuex',
+  axios: 'axios',
+  'element-ui': 'ELEMENT',
+  'js-cookie': 'Cookies',
+  nprogress: 'NProgress'
 }
 
 const cdn = {
-	// 开发环境
-	dev: {
-		css: [
-			'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-		],
-		js: []
-	},
-	// 生产环境
-	build: {
-		css: [
-			'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-		],
-		js: [
-			'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
-			'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
-			'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
-			'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
-			'https://unpkg.com/element-ui/lib/index.js',
-			'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
-		]
-	}
+  // 开发环境
+  dev: {
+    css: [
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+    ],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: [
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+    ],
+    js: [
+      'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
+      'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
+      'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
+      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
+      'https://unpkg.com/element-ui/lib/index.js',
+      'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
+    ]
+  }
 }
 
 // 是否使用 gzip
@@ -1025,133 +1025,133 @@ const productionGzip = true
 const productionGzipExtensions = ['js', 'css']
 
 module.exports = {
-	chainWebpack: config => {
-		// 配置别名
-		config.resolve.alias
-			.set('@', resolve('src'))
-			.set('api', resolve('src/api'))
-			.set('static', resolve('src/static'))
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('api', resolve('src/api'))
+      .set('static', resolve('src/static'))
 
-		// 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
-		config.plugin('define').tap(args => {
-			const argv = process.argv
-			const mode = argv[argv.indexOf('--project-mode') + 1]
-			args[0]['process.env'].MODE = `"${mode}"`
-			switch (args[0]['process.env'].MODE) {
-				case '"test"':
-					args[0]['process.env'].BASE_API = '"/test"'
-					break
-				case '"dev"':
-					args[0]['process.env'].BASE_API = '"/api"'
-					break
-			}
-			return args
-		})
+    // 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
+    config.plugin('define').tap(args => {
+      const argv = process.argv
+      const mode = argv[argv.indexOf('--project-mode') + 1]
+      args[0]['process.env'].MODE = `"${mode}"`
+      switch (args[0]['process.env'].MODE) {
+        case '"test"':
+          args[0]['process.env'].BASE_API = '"/test"'
+          break
+        case '"dev"':
+          args[0]['process.env'].BASE_API = '"/api"'
+          break
+      }
+      return args
+    })
 
-		/**
-		 * 添加 CDN 参数到 htmlWebpackPlugin 配置中，详见 public/index.html 修改
-		 */
-		config.plugin('html').tap(args => {
-			if (process.env.NODE_ENV === 'production') {
-				args[0].cdn = cdn.build
-			}
-			if (process.env.NODE_ENV === 'development') {
-				args[0].cdn = cdn.dev
-			}
-			return args
-		})
+    /**
+     * 添加 CDN 参数到 htmlWebpackPlugin 配置中，详见 public/index.html 修改
+     */
+    config.plugin('html').tap(args => {
+      if (process.env.NODE_ENV === 'production') {
+        args[0].cdn = cdn.build
+      }
+      if (process.env.NODE_ENV === 'development') {
+        args[0].cdn = cdn.dev
+      }
+      return args
+    })
 
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
 
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
 
-		// 使用 webpack4 新特性来拆分代码
-		config.optimization.splitChunks({
-			chunks: 'all',
-			cacheGroups: {
-				libs: {
-					name: 'chunk-libs',
-					test: /[\\/]node_modules[\\/]/,
-					priority: 10,
-					chunks: 'initial' // 只打包初始时依赖的第三方
-				},
-				elementUI: {
-					name: 'chunk-elementUI', // 单独将 elementUI 拆包
-					priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-					test: /[\\/]node_modules[\\/]element-ui[\\/]/
-				},
-				commons: {
-					name: 'chunk-commons',
-					test: resolve('src/components'), // 可自定义拓展你的规则
-					minChunks: 3, // 最小公用次数
-					priority: 5,
-					reuseExistingChunk: true
-				}
-			}
-		})
-		config.optimization.runtimeChunk('single')
-	},
+    // 使用 webpack4 新特性来拆分代码
+    config.optimization.splitChunks({
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        },
+        elementUI: {
+          name: 'chunk-elementUI', // 单独将 elementUI 拆包
+          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        },
+        commons: {
+          name: 'chunk-commons',
+          test: resolve('src/components'), // 可自定义拓展你的规则
+          minChunks: 3, // 最小公用次数
+          priority: 5,
+          reuseExistingChunk: true
+        }
+      }
+    })
+    config.optimization.runtimeChunk('single')
+  },
 
-	// 修改 webpack config, 使其不打包 externals 下的资源
-	configureWebpack: () => {
-		const myConfig = {}
-		if (process.env.NODE_ENV === 'production') {
-			// 1. 生产环境 npm 包转 CDN
-			myConfig.externals = externals
+  // 修改 webpack config, 使其不打包 externals 下的资源
+  configureWebpack: () => {
+    const myConfig = {}
+    if (process.env.NODE_ENV === 'production') {
+      // 1. 生产环境 npm 包转 CDN
+      myConfig.externals = externals
 
-			myConfig.plugins = []
-			// 2. 构建时开启 gzip，降低服务器压缩对 CPU 资源的占用，服务器也要相应开启 gzip
-			productionGzip &&
-				myConfig.plugins.push(
-					new CompressionWebpackPlugin({
-						test: new RegExp(
-							'\\.(' + productionGzipExtensions.join('|') + ')$' // 处理所有匹配此 {RegExp} 的资源
-						),
-						threshold: 1024, // 1k, 只处理比这个值大的资源。按字节计算
-						minRatio: 0.8 // 只有压缩后的压缩率比这个值小的资源才会被处理
-					})
-				)
-		}
-		if (process.env.NODE_ENV === 'development') {
-			/**
-			 * 关闭 host check，方便使用 ngrok 之类的内网转发工具
-			 */
-			myConfig.devServer = {
-				disableHostCheck: true,
-				hot: true,
-				port: 8081, // 端口号
-				host: '0.0.0.0',
-				https: false,
-				open: false, // 是否自动启动浏览器
-				compress: true, // 是否启用 gzip 压缩
-				// 代理跨域
-				proxy: {
-					'/api': {
-						target: 'http://10.18.72.30:20080/',
-						ws: true,
-						changeOrigin: true,
-						pathRewrite: {
-							'^/api': ''
-						}
-					}
-				}
-			}
-		}
-		return myConfig
-	}
+      myConfig.plugins = []
+      // 2. 构建时开启 gzip，降低服务器压缩对 CPU 资源的占用，服务器也要相应开启 gzip
+      productionGzip &&
+        myConfig.plugins.push(
+          new CompressionWebpackPlugin({
+            test: new RegExp(
+              '\\.(' + productionGzipExtensions.join('|') + ')$' // 处理所有匹配此 {RegExp} 的资源
+            ),
+            threshold: 1024, // 1k, 只处理比这个值大的资源。按字节计算
+            minRatio: 0.8 // 只有压缩后的压缩率比这个值小的资源才会被处理
+          })
+        )
+    }
+    if (process.env.NODE_ENV === 'development') {
+      /**
+       * 关闭 host check，方便使用 ngrok 之类的内网转发工具
+       */
+      myConfig.devServer = {
+        disableHostCheck: true,
+        hot: true,
+        port: 8081, // 端口号
+        host: '0.0.0.0',
+        https: false,
+        open: false, // 是否自动启动浏览器
+        compress: true, // 是否启用 gzip 压缩
+        // 代理跨域
+        proxy: {
+          '/api': {
+            target: 'http://10.18.72.30:20080/',
+            ws: true,
+            changeOrigin: true,
+            pathRewrite: {
+              '^/api': ''
+            }
+          }
+        }
+      }
+    }
+    return myConfig
+  }
 }
 ```
 
@@ -1225,45 +1225,45 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProductionEnvFlag = process.env.NODE_ENV === 'production'
 
 function resolve(dir) {
-	return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir)
 }
 
 // cdn预加载使用
 const externals = {
-	vue: 'Vue',
-	'vue-router': 'VueRouter',
-	vuex: 'Vuex',
-	axios: 'axios',
-	'element-ui': 'ELEMENT',
-	'js-cookie': 'Cookies',
-	nprogress: 'NProgress'
+  vue: 'Vue',
+  'vue-router': 'VueRouter',
+  vuex: 'Vuex',
+  axios: 'axios',
+  'element-ui': 'ELEMENT',
+  'js-cookie': 'Cookies',
+  nprogress: 'NProgress'
 }
 
 const cdn = {
-	// 开发环境
-	dev: {
-		css: [
-			'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-		],
-		js: []
-	},
-	// 生产环境
-	build: {
-		css: [
-			'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
-		],
-		js: [
-			'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
-			'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
-			'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
-			'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
-			'https://unpkg.com/element-ui/lib/index.js',
-			'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
-			'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
-		]
-	}
+  // 开发环境
+  dev: {
+    css: [
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+    ],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: [
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+    ],
+    js: [
+      'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
+      'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js',
+      'https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js',
+      'https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js',
+      'https://unpkg.com/element-ui/lib/index.js',
+      'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
+      'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
+    ]
+  }
 }
 
 // 是否使用gzip
@@ -1272,137 +1272,137 @@ const productionGzip = true
 const productionGzipExtensions = ['js', 'css']
 
 module.exports = {
-	chainWebpack: config => {
-		// 配置别名
-		config.resolve.alias
-			.set('@', resolve('src'))
-			.set('api', resolve('src/api'))
-			.set('static', resolve('src/static'))
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('api', resolve('src/api'))
+      .set('static', resolve('src/static'))
 
-		// 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
-		config.plugin('define').tap(args => {
-			const argv = process.argv
-			const mode = argv[argv.indexOf('--project-mode') + 1]
-			args[0]['process.env'].MODE = `"${mode}"`
-			switch (args[0]['process.env'].MODE) {
-				case '"test"':
-					args[0]['process.env'].BASE_API = '"/test"'
-					break
-				case '"dev"':
-					args[0]['process.env'].BASE_API = '"/api"'
-					break
-			}
-			return args
-		})
+    // 这里是对环境的配置，不同环境对应不同的 BASE_API，以便 axios 的请求地址不同
+    config.plugin('define').tap(args => {
+      const argv = process.argv
+      const mode = argv[argv.indexOf('--project-mode') + 1]
+      args[0]['process.env'].MODE = `"${mode}"`
+      switch (args[0]['process.env'].MODE) {
+        case '"test"':
+          args[0]['process.env'].BASE_API = '"/test"'
+          break
+        case '"dev"':
+          args[0]['process.env'].BASE_API = '"/api"'
+          break
+      }
+      return args
+    })
 
-		/**
-		 * 添加 CDN 参数到 htmlWebpackPlugin 配置中，详见 public/index.html 修改
-		 */
-		config.plugin('html').tap(args => {
-			if (process.env.NODE_ENV === 'production') {
-				args[0].cdn = cdn.build
-			}
-			if (process.env.NODE_ENV === 'development') {
-				args[0].cdn = cdn.dev
-			}
-			return args
-		})
+    /**
+     * 添加 CDN 参数到 htmlWebpackPlugin 配置中，详见 public/index.html 修改
+     */
+    config.plugin('html').tap(args => {
+      if (process.env.NODE_ENV === 'production') {
+        args[0].cdn = cdn.build
+      }
+      if (process.env.NODE_ENV === 'development') {
+        args[0].cdn = cdn.dev
+      }
+      return args
+    })
 
-		// svg loader
-		const svgRule = config.module.rule('svg') // 找到 svg-loader
-		svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
-		svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
-		svgRule // 添加 svg 新的 loader 处理
-			.test(/\.svg$/)
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]'
-			})
+    // svg loader
+    const svgRule = config.module.rule('svg') // 找到 svg-loader
+    svgRule.uses.clear() // 清除已有的 loader, 如果不这样做会添加在此loader之后
+    svgRule.exclude.add(/node_modules/) // 正则匹配排除 node_modules 目录
+    svgRule // 添加 svg 新的 loader 处理
+      .test(/\.svg$/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
 
-		// 修改 images loader 添加 svg 处理
-		const imagesRule = config.module.rule('images')
-		imagesRule.exclude.add(resolve('src/icons'))
-		config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+    // 修改 images loader 添加 svg 处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(resolve('src/icons'))
+    config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
 
-		// 使用 webpack4 新特性来拆分代码
-		config.optimization.splitChunks({
-			chunks: 'all',
-			cacheGroups: {
-				libs: {
-					name: 'chunk-libs',
-					test: /[\\/]node_modules[\\/]/,
-					priority: 10,
-					chunks: 'initial' // 只打包初始时依赖的第三方
-				},
-				elementUI: {
-					name: 'chunk-elementUI', // 单独将 elementUI 拆包
-					priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-					test: /[\\/]node_modules[\\/]element-ui[\\/]/
-				},
-				commons: {
-					name: 'chunk-commons',
-					test: resolve('src/components'), // 可自定义拓展你的规则
-					minChunks: 3, // 最小公用次数
-					priority: 5,
-					reuseExistingChunk: true
-				}
-			}
-		})
-		config.optimization.runtimeChunk('single')
-	},
+    // 使用 webpack4 新特性来拆分代码
+    config.optimization.splitChunks({
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        },
+        elementUI: {
+          name: 'chunk-elementUI', // 单独将 elementUI 拆包
+          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        },
+        commons: {
+          name: 'chunk-commons',
+          test: resolve('src/components'), // 可自定义拓展你的规则
+          minChunks: 3, // 最小公用次数
+          priority: 5,
+          reuseExistingChunk: true
+        }
+      }
+    })
+    config.optimization.runtimeChunk('single')
+  },
 
-	// 修改 webpack config, 使其不打包 externals 下的资源
-	configureWebpack: () => {
-		const myConfig = {}
-		if (process.env.NODE_ENV === 'production') {
-			// 1. 生产环境 npm 包转 CDN
-			myConfig.externals = externals
+  // 修改 webpack config, 使其不打包 externals 下的资源
+  configureWebpack: () => {
+    const myConfig = {}
+    if (process.env.NODE_ENV === 'production') {
+      // 1. 生产环境 npm 包转 CDN
+      myConfig.externals = externals
 
-			myConfig.plugins = []
-			// 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
-			productionGzip &&
-				myConfig.plugins.push(
-					new CompressionWebpackPlugin({
-						test: new RegExp(
-							'\\.(' + productionGzipExtensions.join('|') + ')$' // 处理所有匹配此 {RegExp} 的资源
-						),
-						threshold: 1024, // 1k, 只处理比这个值大的资源。按字节计算
-						minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
-					})
-				)
+      myConfig.plugins = []
+      // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
+      productionGzip &&
+        myConfig.plugins.push(
+          new CompressionWebpackPlugin({
+            test: new RegExp(
+              '\\.(' + productionGzipExtensions.join('|') + ')$' // 处理所有匹配此 {RegExp} 的资源
+            ),
+            threshold: 1024, // 1k, 只处理比这个值大的资源。按字节计算
+            minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
+          })
+        )
 
-			// 配置 size-plugin 插件
-			myConfig.plugins.push(isProductionEnvFlag ? new SizePlugin() : () => {})
-		}
-		if (process.env.NODE_ENV === 'development') {
-			/**
-			 * 关闭 host check，方便使用 ngrok 之类的内网转发工具
-			 * 配置跨域
-			 */
-			myConfig.devServer = {
-				disableHostCheck: true,
-				hot: true,
-				port: 8081, // 端口号
-				host: '0.0.0.0',
-				https: false,
-				open: false, // 是否自动启动浏览器
-				compress: true, // 是否启用 gzip 压缩
-				// 代理跨域
-				proxy: {
-					'/api': {
-						target: 'http://10.18.72.30:20080/',
-						ws: true,
-						changeOrigin: true,
-						pathRewrite: {
-							'^/api': ''
-						}
-					}
-				}
-			}
-		}
-		return myConfig
-	}
+      // 配置 size-plugin 插件
+      myConfig.plugins.push(isProductionEnvFlag ? new SizePlugin() : () => {})
+    }
+    if (process.env.NODE_ENV === 'development') {
+      /**
+       * 关闭 host check，方便使用 ngrok 之类的内网转发工具
+       * 配置跨域
+       */
+      myConfig.devServer = {
+        disableHostCheck: true,
+        hot: true,
+        port: 8081, // 端口号
+        host: '0.0.0.0',
+        https: false,
+        open: false, // 是否自动启动浏览器
+        compress: true, // 是否启用 gzip 压缩
+        // 代理跨域
+        proxy: {
+          '/api': {
+            target: 'http://10.18.72.30:20080/',
+            ws: true,
+            changeOrigin: true,
+            pathRewrite: {
+              '^/api': ''
+            }
+          }
+        }
+      }
+    }
+    return myConfig
+  }
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: "用 promise 封装 wx.request"
-permalink: "miniprogram-promise"
+title: '用 promise 封装 wx.request'
+permalink: 'miniprogram-promise'
 ---
 
 Promise 优势：多个异步等待合并

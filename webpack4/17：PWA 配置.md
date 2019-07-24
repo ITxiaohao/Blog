@@ -1,7 +1,7 @@
 ---
-title: "十七：PWA 配置"
+title: '十七：PWA 配置'
 date: 2019-03-20
-permalink: "webpack4-pwa"
+permalink: 'webpack4-pwa'
 ---
 
 [demo17 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo17)
@@ -16,11 +16,11 @@ permalink: "webpack4-pwa"
 
 ```json {3}
 {
-  "scripts": {
-    "start": "http-server dist",
-    "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
-    "build": "webpack --config ./build/webpack.prod.conf.js"
-  }
+	"scripts": {
+		"start": "http-server dist",
+		"dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
+		"build": "webpack --config ./build/webpack.prod.conf.js"
+	}
 }
 ```
 
@@ -51,17 +51,17 @@ npm i workbox-webpack-plugin -D
 只有要上线的代码，才需要做 PWA 的处理，打开 **webpack.prod.conf.js**
 
 ```js
-const WorkboxPlugin = require("workbox-webpack-plugin"); // 引入 PWA 插件
+const WorkboxPlugin = require('workbox-webpack-plugin') // 引入 PWA 插件
 
 const prodConfig = {
-  plugins: [
-    // 配置 PWA
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true
-    })
-  ]
-};
+	plugins: [
+		// 配置 PWA
+		new WorkboxPlugin.GenerateSW({
+			clientsClaim: true,
+			skipWaiting: true
+		})
+	]
+}
 ```
 
 重新打包，在 dist 目录下会多出 `service-worker.js` 和 `precache-manifest.js` 两个文件，通过这两个文件就能使我们的网页支持 PWA 技术，**service-worker.js** 可以理解为另类的缓存
@@ -74,17 +74,17 @@ const prodConfig = {
 
 ```js
 // 判断该浏览器支不支持 serviceWorker
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/service-worker.js")
-      .then(registration => {
-        console.log("service-worker registed");
-      })
-      .catch(error => {
-        console.log("service-worker registed error");
-      });
-  });
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker
+			.register('/service-worker.js')
+			.then(registration => {
+				console.log('service-worker registed')
+			})
+			.catch(error => {
+				console.log('service-worker registed error')
+			})
+	})
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: "proxy"
-permalink: "es6-proxy"
+title: 'proxy'
+permalink: 'es6-proxy'
 ---
 
 Proxy 是 ES6 中新增的功能，可以理解成，在目标对象之前架设一层 **「拦截」**，外界对该对象的访问，都必须先通过这层**拦截**，因此提供了一种机制，可以对外界的访问进行**过滤**和**改写**。
@@ -9,25 +9,25 @@ Proxy 这个词的原意是代理，用在这里表示由它来 **「代理」**
 
 ```js {4,8}
 var obj = new Proxy(
-  {},
-  {
-    get: function(target, key, receiver) {
-      console.log(`getting ${key}!`);
-      return Reflect.get(target, key, receiver);
-    },
-    set: function(target, key, value, receiver) {
-      console.log(`setting ${key}!`);
-      return Reflect.set(target, key, value, receiver);
-    }
-  }
-);
+	{},
+	{
+		get: function(target, key, receiver) {
+			console.log(`getting ${key}!`)
+			return Reflect.get(target, key, receiver)
+		},
+		set: function(target, key, value, receiver) {
+			console.log(`setting ${key}!`)
+			return Reflect.set(target, key, value, receiver)
+		}
+	}
+)
 
-obj.count = 1;
+obj.count = 1
 //  setting count!
-++obj.count;
+++obj.count
 //  getting count!
 //  setting count!
-console.log(obj.count);
+console.log(obj.count)
 //  getting count!
 //  2
 ```

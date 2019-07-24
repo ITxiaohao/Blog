@@ -110,11 +110,11 @@ Module {
 
 ```js
 module.exports = {
-  a,
-  b,
-  s,
-  o,
-  f
+	a,
+	b,
+	s,
+	o,
+	f
 }
 ```
 
@@ -122,11 +122,11 @@ module.exports = {
 
 ```js
 const obj = {
-  a,
-  b,
-  s,
-  o,
-  f
+	a,
+	b,
+	s,
+	o,
+	f
 }
 
 module.exports = obj
@@ -193,19 +193,19 @@ console.log(array)
 
 ```js
 ;(function(exports, require, module, __filename, __dirname) {
-  const s = 'string'
-  const o = {}
-  const a = []
-  const b = true
-  const f = function() {}
-  const obj = {
-    a,
-    b,
-    s,
-    o,
-    f
-  }
-  module.exports = obj
+	const s = 'string'
+	const o = {}
+	const a = []
+	const b = true
+	const f = function() {}
+	const obj = {
+		a,
+		b,
+		s,
+		o,
+		f
+	}
+	module.exports = obj
 })
 ```
 
@@ -230,11 +230,11 @@ const a = []
 const b = true
 const f = function() {}
 const obj = {
-  a,
-  b,
-  s,
-  o,
-  f
+	a,
+	b,
+	s,
+	o,
+	f
 }
 module.exports = obj
 ```

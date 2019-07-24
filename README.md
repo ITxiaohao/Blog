@@ -5,7 +5,7 @@ comment: false
 # heroText: Hero Title
 # tagline: Hero subtitle
 actionText: come on →
-actionLink: "/guide/"
+actionLink: '/guide/'
 footer: MIT Licensed | Copyright © 2019 Zsh
 ---
 

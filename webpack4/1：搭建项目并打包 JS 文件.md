@@ -1,7 +1,7 @@
 ---
-title: "一：搭建项目并打包 JS 文件"
+title: '一：搭建项目并打包 JS 文件'
 date: 2019-03-20
-permalink: "webpack4-pack-js"
+permalink: 'webpack4-pack-js'
 ---
 
 [demo1 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo01)

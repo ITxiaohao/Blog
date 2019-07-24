@@ -1,7 +1,7 @@
 ---
-title: "导航"
-permalink: "guide"
-sidebar: "auto"
+title: '导航'
+permalink: 'guide'
+sidebar: 'auto'
 comment: false
 single: true
 ---

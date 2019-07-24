@@ -1,7 +1,7 @@
 ---
-title: "三：覆盖默认 entry、output"
+title: '三：覆盖默认 entry、output'
 date: 2019-03-20
-permalink: "webpack4-entry-output"
+permalink: 'webpack4-entry-output'
 ---
 
 [demo3 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo03)
@@ -15,20 +15,20 @@ webpack 支持 ES6, CommonJS, AMD 规范
 ```js
 // minus.js
 module.exports = function(a, b) {
-  return a - b;
-};
+	return a - b
+}
 
 // multi.js
 define(function(require, factory) {
-  "use strict";
-  return function(a, b) {
-    return a * b;
-  };
-});
+	'use strict'
+	return function(a, b) {
+		return a * b
+	}
+})
 
 // sum.js
 export default function(a, b) {
-  return a + b;
+	return a + b
 }
 ```
 
@@ -40,17 +40,17 @@ export default function(a, b) {
  */
 
 // ES6
-import sum from "./vendor/sum";
-console.log("sum(1, 2) = ", sum(1, 2));
+import sum from './vendor/sum'
+console.log('sum(1, 2) = ', sum(1, 2))
 
 // CommonJs
-var minus = require("./vendor/minus");
-console.log("minus(1, 2) = ", minus(1, 2));
+var minus = require('./vendor/minus')
+console.log('minus(1, 2) = ', minus(1, 2))
 
 // AMD
-require(["./vendor/multi"], function(multi) {
-  console.log("multi(1, 2) = ", multi(1, 2));
-});
+require(['./vendor/multi'], function(multi) {
+	console.log('multi(1, 2) = ', multi(1, 2))
+})
 ```
 
 **2. 编写配置文件覆盖 entry/output**
@@ -58,18 +58,18 @@ require(["./vendor/multi"], function(multi) {
 webpack.config.js 是 webpack **默认**的配置文件名，在根目录下创建
 
 ```js
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  entry: {
-    app: "./app.js" // 需要打包的文件入口
-  },
-  output: {
-    publicPath: __dirname + "/dist/", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "bundle.js" // 打包后生产的 js 文件
-  }
-};
+	entry: {
+		app: './app.js' // 需要打包的文件入口
+	},
+	output: {
+		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: 'bundle.js' // 打包后生产的 js 文件
+	}
+}
 ```
 
 `path.resolve()` 方法会把一个路径或路径片段的序列解析为一个绝对路径。
@@ -79,21 +79,21 @@ module.exports = {
 可以使用 `console.log` 输出一下就明白了
 
 ```js
-const path = require("path");
+const path = require('path')
 
-console.log("__dirname: ", __dirname);
-console.log("path.resolve: ", path.resolve(__dirname, "dist"));
+console.log('__dirname: ', __dirname)
+console.log('path.resolve: ', path.resolve(__dirname, 'dist'))
 
 module.exports = {
-  entry: {
-    app: "./app.js" // 需要打包的文件入口
-  },
-  output: {
-    publicPath: __dirname + "/dist/", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "bundle.js" // 打包后生产的 js 文件
-  }
-};
+	entry: {
+		app: './app.js' // 需要打包的文件入口
+	},
+	output: {
+		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: 'bundle.js' // 打包后生产的 js 文件
+	}
+}
 ```
 
 ![](https://raw.githubusercontent.com/ITxiaohao/blog-img/master/img/webpack/20190318112611.png)
@@ -121,30 +121,30 @@ npm install clean-webpack-plugin --save-dev
 ② 修改 webpack 配置文件
 
 ```js
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: {
-    app: "./app.js" // 需要打包的文件入口
-  },
-  output: {
-    publicPath: __dirname + "/dist/", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "bundle.js" // 打包后生产的 js 文件
-  },
-  plugins: [
-    new CleanWebpackPlugin() // 默认情况下，此插件将删除 webpack output.path目录中的所有文件，以及每次成功重建后所有未使用的 webpack 资产。
-  ]
-};
+	entry: {
+		app: './app.js' // 需要打包的文件入口
+	},
+	output: {
+		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: 'bundle.js' // 打包后生产的 js 文件
+	},
+	plugins: [
+		new CleanWebpackPlugin() // 默认情况下，此插件将删除 webpack output.path目录中的所有文件，以及每次成功重建后所有未使用的 webpack 资产。
+	]
+}
 ```
 
 注意!!!如果安装的 clean-webpack-plugin 是 [3.0](https://github.com/johnagan/clean-webpack-plugin/releases) 版本的，配置要更改为：
 
 ```js
 // common js
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 ```
 
 之后再执行 `npm run build` 就可以了

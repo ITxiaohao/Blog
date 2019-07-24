@@ -1,7 +1,7 @@
 ---
-title: "五：Code Splitting"
+title: '五：Code Splitting'
 date: 2019-03-20
-permalink: "webpack4-code-splitting"
+permalink: 'webpack4-code-splitting'
 ---
 
 [demo5 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo05)
@@ -10,27 +10,27 @@ permalink: "webpack4-code-splitting"
 
 ```json
 {
-  "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
-  },
-  "devDependencies": {
-    "clean-webpack-plugin": "^2.0.0",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
-  },
-  "dependencies": {
-    "lodash": "^4.17.11"
-  }
+	"scripts": {
+		"dev": "webpack --mode development",
+		"build": "webpack --mode production"
+	},
+	"devDependencies": {
+		"clean-webpack-plugin": "^2.0.0",
+		"webpack": "^4.29.6",
+		"webpack-cli": "^3.2.3"
+	},
+	"dependencies": {
+		"lodash": "^4.17.11"
+	}
 }
 ```
 
 我们在 src/ 文件夹下创建 index.js 文件
 
 ```js
-import _ from "lodash";
+import _ from 'lodash'
 
-console.log(_.join(["a", "b", "c"]));
+console.log(_.join(['a', 'b', 'c']))
 ```
 
 目录结构为：
@@ -40,22 +40,22 @@ console.log(_.join(["a", "b", "c"]));
 **2. 配置 webpack.config.js 文件**
 
 ```js
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: {
-    main: "./src/index.js"
-  },
-  output: {
-    publicPath: __dirname + "/dist/", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  plugins: [new CleanWebpackPlugin()]
-};
+	entry: {
+		main: './src/index.js'
+	},
+	output: {
+		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	plugins: [new CleanWebpackPlugin()]
+}
 ```
 
 运行 `npm run build` 打包
@@ -67,16 +67,16 @@ module.exports = {
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>代码分割</title>
-  </head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>代码分割</title>
+	</head>
 
-  <body>
-    <script src="./dist/main.bundle.js"></script>
-  </body>
+	<body>
+		<script src="./dist/main.bundle.js"></script>
+	</body>
 </html>
 ```
 
@@ -85,9 +85,9 @@ module.exports = {
 如果我们再改动业务代码，将 index.js 中的代码改为
 
 ```js
-import _ from "lodash";
+import _ from 'lodash'
 
-console.log(_.join(["a", "b", "c"], "***"));
+console.log(_.join(['a', 'b', 'c'], '***'))
 ```
 
 再打包，刷新页面可以看到 `a***b*****c**`
@@ -111,27 +111,27 @@ console.log(_.join(["a", "b", "c"], "***"));
 现在我们来配置 **webpack.config.js** 文件
 
 ```js {15,16,17,18}
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: {
-    main: "./src/index.js"
-  },
-  output: {
-    publicPath: __dirname + "/dist/", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  optimization: {
-    splitChunks: {
-      chunks: "all"
-    }
-  },
-  plugins: [new CleanWebpackPlugin()]
-};
+	entry: {
+		main: './src/index.js'
+	},
+	output: {
+		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	optimization: {
+		splitChunks: {
+			chunks: 'all'
+		}
+	},
+	plugins: [new CleanWebpackPlugin()]
+}
 ```
 
 上面高亮的代码段就是告诉 webpack，要做代码分割了，这里的 `chunks: 'all'` 是分割所有代码，包括同步代码和异步代码，webpack 默认是 `chunks: 'async'` 分割**异步**代码
@@ -189,17 +189,17 @@ optimization: {
 
 ```js
 function getComponent() {
-  // 使用 异步的形式导入 lodash，default: _ 表示用 _ 代指 lodash
-  return import("lodash").then(({ default: _ }) => {
-    var element = document.createElement("div");
-    element.innerHTML = _.join(["hello", "world"], "-");
-    return element;
-  });
+	// 使用 异步的形式导入 lodash，default: _ 表示用 _ 代指 lodash
+	return import('lodash').then(({ default: _ }) => {
+		var element = document.createElement('div')
+		element.innerHTML = _.join(['hello', 'world'], '-')
+		return element
+	})
 }
 
 getComponent().then(element => {
-  document.body.appendChild(element);
-});
+	document.body.appendChild(element)
+})
 ```
 
 :::warning 注意！
@@ -316,17 +316,17 @@ getComponent().then(element => {
 
 ```js
 // 异步代码
-import(/* webpackChunkName: 'a'*/ "./a").then(function(a) {
-  console.log(a);
-});
+import(/* webpackChunkName: 'a'*/ './a').then(function(a) {
+	console.log(a)
+})
 
-import(/* webpackChunkName: 'b'*/ "./b").then(function(b) {
-  console.log(b);
-});
+import(/* webpackChunkName: 'b'*/ './b').then(function(b) {
+	console.log(b)
+})
 
-import(/* webpackChunkName: 'use-lodash'*/ "lodash").then(function(_) {
-  console.log(_.join(["1", "2"]));
-});
+import(/* webpackChunkName: 'use-lodash'*/ 'lodash').then(function(_) {
+	console.log(_.join(['1', '2']))
+})
 ```
 
 **将 minChunks 设置为 2，最小公用 2 次才分割**

@@ -1,6 +1,6 @@
 ---
-title: "Jenkins"
-permalink: "server-jenkins"
+title: 'Jenkins'
+permalink: 'server-jenkins'
 ---
 
 Jenkins 是一个独立的开源自动化服务器，可用于自动执行与构建，测试，交付或部署软件相关的各种任务。

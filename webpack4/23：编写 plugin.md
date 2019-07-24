@@ -1,7 +1,7 @@
 ---
-title: "二十三：编写 plugin"
+title: '二十三：编写 plugin'
 date: 2019-03-20
-permalink: "webpack4-plugin"
+permalink: 'webpack4-plugin'
 ---
 
 [demo23 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo23)
@@ -12,32 +12,32 @@ permalink: "webpack4-plugin"
 
 ```js
 class CopyrightWebpackPlugin {
-  constructor() {
-    console.log("插件被使用了");
-  }
-  apply(compiler) {}
+	constructor() {
+		console.log('插件被使用了')
+	}
+	apply(compiler) {}
 }
 
-module.exports = CopyrightWebpackPlugin;
+module.exports = CopyrightWebpackPlugin
 ```
 
 在 webpack.config.js 中使用，所以每次使用 plugin 都要使用 **new**，因为本质上 plugin 是一个类
 
 ```js
-const path = require("path");
-const CopyrightWebpackPlugin = require("./plugins/copyright-webpack-plugin");
+const path = require('path')
+const CopyrightWebpackPlugin = require('./plugins/copyright-webpack-plugin')
 
 module.exports = {
-  mode: "development",
-  entry: {
-    main: "./src/index.js"
-  },
-  plugins: [new CopyrightWebpackPlugin()],
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js"
-  }
-};
+	mode: 'development',
+	entry: {
+		main: './src/index.js'
+	},
+	plugins: [new CopyrightWebpackPlugin()],
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].js'
+	}
+}
 ```
 
 保存后打包，插件被使用了，只不过我们什么都没干
@@ -48,22 +48,22 @@ module.exports = {
 
 ```js
 new CopyrightWebpackPlugin({
-  name: "xh"
-});
+	name: 'xh'
+})
 ```
 
 同时在 `copyright-webpack-plugin.js` 中接收
 
 ```js
 class CopyrightWebpackPlugin {
-  constructor(options) {
-    console.log("插件被使用了");
-    console.log("options = ", options);
-  }
-  apply(compiler) {}
+	constructor(options) {
+		console.log('插件被使用了')
+		console.log('options = ', options)
+	}
+	apply(compiler) {}
 }
 
-module.exports = CopyrightWebpackPlugin;
+module.exports = CopyrightWebpackPlugin
 ```
 
 ![](https://raw.githubusercontent.com/ITxiaohao/blog-img/master/img/webpack/20190326110525.png)
@@ -78,18 +78,18 @@ hooks 是钩子，像 vue、react 的生命周期一样，找到 `emit` 这个�
 
 ```js {7}
 class CopyrightWebpackPlugin {
-  apply(compiler) {
-    compiler.hooks.emit.tapAsync(
-      "CopyrightWebpackPlugin",
-      (compilation, cb) => {
-        console.log(11);
-        cb();
-      }
-    );
-  }
+	apply(compiler) {
+		compiler.hooks.emit.tapAsync(
+			'CopyrightWebpackPlugin',
+			(compilation, cb) => {
+				console.log(11)
+				cb()
+			}
+		)
+	}
 }
 
-module.exports = CopyrightWebpackPlugin;
+module.exports = CopyrightWebpackPlugin
 ```
 
 因为 **emit** 是**异步**的，可以通过 **tapAsync** 来写，当要把代码放入到 dist 目录之前，就会触发这个钩子，走到我们定义的函数里，如果你用 **tapAsync** 函数，记得最后要用 **cb()** ，tapAsync 要传递两个参数，第一个参数传递我们定义的插件名称
@@ -106,27 +106,27 @@ module.exports = CopyrightWebpackPlugin;
 
 ```js
 class CopyrightWebpackPlugin {
-  apply(compiler) {
-    compiler.hooks.emit.tapAsync(
-      "CopyrightWebpackPlugin",
-      (compilation, cb) => {
-        // 生成一个 copyright.txt 文件
-        compilation.assets["copyright.txt"] = {
-          source: function() {
-            return "copyright by xh";
-          },
-          size: function() {
-            return 15; // 上面 source 返回的字符长度
-          }
-        };
-        console.log("compilation.assets = ", compilation.assets);
-        cb();
-      }
-    );
-  }
+	apply(compiler) {
+		compiler.hooks.emit.tapAsync(
+			'CopyrightWebpackPlugin',
+			(compilation, cb) => {
+				// 生成一个 copyright.txt 文件
+				compilation.assets['copyright.txt'] = {
+					source: function() {
+						return 'copyright by xh'
+					},
+					size: function() {
+						return 15 // 上面 source 返回的字符长度
+					}
+				}
+				console.log('compilation.assets = ', compilation.assets)
+				cb()
+			}
+		)
+	}
 }
 
-module.exports = CopyrightWebpackPlugin;
+module.exports = CopyrightWebpackPlugin
 ```
 
 ![](https://raw.githubusercontent.com/ITxiaohao/blog-img/master/img/webpack/20190326112915.png)
@@ -139,32 +139,32 @@ module.exports = CopyrightWebpackPlugin;
 
 ```js
 class CopyrightWebpackPlugin {
-  apply(compiler) {
-    // 同步钩子
-    compiler.hooks.compile.tap("CopyrightWebpackPlugin", compilation => {
-      console.log("compile");
-    });
+	apply(compiler) {
+		// 同步钩子
+		compiler.hooks.compile.tap('CopyrightWebpackPlugin', compilation => {
+			console.log('compile')
+		})
 
-    // 异步钩子
-    compiler.hooks.emit.tapAsync(
-      "CopyrightWebpackPlugin",
-      (compilation, cb) => {
-        compilation.assets["copyright.txt"] = {
-          source: function() {
-            return "copyright by xh";
-          },
-          size: function() {
-            return 15; // 字符长度
-          }
-        };
-        console.log("compilation.assets = ", compilation.assets);
-        cb();
-      }
-    );
-  }
+		// 异步钩子
+		compiler.hooks.emit.tapAsync(
+			'CopyrightWebpackPlugin',
+			(compilation, cb) => {
+				compilation.assets['copyright.txt'] = {
+					source: function() {
+						return 'copyright by xh'
+					},
+					size: function() {
+						return 15 // 字符长度
+					}
+				}
+				console.log('compilation.assets = ', compilation.assets)
+				cb()
+			}
+		)
+	}
 }
 
-module.exports = CopyrightWebpackPlugin;
+module.exports = CopyrightWebpackPlugin
 ```
 
 <!-- `chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9229/d3928cd4-4060-4f99-9bb8-91e6928b6e1a` -->

@@ -1,6 +1,6 @@
 ---
-title: "从 commit 规范化到发布自定义 CHANGELOG 模版"
-permalink: "git-commit"
+title: '从 commit 规范化到发布自定义 CHANGELOG 模版'
+permalink: 'git-commit'
 ---
 
 ## 前言
@@ -55,14 +55,14 @@ npm install husky --save-dev
 
 ```json
 {
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/*_/_.{js,vue}": ["npm run lint", "git add"]
-  }
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"src/*_/_.{js,vue}": ["npm run lint", "git add"]
+	}
 }
 ```
 
@@ -312,9 +312,9 @@ npm run changelog
 
 ```json
 {
-  "scripts": {
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 -n ./changelog-option/index.js"
-  }
+	"scripts": {
+		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 -n ./changelog-option/index.js"
+	}
 }
 ```
 
@@ -334,27 +334,27 @@ format 里面有 authorName 和 authorEmail 字段，运行 `npm run changelog` 
 
 ```json
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "cwd": "${workspaceFolder}",
-      "program": "${workspaceFolder}\\node_modules\\conventional-changelog-cli\\cli.js",
-      "args": [
-        "-p",
-        "angular",
-        "-i",
-        "CHANGELOG.md",
-        "-s",
-        "-r",
-        "0",
-        "-n",
-        "./changelog-option/index.js"
-      ]
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Program",
+			"cwd": "${workspaceFolder}",
+			"program": "${workspaceFolder}\\node_modules\\conventional-changelog-cli\\cli.js",
+			"args": [
+				"-p",
+				"angular",
+				"-i",
+				"CHANGELOG.md",
+				"-s",
+				"-r",
+				"0",
+				"-n",
+				"./changelog-option/index.js"
+			]
+		}
+	]
 }
 ```
 
@@ -472,46 +472,46 @@ authorEmail：邮箱
 
 ```js
 module.exports = {
-  format:
-    "%B%n-hash-%n%H%n-gitTags-%n%d%n-committerDate-%n%ci%n-authorName-%n%an%n-authorEmail-%n%ae"
-};
+	format:
+		'%B%n-hash-%n%H%n-gitTags-%n%d%n-committerDate-%n%ci%n-authorName-%n%an%n-authorEmail-%n%ae'
+}
 ```
 
 在 index.js 中传入并使用
 
 ```js
-"use strict";
-const Q = require(`q`);
-const conventionalChangelog = require(`./conventional-changelog`);
-const parserOpts = require(`./parser-opts`);
-const recommendedBumpOpts = require(`./conventional-recommended-bump`);
-const writerOpts = require(`./writer-opts`);
+'use strict'
+const Q = require(`q`)
+const conventionalChangelog = require(`./conventional-changelog`)
+const parserOpts = require(`./parser-opts`)
+const recommendedBumpOpts = require(`./conventional-recommended-bump`)
+const writerOpts = require(`./writer-opts`)
 // 格式化 git log 信息
-const gitRawCommitsOpts = require("./git-raw-commit");
+const gitRawCommitsOpts = require('./git-raw-commit')
 
 module.exports = Q.all([
-  conventionalChangelog,
-  parserOpts,
-  recommendedBumpOpts,
-  writerOpts,
-  gitRawCommitsOpts
+	conventionalChangelog,
+	parserOpts,
+	recommendedBumpOpts,
+	writerOpts,
+	gitRawCommitsOpts
 ]).spread(
-  (
-    conventionalChangelog,
-    parserOpts,
-    recommendedBumpOpts,
-    writerOpts,
-    gitRawCommitsOpts
-  ) => {
-    return {
-      conventionalChangelog,
-      parserOpts,
-      recommendedBumpOpts,
-      writerOpts,
-      gitRawCommitsOpts // 传入
-    };
-  }
-);
+	(
+		conventionalChangelog,
+		parserOpts,
+		recommendedBumpOpts,
+		writerOpts,
+		gitRawCommitsOpts
+	) => {
+		return {
+			conventionalChangelog,
+			parserOpts,
+			recommendedBumpOpts,
+			writerOpts,
+			gitRawCommitsOpts // 传入
+		}
+	}
+)
 ```
 
 之后修改 commit.hbs，显示 authorName 和 authorEmail
@@ -524,9 +524,9 @@ module.exports = Q.all([
 
 ```json
 {
-  "scripts": {
-    "changeissueurl": "node ./changelog-option/replace.js https://gitlba.com/issues/ https://redmine.example.com/issues"
-  }
+	"scripts": {
+		"changeissueurl": "node ./changelog-option/replace.js https://gitlba.com/issues/ https://redmine.example.com/issues"
+	}
 }
 ```
 
@@ -574,15 +574,15 @@ npm install conventional-changelog-custom-config --save-dev
 
 ```json
 {
-  "scripts": {
-    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0"
-  },
-  "changelog": {
-    "bugsUrl": "https://redmine.example.com/issues/",
-    "emojis": true,
-    "authorName": true,
-    "authorEmail": true
-  }
+	"scripts": {
+		"changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0"
+	},
+	"changelog": {
+		"bugsUrl": "https://redmine.example.com/issues/",
+		"emojis": true,
+		"authorName": true,
+		"authorEmail": true
+	}
 }
 ```
 
@@ -596,10 +596,10 @@ Type: `string` Default: `false`
 
 ```json
 {
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/example"
-  }
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/example"
+	}
 }
 ```
 

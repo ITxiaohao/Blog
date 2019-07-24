@@ -1,6 +1,6 @@
 ---
-title: "JavaScript 基础-上"
-permalink: "javascript-first"
+title: 'JavaScript 基础-上'
+permalink: 'javascript-first'
 ---
 
 ## 类型转换
@@ -29,10 +29,10 @@ permalink: "javascript-first"
 - 如果一方不是字符串或者数字，那么会将它转换为**数字**或者**字符串**
 
 ```js
-console.log(1 + "1"); // '11'
-console.log(true + true); // 2
-console.log(4 + [1, 2, 3]); // "41,2,3"
-console.log([1, 2] + [2, 1]); // '1,22,1'
+console.log(1 + '1') // '11'
+console.log(true + true) // 2
+console.log(4 + [1, 2, 3]) // "41,2,3"
+console.log([1, 2] + [2, 1]) // '1,22,1'
 ```
 
 :::tip 练习
@@ -60,9 +60,9 @@ console.log([1, 2] + [2, 1]); // '1,22,1'
 除了加法运算，只要其中一方是数字，那么另一方就会被转成数字
 
 ```js
-console.log(4 * "3"); // 12
-console.log(4 * []); // 0
-console.log(4 * [1, 2]); // NaN
+console.log(4 * '3') // 12
+console.log(4 * []) // 0
+console.log(4 * [1, 2]) // NaN
 ```
 
 ### == 操作符
@@ -100,14 +100,14 @@ ToPrimitive([]) == 0
 
 ```js
 let a = {
-  valueOf() {
-    return 0;
-  },
-  toString() {
-    return "1";
-  }
-};
-a > -1; // true
+	valueOf() {
+		return 0
+	},
+	toString() {
+		return '1'
+	}
+}
+a > -1 // true
 ```
 
 在以上代码中，因为 **a 是对象**，所以会通过 **valueOf** 方法转换为原始类型再比较值。这里我们自定义了一个 **valueOf** 方法，返回的是 **0**，如果这里改为 **-2**，则 `a > -1` 为 **false**
@@ -148,27 +148,27 @@ this 实际上是在函数被调用时发生的绑定，它指向什么完全取
 
 ```js
 function baz() {
-  // 当前调用栈是：baz
-  // 因此，当前调用位置是全局作用域
-  console.log("baz");
-  bar(); // <-- bar 的调用位置
+	// 当前调用栈是：baz
+	// 因此，当前调用位置是全局作用域
+	console.log('baz')
+	bar() // <-- bar 的调用位置
 }
 
 function bar() {
-  // 当前调用栈是 baz -> bar
-  // 因此，当前调用位置在 baz 中
-  console.log("bar");
-  foo(); // <-- foo 的调用位置
+	// 当前调用栈是 baz -> bar
+	// 因此，当前调用位置在 baz 中
+	console.log('bar')
+	foo() // <-- foo 的调用位置
 }
 
 function foo() {
-  // 当前调用栈是 baz -> bar -> foo
-  // 因此，当前调用位置在 bar 中
-  debugger;
-  console.log("foo");
+	// 当前调用栈是 baz -> bar -> foo
+	// 因此，当前调用位置在 bar 中
+	debugger
+	console.log('foo')
 }
 
-baz(); // <-- baz 的调用位置
+baz() // <-- baz 的调用位置
 ```
 
 可以把调用栈想象成一个函数调用链，就像我们在前面代码段的注释中所写的一样。
@@ -193,10 +193,10 @@ baz(); // <-- baz 的调用位置
 
 ```js
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
-var a = 2;
-foo(); // 2
+var a = 2
+foo() // 2
 ```
 
 当调用 `foo()` 时，`this.a` 被解析成了**全局变量 a**。为什么？因为在本例中，函数调用时应用了 this 的默认绑定，因此 this 指向全局对象。
@@ -209,12 +209,12 @@ foo(); // 2
 
 ```js
 function foo() {
-  "use strict";
-  console.log(this); // undefined
-  console.log(this.a); // TypeError: Cannot read property 'a' of undefined
+	'use strict'
+	console.log(this) // undefined
+	console.log(this.a) // TypeError: Cannot read property 'a' of undefined
 }
-var a = 2;
-foo();
+var a = 2
+foo()
 ```
 
 :::tip
@@ -225,13 +225,13 @@ foo();
 
 ```js
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
 var obj = {
-  a: 2,
-  foo: foo
-};
-obj.foo(); // 2
+	a: 2,
+	foo: foo
+}
+obj.foo() // 2
 ```
 
 调用位置会使用 obj 上下文来引用函数，因此你可以说函数被调用时 obj 对象“**拥有**”或者“**包含**”它。
@@ -246,18 +246,18 @@ obj.foo(); // 2
 
 ```js
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
 var obj2 = {
-  a: 42,
-  foo: foo
-};
+	a: 42,
+	foo: foo
+}
 
 var obj1 = {
-  a: 2,
-  obj2: obj2
-};
-obj1.obj2.foo(); // 42，最终是调用了 obj2.foo，this 指向 obj2
+	a: 2,
+	obj2: obj2
+}
+obj1.obj2.foo() // 42，最终是调用了 obj2.foo，this 指向 obj2
 ```
 
 #### 注意隐式丢失的问题
@@ -266,16 +266,16 @@ obj1.obj2.foo(); // 42，最终是调用了 obj2.foo，this 指向 obj2
 
 ```js
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
 var obj = {
-  a: 2,
-  foo: foo
-};
+	a: 2,
+	foo: foo
+}
 
-var bar = obj.foo; // 函数别名！！
-var a = "oops, global"; // a 是全局对象的属性
-bar(); // "oops, global"
+var bar = obj.foo // 函数别名！！
+var a = 'oops, global' // a 是全局对象的属性
+bar() // "oops, global"
 ```
 
 以上代码放在**浏览器**环境中返回 `'oops, global'`，this 绑定到了 window 全局对象中，如果是在 node 环境中，全局对象是 global，还有在其他环境中 this 会绑定到 undefined
@@ -298,12 +298,12 @@ bar(); // "oops, global"
 
 ```js
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
 var obj = {
-  a: 2
-};
-foo.call(obj); // 2
+	a: 2
+}
+foo.call(obj) // 2
 ```
 
 通过 **foo.call(..)**，我们可以在调用 foo 时强制把它的 this 绑定到 obj 上。
@@ -316,21 +316,21 @@ foo.call(obj); // 2
 
 ```js {8}
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
 var obj = {
-  a: 2
-};
+	a: 2
+}
 var bar = function() {
-  foo.call(obj);
-};
+	foo.call(obj)
+}
 
-bar(); // 2
+bar() // 2
 
-setTimeout(bar, 100); // 2
+setTimeout(bar, 100) // 2
 
 // 硬绑定的 bar 不可能再修改它的 this
-bar.call(window); // 2
+bar.call(window) // 2
 ```
 
 以上代码请在**浏览器**环境中运行
@@ -345,35 +345,35 @@ bar.call(window); // 2
 
 ```js
 function foo(something) {
-  console.log(this.a, something);
-  return this.a + something;
+	console.log(this.a, something)
+	return this.a + something
 }
 var obj = {
-  a: 2
-};
+	a: 2
+}
 var bar = function() {
-  return foo.apply(obj, arguments);
-};
-var b = bar(3); // 2 3
-console.log(b); // 5
+	return foo.apply(obj, arguments)
+}
+var b = bar(3) // 2 3
+console.log(b) // 5
 ```
 
 由于硬绑定是一种非常常用的模式，所以在 ES5 中提供了内置的方法 `Function.prototype.bind`
 
 ```js
 function foo(something) {
-  console.log(this.a, something);
-  return this.a + something;
+	console.log(this.a, something)
+	return this.a + something
 }
 
 var obj = {
-  a: 2
-};
+	a: 2
+}
 
-var bar = foo.bind(obj);
+var bar = foo.bind(obj)
 
-var b = bar(3); // 2 3
-console.log(b); // 5
+var b = bar(3) // 2 3
+console.log(b) // 5
 ```
 
 bind(..) 会返回一个硬编码的新函数，它会把参数设置为 this 的上下文并调用原始函数。
@@ -388,13 +388,13 @@ bind(..) 会返回一个硬编码的新函数，它会把参数设置为 this �
 
 ```js
 function foo(el) {
-  console.log(el, this.id);
+	console.log(el, this.id)
 }
 var obj = {
-  id: "awesome"
-};
+	id: 'awesome'
+}
 
-[1, 2, 3].forEach(foo, obj);
+;[1, 2, 3].forEach(foo, obj)
 // 1 ' awesome'
 // 2 ' awesome'
 // 3 ' awesome'
@@ -419,11 +419,11 @@ JavaScript 中 new 的机制实际上和面向类的语言完全不同
 
 ```js
 function foo(a) {
-  this.a = a;
+	this.a = a
 }
 
-var bar = new foo(2);
-console.log(bar.a); // 2
+var bar = new foo(2)
+console.log(bar.a) // 2
 ```
 
 使用 new 来调用 foo(..) 时，我们会构造一个新对象 bar 并把它绑定到 foo(..) 调用中的 this 上。new 是最后一种可以影响函数调用时 this 绑定行为的方法，我们称之为 new 绑定。
@@ -438,21 +438,21 @@ console.log(bar.a); // 2
 
 ```js
 function foo() {
-  console.log(this.a);
+	console.log(this.a)
 }
 var objl = {
-  a: 2,
-  foo: foo
-};
+	a: 2,
+	foo: foo
+}
 
 var obj2 = {
-  a: 3,
-  foo: foo
-};
-objl.foo(); // 2
-obj2.foo(); // 3
-objl.foo.call(obj2); // 3
-obj2.foo.call(objl); // 2
+	a: 3,
+	foo: foo
+}
+objl.foo() // 2
+obj2.foo() // 3
+objl.foo.call(obj2) // 3
+obj2.foo.call(objl) // 2
 ```
 
 相比隐式绑定，**显式绑定优先级更高**，也就是说在判断时应当先考虑是否可以应用显式绑定
@@ -509,14 +509,14 @@ ES6 中的箭头函数并不会使用四条标准的绑定规则，而是根据�
 如果是基本数据类型，赋值的时候，会在栈内存中重新开辟一块空间，两者修改后互不影响
 
 ```js
-let a = 1;
+let a = 1
 
-let b = a;
+let b = a
 
-a = 2;
+a = 2
 
-console.log(a); // 2
-console.log(b); // 1
+console.log(a) // 2
+console.log(b) // 1
 ```
 
 而赋值引用类型的时候，修改其中一个则会影响到另一个
@@ -525,27 +525,27 @@ console.log(b); // 1
 
 ```js
 let a = {
-  age: 1
-};
+	age: 1
+}
 
-let b = a;
-a.age = 2;
+let b = a
+a.age = 2
 
-console.log("a.age", a.age); // 2
-console.log("b.age", b.age); // 2
+console.log('a.age', a.age) // 2
+console.log('b.age', b.age) // 2
 ```
 
 以下是数组
 
 ```js
-let arr = [1, 2, 3];
+let arr = [1, 2, 3]
 
-let brr = arr;
+let brr = arr
 
-arr.push(4); // 使用 push、splic、pop、shift、unshift 均会更改
+arr.push(4) // 使用 push、splic、pop、shift、unshift 均会更改
 
-console.log(arr); // [ 1, 2, 3, 4 ]
-console.log(brr); // [ 1, 2, 3, 4 ]
+console.log(arr) // [ 1, 2, 3, 4 ]
+console.log(brr) // [ 1, 2, 3, 4 ]
 ```
 
 因为 a 和 b 都指向同一个引用，所以将 a 更改后，b 也跟着更改
@@ -562,28 +562,28 @@ console.log(brr); // [ 1, 2, 3, 4 ]
 
 ```js {5}
 let a = {
-  age: 1
-};
+	age: 1
+}
 
-let b = Object.assign({}, a);
+let b = Object.assign({}, a)
 
-a.age = 2;
-console.log("a.age", a.age); // 2
-console.log("b.age", b.age); // 1
+a.age = 2
+console.log('a.age', a.age) // 2
+console.log('b.age', b.age) // 1
 ```
 
 2、通过 ES6 的展开运算符 `{...}`
 
 ```js {5}
 let a = {
-  age: 1
-};
+	age: 1
+}
 
-let b = { ...a };
+let b = { ...a }
 
-a.age = 2;
-console.log("a.age", a.age); // 2
-console.log("b.age", b.age); // 1
+a.age = 2
+console.log('a.age', a.age) // 2
+console.log('b.age', b.age) // 1
 ```
 
 数组的解决方法：
@@ -593,13 +593,13 @@ console.log("b.age", b.age); // 1
 **concat** 方法不会改变 **this** 或任何作为参数提供的数组，而是返回一个**浅拷贝**，它包含与原始数组相结合的相同元素的副本，原始数组的元素将复制到**新数组**中。[MDN 上对 concat 的描述](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
 
 ```js {3}
-let arr = [1, 2, 3];
+let arr = [1, 2, 3]
 
-let brr = arr.concat();
+let brr = arr.concat()
 
-arr.push(4);
-console.log(arr); // [ 1, 2, 3, 4 ]
-console.log(brr); // [ 1, 2, 3 ]
+arr.push(4)
+console.log(arr) // [ 1, 2, 3, 4 ]
+console.log(brr) // [ 1, 2, 3 ]
 ```
 
 2、通过 `slice()` 来解决
@@ -607,13 +607,13 @@ console.log(brr); // [ 1, 2, 3 ]
 `slice()` 方法返回一个新的数组对象，这一对象是一个由 **begin** 和 **end**（不包括 end）决定的原数组的**浅拷贝**,原始数组不会被改变。[MDN 上对 slice 的描述](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
 
 ```js {3}
-let arr = [1, 2, 3];
+let arr = [1, 2, 3]
 
-let brr = arr.slice();
+let brr = arr.slice()
 
-arr.push(4);
-console.log(arr); // [ 1, 2, 3, 4 ]
-console.log(brr); // [ 1, 2, 3 ]
+arr.push(4)
+console.log(arr) // [ 1, 2, 3, 4 ]
+console.log(brr) // [ 1, 2, 3 ]
 ```
 
 其实这两种方法都是返回一个新的数组，所以改变其中一个数组并不会影响另一个
@@ -622,18 +622,18 @@ console.log(brr); // [ 1, 2, 3 ]
 
 ```js {8,10}
 let a = {
-  age: 1,
-  city: {
-    name: "fz"
-  }
-};
+	age: 1,
+	city: {
+		name: 'fz'
+	}
+}
 
-let b = Object.assign({}, a);
+let b = Object.assign({}, a)
 
-a.city.name = "sz";
+a.city.name = 'sz'
 
-console.log("a.city.name", a.city.name); // sz
-console.log("b.city.name", b.city.name); // sz
+console.log('a.city.name', a.city.name) // sz
+console.log('b.city.name', b.city.name) // sz
 ```
 
 有多层引用的时候就要使用深拷贝
@@ -644,18 +644,18 @@ console.log("b.city.name", b.city.name); // sz
 
 ```js {8,13}
 let a = {
-  age: 1,
-  city: {
-    name: "fz"
-  }
-};
+	age: 1,
+	city: {
+		name: 'fz'
+	}
+}
 
-let b = JSON.parse(JSON.stringify(a));
+let b = JSON.parse(JSON.stringify(a))
 
-a.city.name = "sz";
+a.city.name = 'sz'
 
-console.log("a.city.name", a.city.name); // sz
-console.log("b.city.name", b.city.name); // fz
+console.log('a.city.name', a.city.name) // sz
+console.log('b.city.name', b.city.name) // fz
 ```
 
 但是该方法也是有局限性的：
@@ -688,75 +688,75 @@ undefined、任意的函数以及 symbol 值，在序列化过程中会被忽略
 
 ```js
 var obj1 = {
-  a: 1,
-  b: { f: { g: 1 } },
-  c: [1, 2, 3]
-};
-var obj2 = _.cloneDeep(obj1);
-console.log(obj1.b.f === obj2.b.f); // false
+	a: 1,
+	b: { f: { g: 1 } },
+	c: [1, 2, 3]
+}
+var obj2 = _.cloneDeep(obj1)
+console.log(obj1.b.f === obj2.b.f) // false
 ```
 
 也可以手动递归拷贝（较为麻烦）
 
 ```js
 var obj1 = {
-  a: 1,
-  b: {
-    f: {
-      g: 1
-    }
-  },
-  c: [1, 2, 3]
-};
+	a: 1,
+	b: {
+		f: {
+			g: 1
+		}
+	},
+	c: [1, 2, 3]
+}
 
 function getType(obj) {
-  // tostring 会返回对应不同的标签的构造函数
-  var toString = Object.prototype.toString;
-  var map = {
-    "[object Boolean]": "boolean",
-    "[object Number]": "number",
-    "[object String]": "string",
-    "[object Function]": "function",
-    "[object Array]": "array",
-    "[object Date]": "date",
-    "[object RegExp]": "regExp",
-    "[object Undefined]": "undefined",
-    "[object Null]": "null",
-    "[object Object]": "object"
-  };
-  // 判断是否为 DOM 元素
-  if (obj instanceof Element) {
-    return "element";
-  }
-  return map[toString.call(obj)];
+	// tostring 会返回对应不同的标签的构造函数
+	var toString = Object.prototype.toString
+	var map = {
+		'[object Boolean]': 'boolean',
+		'[object Number]': 'number',
+		'[object String]': 'string',
+		'[object Function]': 'function',
+		'[object Array]': 'array',
+		'[object Date]': 'date',
+		'[object RegExp]': 'regExp',
+		'[object Undefined]': 'undefined',
+		'[object Null]': 'null',
+		'[object Object]': 'object'
+	}
+	// 判断是否为 DOM 元素
+	if (obj instanceof Element) {
+		return 'element'
+	}
+	return map[toString.call(obj)]
 }
 
 function deepClone(data) {
-  var type = getType(data);
-  var obj;
-  if (type === "array") {
-    obj = [];
-  } else if (type === "object") {
-    obj = {};
-  } else {
-    //不再具有下一层次
-    return data;
-  }
-  if (type === "array") {
-    for (var i = 0, len = data.length; i < len; i++) {
-      obj.push(deepClone(data[i]));
-    }
-  } else if (type === "object") {
-    for (var key in data) {
-      obj[key] = deepClone(data[key]);
-    }
-  }
-  return obj;
+	var type = getType(data)
+	var obj
+	if (type === 'array') {
+		obj = []
+	} else if (type === 'object') {
+		obj = {}
+	} else {
+		//不再具有下一层次
+		return data
+	}
+	if (type === 'array') {
+		for (var i = 0, len = data.length; i < len; i++) {
+			obj.push(deepClone(data[i]))
+		}
+	} else if (type === 'object') {
+		for (var key in data) {
+			obj[key] = deepClone(data[key])
+		}
+	}
+	return obj
 }
 
-let obj2 = deepClone(obj1);
-obj1.b.f.g = 2;
-console.log(obj2); // 不会改变
+let obj2 = deepClone(obj1)
+obj1.b.f.g = 2
+console.log(obj2) // 不会改变
 ```
 
 ## Map、Filter、Reduce
@@ -764,15 +764,15 @@ console.log(obj2); // 不会改变
 `Map` 的作用是生成一个**新数组**，遍历原数组，将数组中的元素进行一些变换后放入新数组中
 
 ```js
-let array = [1, 2, 3];
-let b = array.map(v => v + 1); // [2, 3, 4]
+let array = [1, 2, 3]
+let b = array.map(v => v + 1) // [2, 3, 4]
 ```
 
 `Map` 接收三个参数，分别是**当前索引元素**、**索引值**、**原数组**
 
 ```js
-let array = ["1", "2", "3"];
-let b = array.map(parseInt); // [ 1, NaN, NaN ]
+let array = ['1', '2', '3']
+let b = array.map(parseInt) // [ 1, NaN, NaN ]
 ```
 
 - 第一轮遍历  parseInt('1', 0) -> 1
@@ -782,9 +782,9 @@ let b = array.map(parseInt); // [ 1, NaN, NaN ]
 `Filter`  的作用也是生成一个**新数组**，在遍历数组的时候**将返回值为  true  的元素**放入新数组，我们可以利用这个函数删除一些不需要的元素
 
 ```js
-let array = [1, 2, 4, 6];
-let newArray = array.filter(v => v !== 6);
-console.log(newArray); // [ 1, 2, 4 ]
+let array = [1, 2, 4, 6]
+let newArray = array.filter(v => v !== 6)
+console.log(newArray) // [ 1, 2, 4 ]
 ```
 
 和  `Map`  一样，`Filter`  的回调函数也接受三个参数，用处也相同。
@@ -794,19 +794,19 @@ console.log(newArray); // [ 1, 2, 4 ]
 如果要实现一个将函数里的元素全部相加得到一个值，可能会这样写
 
 ```js
-const arr = [1, 2, 3];
-let total = 0;
+const arr = [1, 2, 3]
+let total = 0
 for (let i = 0; i < arr.length; i++) {
-  total += arr[i];
+	total += arr[i]
 }
-console.log(total); // 6
+console.log(total) // 6
 ```
 
 使用 `Reduce` 的话就可以将遍历部分的代码优化为一行代码
 
 ```js
-const arr = [1, 2, 3];
-const sum = arr.reduce((acc, current) => acc + current, 0); // 6
+const arr = [1, 2, 3]
+const sum = arr.reduce((acc, current) => acc + current, 0) // 6
 ```
 
 对于  `Reduce`  来说，它接受**两个参数**，分别是**回调函数**和**初始值**，接下来我们来分解上述代码中  `Reduce`  的过程
@@ -819,13 +819,13 @@ const sum = arr.reduce((acc, current) => acc + current, 0); // 6
 当然 `Reduce` 还可以实现很多功能，接下来我们就通过  `Reduce`  来实现  `Map`  函数
 
 ```js
-const arr = [1, 2, 3];
-const mapArray = arr.map(value => value * 2);
+const arr = [1, 2, 3]
+const mapArray = arr.map(value => value * 2)
 const reduceArray = arr.reduce((acc, current) => {
-  acc.push(current * 2);
-  return acc;
-}, []);
-console.log(mapArray, reduceArray); // [ 2, 4, 6 ] [ 2, 4, 6 ]
+	acc.push(current * 2)
+	return acc
+}, [])
+console.log(mapArray, reduceArray) // [ 2, 4, 6 ] [ 2, 4, 6 ]
 ```
 
 - 第一次执行的时候，将 **[]** 空数组作为第一个参数传入，即 **acc = []** ，然后执行回调函数，`acc.push(current \* 2)` 这里 **acc = []**，**current = 1** ，执行完后，**acc = [2]**，**return acc**

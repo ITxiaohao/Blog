@@ -1,7 +1,7 @@
 ---
-title: "八：处理 CSS/SCSS 文件"
+title: '八：处理 CSS/SCSS 文件'
 date: 2019-03-20
-permalink: "webpack4-css-scss"
+permalink: 'webpack4-css-scss'
 ---
 
 [demo8 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo08)
@@ -33,20 +33,20 @@ npm i css-loader style-loader --save-dev
 
 ```json
 {
-  "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
-  },
-  "devDependencies": {
-    "clean-webpack-plugin": "^2.0.0",
-    "css-loader": "^2.1.0",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.5.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
-  }
+	"scripts": {
+		"dev": "webpack --mode development",
+		"build": "webpack --mode production"
+	},
+	"devDependencies": {
+		"clean-webpack-plugin": "^2.0.0",
+		"css-loader": "^2.1.0",
+		"html-loader": "^0.5.5",
+		"html-webpack-plugin": "^3.2.0",
+		"mini-css-extract-plugin": "^0.5.0",
+		"style-loader": "^0.23.1",
+		"webpack": "^4.29.6",
+		"webpack-cli": "^3.2.3"
+	}
 }
 ```
 
@@ -54,15 +54,15 @@ npm i css-loader style-loader --save-dev
 
 ```js {6}
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/, // 针对 .css 后缀的文件设置 loader
-        use: ["style-loader", "css-loader"]
-      }
-    ]
-  }
-};
+	module: {
+		rules: [
+			{
+				test: /\.css$/, // 针对 .css 后缀的文件设置 loader
+				use: ['style-loader', 'css-loader']
+			}
+		]
+	}
+}
 ```
 
 配置 module 中的 rules 属性，和配置 babel 一样，首先在 test 中使用正则来过滤 `.css` 文件，对 `.css` 文件使用 loader，`'style-loader', 'css-loader'`
@@ -72,63 +72,63 @@ module.exports = {
 ```css
 *,
 body {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 html {
-  background: red;
+	background: red;
 }
 ```
 
 **并在 app.js 中引入 base.css**
 
 ```js
-import style from "./css/base.css";
+import style from './css/base.css'
 ```
 
 配置文件完整代码:
 
 ```js (20)
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // 引入插件
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 引入插件
 
 module.exports = {
-  entry: {
-    app: "./src/app.js"
-  },
-  output: {
-    publicPath: "./", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/, // 针对 .css 后缀的文件设置 loader
-        use: ["style-loader", "css-loader"] // 使用 loader
-      }
-    ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      // 打包输出HTML
-      title: "自动生成 HTML",
-      minify: {
-        // 压缩 HTML 文件
-        removeComments: true, // 移除 HTML 中的注释
-        collapseWhitespace: true, // 删除空白符与换行符
-        minifyCSS: true // 压缩内联 css
-      },
-      filename: "index.html", // 生成后的文件名
-      template: "index.html", // 根据此模版生成 HTML 文件
-      chunks: ["app"] // entry中的 app 入口才会被打包
-    })
-  ]
-};
+	entry: {
+		app: './src/app.js'
+	},
+	output: {
+		publicPath: './', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	module: {
+		rules: [
+			{
+				test: /\.css$/, // 针对 .css 后缀的文件设置 loader
+				use: ['style-loader', 'css-loader'] // 使用 loader
+			}
+		]
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			// 打包输出HTML
+			title: '自动生成 HTML',
+			minify: {
+				// 压缩 HTML 文件
+				removeComments: true, // 移除 HTML 中的注释
+				collapseWhitespace: true, // 删除空白符与换行符
+				minifyCSS: true // 压缩内联 css
+			},
+			filename: 'index.html', // 生成后的文件名
+			template: 'index.html', // 根据此模版生成 HTML 文件
+			chunks: ['app'] // entry中的 app 入口才会被打包
+		})
+	]
+}
 ```
 
 项目打包，查看 dist 文件夹
@@ -162,85 +162,85 @@ npm i mini-css-extract-plugin --save-dev
 更改配置文件：
 
 ```js
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/, // 针对 .css 后缀的文件设置 loader
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          "css-loader"
-        ]
-      }
-    ]
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
-  ]
-};
+	module: {
+		rules: [
+			{
+				test: /\.css$/, // 针对 .css 后缀的文件设置 loader
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
+					'css-loader'
+				]
+			}
+		]
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+			chunkFilename: '[id].css'
+		})
+	]
+}
 ```
 
 完整代码：
 
 ```js
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 将 css 单独打包成文件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 将 css 单独打包成文件
 
 module.exports = {
-  entry: {
-    app: "./src/app.js"
-  },
-  output: {
-    publicPath: "./", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/, // 针对 .css 后缀的文件设置 loader
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          "css-loader"
-        ]
-      }
-    ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      // 打包输出HTML
-      title: "自动生成 HTML",
-      minify: {
-        // 压缩 HTML 文件
-        removeComments: true, // 移除 HTML 中的注释
-        collapseWhitespace: true, // 删除空白符与换行符
-        minifyCSS: true // 压缩内联 css
-      },
-      filename: "index.html", // 生成后的文件名
-      template: "index.html", // 根据此模版生成 HTML 文件
-      chunks: ["app"] // entry中的 app 入口才会被打包
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
-  ]
-};
+	entry: {
+		app: './src/app.js'
+	},
+	output: {
+		publicPath: './', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	module: {
+		rules: [
+			{
+				test: /\.css$/, // 针对 .css 后缀的文件设置 loader
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
+					'css-loader'
+				]
+			}
+		]
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			// 打包输出HTML
+			title: '自动生成 HTML',
+			minify: {
+				// 压缩 HTML 文件
+				removeComments: true, // 移除 HTML 中的注释
+				collapseWhitespace: true, // 删除空白符与换行符
+				minifyCSS: true // 压缩内联 css
+			},
+			filename: 'index.html', // 生成后的文件名
+			template: 'index.html', // 根据此模版生成 HTML 文件
+			chunks: ['app'] // entry中的 app 入口才会被打包
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+			chunkFilename: '[id].css'
+		})
+	]
+}
 ```
 
 这样只是生成了单独的 css 文件，但是并没有压缩，引入 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 插件来实现 css 压缩
@@ -252,64 +252,64 @@ npm install optimize-css-assets-webpack-plugin --save-dev
 完整代码：
 
 ```js
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 将 css 单独打包成文件
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin"); // 压缩 css
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 将 css 单独打包成文件
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin') // 压缩 css
 
 module.exports = {
-  entry: {
-    app: "./src/app.js"
-  },
-  output: {
-    publicPath: "./", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/, // 针对 .css 后缀的文件设置 loader
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          "css-loader"
-        ]
-      }
-    ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      // 打包输出HTML
-      title: "自动生成 HTML",
-      minify: {
-        // 压缩 HTML 文件
-        removeComments: true, // 移除 HTML 中的注释
-        collapseWhitespace: true, // 删除空白符与换行符
-        minifyCSS: true // 压缩内联 css
-      },
-      filename: "index.html", // 生成后的文件名
-      template: "index.html", // 根据此模版生成 HTML 文件
-      chunks: ["app"] // entry中的 app 入口才会被打包
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require("cssnano"), //用于优化\最小化 CSS 的 CSS 处理器，默认为 cssnano
-      cssProcessorOptions: { safe: true, discardComments: { removeAll: true } }, //传递给 cssProcessor 的选项，默认为{}
-      canPrint: true //布尔值，指示插件是否可以将消息打印到控制台，默认为 true
-    })
-  ]
-};
+	entry: {
+		app: './src/app.js'
+	},
+	output: {
+		publicPath: './', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	module: {
+		rules: [
+			{
+				test: /\.css$/, // 针对 .css 后缀的文件设置 loader
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
+					'css-loader'
+				]
+			}
+		]
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			// 打包输出HTML
+			title: '自动生成 HTML',
+			minify: {
+				// 压缩 HTML 文件
+				removeComments: true, // 移除 HTML 中的注释
+				collapseWhitespace: true, // 删除空白符与换行符
+				minifyCSS: true // 压缩内联 css
+			},
+			filename: 'index.html', // 生成后的文件名
+			template: 'index.html', // 根据此模版生成 HTML 文件
+			chunks: ['app'] // entry中的 app 入口才会被打包
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+			chunkFilename: '[id].css'
+		}),
+		new OptimizeCssAssetsPlugin({
+			assetNameRegExp: /\.css$/g,
+			cssProcessor: require('cssnano'), //用于优化\最小化 CSS 的 CSS 处理器，默认为 cssnano
+			cssProcessorOptions: { safe: true, discardComments: { removeAll: true } }, //传递给 cssProcessor 的选项，默认为{}
+			canPrint: true //布尔值，指示插件是否可以将消息打印到控制台，默认为 true
+		})
+	]
+}
 ```
 
 再打开 css 文件可以发现已经被压缩了，并且打开 index.html 也是有样式的
@@ -330,83 +330,83 @@ main.scss 引入样式
 $bgColor: black !default;
 *,
 body {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 html {
-  background-color: $bgColor;
+	background-color: $bgColor;
 }
 ```
 
 在 app.js 中引入 main.scss 文件
 
 ```js
-import "./css/base.css";
-import "./scss/main.scss";
+import './css/base.css'
+import './scss/main.scss'
 ```
 
 修改配置文件
 
 ```js
-const path = require("path");
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 将 css 单独打包成文件
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin"); // 压缩 css
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 将 css 单独打包成文件
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin') // 压缩 css
 
 module.exports = {
-  entry: {
-    app: "./src/app.js"
-  },
-  output: {
-    publicPath: "./", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(scss|css)$/, // 针对 .scss 或者 .css 后缀的文件设置 loader
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          "css-loader",
-          "sass-loader" // 使用 sass-loader 将 scss 转为 css
-        ]
-      }
-    ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      // 打包输出HTML
-      title: "自动生成 HTML",
-      minify: {
-        // 压缩 HTML 文件
-        removeComments: true, // 移除 HTML 中的注释
-        collapseWhitespace: true, // 删除空白符与换行符
-        minifyCSS: true // 压缩内联 css
-      },
-      filename: "index.html", // 生成后的文件名
-      template: "index.html", // 根据此模版生成 HTML 文件
-      chunks: ["app"] // entry中的 app 入口才会被打包
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require("cssnano"), //用于优化\最小化 CSS 的 CSS 处理器，默认为 cssnano
-      cssProcessorOptions: { safe: true, discardComments: { removeAll: true } }, //传递给 cssProcessor 的选项，默认为{}
-      canPrint: true //布尔值，指示插件是否可以将消息打印到控制台，默认为 true
-    })
-  ]
-};
+	entry: {
+		app: './src/app.js'
+	},
+	output: {
+		publicPath: './', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	module: {
+		rules: [
+			{
+				test: /\.(scss|css)$/, // 针对 .scss 或者 .css 后缀的文件设置 loader
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
+					'css-loader',
+					'sass-loader' // 使用 sass-loader 将 scss 转为 css
+				]
+			}
+		]
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			// 打包输出HTML
+			title: '自动生成 HTML',
+			minify: {
+				// 压缩 HTML 文件
+				removeComments: true, // 移除 HTML 中的注释
+				collapseWhitespace: true, // 删除空白符与换行符
+				minifyCSS: true // 压缩内联 css
+			},
+			filename: 'index.html', // 生成后的文件名
+			template: 'index.html', // 根据此模版生成 HTML 文件
+			chunks: ['app'] // entry中的 app 入口才会被打包
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+			chunkFilename: '[id].css'
+		}),
+		new OptimizeCssAssetsPlugin({
+			assetNameRegExp: /\.css$/g,
+			cssProcessor: require('cssnano'), //用于优化\最小化 CSS 的 CSS 处理器，默认为 cssnano
+			cssProcessorOptions: { safe: true, discardComments: { removeAll: true } }, //传递给 cssProcessor 的选项，默认为{}
+			canPrint: true //布尔值，指示插件是否可以将消息打印到控制台，默认为 true
+		})
+	]
+}
 ```
 
 :::warning 注意!!!
@@ -435,10 +435,10 @@ npm install postcss-loader autoprefixer --save-dev
 
 ```css
 .example {
-  display: grid;
-  transition: all 0.5s;
-  user-select: none;
-  background: linear-gradient(to bottom, white, black);
+	display: grid;
+	transition: all 0.5s;
+	user-select: none;
+	background: linear-gradient(to bottom, white, black);
 }
 ```
 
@@ -446,25 +446,25 @@ npm install postcss-loader autoprefixer --save-dev
 
 ```js
 module: {
-  rules: [
-    {
-      test: /\.(sa|sc|c)ss$/, // 针对 .sass .scss 或者 .css 后缀的文件设置 loader
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        "css-loader",
-        // 使用 postcss 为 css 加上浏览器前缀
-        {
-          loader: "postcss-loader",
-          options: {
-            plugins: [require("autoprefixer")]
-          }
-        },
-        "sass-loader" // 使用 sass-loader 将 scss 转为 css
-      ]
-    }
-  ];
+	rules: [
+		{
+			test: /\.(sa|sc|c)ss$/, // 针对 .sass .scss 或者 .css 后缀的文件设置 loader
+			use: [
+				{
+					loader: MiniCssExtractPlugin.loader
+				},
+				'css-loader',
+				// 使用 postcss 为 css 加上浏览器前缀
+				{
+					loader: 'postcss-loader',
+					options: {
+						plugins: [require('autoprefixer')]
+					}
+				},
+				'sass-loader' // 使用 sass-loader 将 scss 转为 css
+			]
+		}
+	]
 }
 ```
 
@@ -476,27 +476,27 @@ module: {
 
 ```js
 module.exports = {
-  plugins: [require("autoprefixer")]
-};
+	plugins: [require('autoprefixer')]
+}
 ```
 
 同时在 webpack.config.js 中
 
 ```js
 module: {
-  rules: [
-    {
-      test: /\.(sa|sc|c)ss$/, // 针对 .sass .scss 或者 .css 后缀的文件设置 loader
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        "css-loader",
-        "postcss-loader", // 使用 postcss 为 css 加上浏览器前缀
-        "sass-loader" // 使用 sass-loader 将 scss 转为 css
-      ]
-    }
-  ];
+	rules: [
+		{
+			test: /\.(sa|sc|c)ss$/, // 针对 .sass .scss 或者 .css 后缀的文件设置 loader
+			use: [
+				{
+					loader: MiniCssExtractPlugin.loader
+				},
+				'css-loader',
+				'postcss-loader', // 使用 postcss 为 css 加上浏览器前缀
+				'sass-loader' // 使用 sass-loader 将 scss 转为 css
+			]
+		}
+	]
 }
 ```
 
@@ -512,24 +512,24 @@ module: {
 
 ```js
 module: {
-  rules: [
-    {
-      test: /\.(sa|sc|c)ss$/, // 针对 .sass .scss 或者 .css 后缀的文件设置 loader
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: css - loader,
-          options: {
-            importLoaders: 2
-          }
-        },
-        "postcss-loader", // 使用 postcss 为 css 加上浏览器前缀
-        "sass-loader" // 使用 sass-loader 将 scss 转为 css
-      ]
-    }
-  ];
+	rules: [
+		{
+			test: /\.(sa|sc|c)ss$/, // 针对 .sass .scss 或者 .css 后缀的文件设置 loader
+			use: [
+				{
+					loader: MiniCssExtractPlugin.loader
+				},
+				{
+					loader: css - loader,
+					options: {
+						importLoaders: 2
+					}
+				},
+				'postcss-loader', // 使用 postcss 为 css 加上浏览器前缀
+				'sass-loader' // 使用 sass-loader 将 scss 转为 css
+			]
+		}
+	]
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
-title: "四：用 Babel7 转译 ES6"
+title: '四：用 Babel7 转译 ES6'
 date: 2019-03-20
-permalink: "webpack4-Babel7"
+permalink: 'webpack4-Babel7'
 ---
 
 [demo4 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo04)
@@ -64,15 +64,15 @@ npm i @babel/polyfill @babel/runtime
 
 ```js
 module: {
-  rules: [
-    {
-      test: /\.js$/, // 使用正则来匹配 js 文件
-      exclude: /node_modules/, // 排除依赖包文件夹
-      use: {
-        loader: "babel-loader" // 使用 babel-loader
-      }
-    }
-  ];
+	rules: [
+		{
+			test: /\.js$/, // 使用正则来匹配 js 文件
+			exclude: /node_modules/, // 排除依赖包文件夹
+			use: {
+				loader: 'babel-loader' // 使用 babel-loader
+			}
+		}
+	]
 }
 ```
 
@@ -84,19 +84,19 @@ webpack.config.js 最终配置：
 
 ```js {2}
 // 全局引入
-import "@babel/polyfill";
+import '@babel/polyfill'
 
 // 测试 ES6 语法是否通过 babel 转译
-const array = [1, 2, 3];
-const isES6 = () => console.log(...array);
+const array = [1, 2, 3]
+const isES6 = () => console.log(...array)
 
-isES6();
+isES6()
 
-const arr = [new Promise(() => {}), new Promise(() => {})];
+const arr = [new Promise(() => {}), new Promise(() => {})]
 
 arr.map(item => {
-  console.log(item);
-});
+	console.log(item)
+})
 ```
 
 <!-- ![](https://raw.githubusercontent.com/ITxiaohao/blog-img/master/img/webpack/20190306134849.png) -->
@@ -154,7 +154,7 @@ arr.map(item => {
 
 也可以创建 `.browserslistrc` 文件单独写配置
 
-```txt
+```sh
 # 所支持的浏览器版本
 
 > 1% # 全球使用情况统计选择的浏览器版本

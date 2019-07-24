@@ -1,7 +1,7 @@
 ---
-title: "十九：Eslint 配置"
+title: '十九：Eslint 配置'
 date: 2019-03-20
-permalink: "webpack4-eslint"
+permalink: 'webpack4-eslint'
 ---
 
 [demo19 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo19)
@@ -22,21 +22,21 @@ npm i eslint -D
 
 ```js
 module.exports = {
-  env: {
-    browser: true,
-    es6: true
-  },
-  extends: "eslint:recommended",
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
-  },
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: "module"
-  },
-  rules: {}
-};
+	env: {
+		browser: true,
+		es6: true
+	},
+	extends: 'eslint:recommended',
+	globals: {
+		Atomics: 'readonly',
+		SharedArrayBuffer: 'readonly'
+	},
+	parserOptions: {
+		ecmaVersion: 2018,
+		sourceType: 'module'
+	},
+	rules: {}
+}
 ```
 
 里面就是 eslint 的一些规范，也可以定义一些规则，具体看 [eslint 配置规则](https://cn.eslint.org/docs/user-guide/configuring)
@@ -59,7 +59,7 @@ eslint 报错提示，变量定义后却没有使用，如果在编辑器里没�
 
 ```js
 /* eslint-disable no-unused-vars */
-let a = "1";
+let a = '1'
 ```
 
 这个 eslint 的 vscode 扩展和 webpack 是没有什么关联的，我们现在要讲的是如何在 webpack 里使用 eslint，首先安装一个插件
@@ -73,32 +73,32 @@ npm i eslint-loader -D
 ```js {16}
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-undef
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  mode: "production",
-  entry: {
-    app: "./src/index.js" // 需要打包的文件入口
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/, // 使用正则来匹配 js 文件
-        exclude: /nodes_modules/, // 排除依赖包文件夹
-        use: {
-          loader: "eslint-loader" // 使用 eslint-loader
-        }
-      }
-    ]
-  },
-  output: {
-    // eslint-disable-next-line no-undef
-    publicPath: __dirname + "/dist/", // js 引用的路径或者 CDN 地址
-    // eslint-disable-next-line no-undef
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "bundle.js" // 打包后生产的 js 文件
-  }
-};
+	mode: 'production',
+	entry: {
+		app: './src/index.js' // 需要打包的文件入口
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/, // 使用正则来匹配 js 文件
+				exclude: /nodes_modules/, // 排除依赖包文件夹
+				use: {
+					loader: 'eslint-loader' // 使用 eslint-loader
+				}
+			}
+		]
+	},
+	output: {
+		// eslint-disable-next-line no-undef
+		publicPath: __dirname + '/dist/', // js 引用的路径或者 CDN 地址
+		// eslint-disable-next-line no-undef
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: 'bundle.js' // 打包后生产的 js 文件
+	}
+}
 ```
 
 由于 webpack 配置文件也会被 eslint 校验，这里我先写上注释，关闭校验

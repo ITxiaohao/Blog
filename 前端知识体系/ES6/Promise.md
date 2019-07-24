@@ -1,6 +1,6 @@
 ---
-title: "Promise"
-permalink: "es6-promise"
+title: 'Promise'
+permalink: 'es6-promise'
 ---
 
 优势：多个异步等待合并，可以解决回调地狱的问题，可以 return
@@ -29,10 +29,10 @@ const promise = new Promise(function(resolve, reject) {
 
 ```js
 new Promise((resolve, reject) => {
-  console.log("new Promise");
-  resolve("success");
-});
-console.log("finifsh");
+	console.log('new Promise')
+	resolve('success')
+})
+console.log('finifsh')
 // 先输出 new Promise 再输出 finifsh
 ```
 
@@ -40,25 +40,25 @@ console.log("finifsh");
 
 ```js
 function promiseTest(val) {
-  return new Promise((reslove, reject) => {
-    setTimeout(() => {
-      reslove(val);
-    }, 1000);
-  });
+	return new Promise((reslove, reject) => {
+		setTimeout(() => {
+			reslove(val)
+		}, 1000)
+	})
 }
 
-promiseTest("JavaScript")
-  .then(val => {
-    console.log(val);
-    return promiseTest("Vue");
-  })
-  .then(val => {
-    console.log(val);
-    return promiseTest("React");
-  })
-  .then(val => {
-    console.log(val);
-  });
+promiseTest('JavaScript')
+	.then(val => {
+		console.log(val)
+		return promiseTest('Vue')
+	})
+	.then(val => {
+		console.log(val)
+		return promiseTest('React')
+	})
+	.then(val => {
+		console.log(val)
+	})
 ```
 
 then 方法可以传递两个函数，一个是成功后的回调函数，一个是失败后的回调
@@ -73,22 +73,22 @@ onRejected 将接收一个参数，参数值由当前 Promise 实例内部的 re
 
 ```js
 const p = function() {
-  let num = Math.random();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      num > 0.8 ? resolve(num) : reject(num);
-    }, 1000);
-  });
-};
+	let num = Math.random()
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			num > 0.8 ? resolve(num) : reject(num)
+		}, 1000)
+	})
+}
 
 p().then(
-  val => {
-    console.info(`Status switches to fulfilled, and the value is ${val}`);
-  },
-  err => {
-    console.info(`Status switches to reject, and the value is ${err}`);
-  }
-);
+	val => {
+		console.info(`Status switches to fulfilled, and the value is ${val}`)
+	},
+	err => {
+		console.info(`Status switches to reject, and the value is ${err}`)
+	}
+)
 ```
 
 上面的例子是创建一个随机数，如果大于 0.8 则返回 resolve() 成功，否则 reject() 失败
@@ -97,36 +97,36 @@ p().then(
 
 ```js {8,10}
 const getJSON = function(url) {
-  const promise = new Promise((resolve, reject) => {
-    const handler = function() {
-      if (this.readyState !== 4) {
-        return;
-      }
-      if (this.status === 200) {
-        resolve(this.response);
-      } else {
-        reject(new Error(this.statusText));
-      }
-    };
-    const client = new XMLHttpRequest();
-    client.open("GET", url);
-    client.onreadystatechange = handler;
-    client.responseType = "json";
-    client.setRequestHeader("Accept", "application/json");
-    client.send();
-  });
+	const promise = new Promise((resolve, reject) => {
+		const handler = function() {
+			if (this.readyState !== 4) {
+				return
+			}
+			if (this.status === 200) {
+				resolve(this.response)
+			} else {
+				reject(new Error(this.statusText))
+			}
+		}
+		const client = new XMLHttpRequest()
+		client.open('GET', url)
+		client.onreadystatechange = handler
+		client.responseType = 'json'
+		client.setRequestHeader('Accept', 'application/json')
+		client.send()
+	})
 
-  return promise;
-};
+	return promise
+}
 
-getJSON("/posts.json").then(
-  function(json) {
-    console.log("Contents: " + json);
-  },
-  function(error) {
-    console.error("出错了", error);
-  }
-);
+getJSON('/posts.json').then(
+	function(json) {
+		console.log('Contents: ' + json)
+	},
+	function(error) {
+		console.error('出错了', error)
+	}
+)
 ```
 
 `Promise` 通过链式调用很好地解决了回调地狱的问题
@@ -137,20 +137,20 @@ promise.all ：等待所有 promise 完成之后才会触发回调函数
 
 ```js
 function promiseTest(val) {
-  return new Promise((reslove, reject) => {
-    setTimeout(() => {
-      reslove(val);
-    }, 2000);
-  });
+	return new Promise((reslove, reject) => {
+		setTimeout(() => {
+			reslove(val)
+		}, 2000)
+	})
 }
 
 Promise.all([
-  promiseTest("JavaScript"),
-  promiseTest("Vue"),
-  promiseTest("React")
+	promiseTest('JavaScript'),
+	promiseTest('Vue'),
+	promiseTest('React')
 ]).then(val => {
-  console.log(val);
-});
+	console.log(val)
+})
 // [ 'JavaScript', 'Vue', 'React' ]
 ```
 
@@ -171,14 +171,14 @@ promise 还有 `.race` 的竞争方法，当某个 promise 率先完成后就触
 promise 的 catch 方法，用于指定发生错误时的回调函数
 
 ```js
-getJSON("/posts.json")
-  .then(function(posts) {
-    // ...
-  })
-  .catch(function(error) {
-    // 处理 getJSON 和 前一个回调函数运行时发生的错误
-    console.log("发生错误！", error);
-  });
+getJSON('/posts.json')
+	.then(function(posts) {
+		// ...
+	})
+	.catch(function(error) {
+		// 处理 getJSON 和 前一个回调函数运行时发生的错误
+		console.log('发生错误！', error)
+	})
 ```
 
 上面代码中，`getJSON` 方法返回一个 `Promise` 对象，如果该对象状态变为 `resolved`，则会调用 `then` 方法指定的回调函数；**如果异步操作抛出错误**，状态就会变为 `rejected`，就会调用 `catch` 方法指定的回调函数，处理这个错误
@@ -187,47 +187,47 @@ getJSON("/posts.json")
 
 ```js
 const p = function() {
-  let num = Math.random();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      num > 0.8 ? resolve(num) : reject(num);
-    }, 1000);
-  });
-};
+	let num = Math.random()
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			num > 0.8 ? resolve(num) : reject(num)
+		}, 1000)
+	})
+}
 
 p()
-  .then(
-    val => {
-      console.info(`Status switches to fulfilled, and the value is ${val}`);
-    },
-    err => {
-      console.info(`Status switches to reject, and the value is ${err}`);
-    }
-  )
-  .catch(err => {
-    console.log("catch", err);
-  });
+	.then(
+		val => {
+			console.info(`Status switches to fulfilled, and the value is ${val}`)
+		},
+		err => {
+			console.info(`Status switches to reject, and the value is ${err}`)
+		}
+	)
+	.catch(err => {
+		console.log('catch', err)
+	})
 ```
 
 如果这样写，则不会触发 catch 方法，而是返回 then 中的 err 回调
 
 ```js
 const p = function() {
-  let num = Math.random();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      num > 0.8 ? resolve(num) : reject(num);
-    }, 1000);
-  });
-};
+	let num = Math.random()
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			num > 0.8 ? resolve(num) : reject(num)
+		}, 1000)
+	})
+}
 
 p()
-  .then(val => {
-    console.info(`Status switches to fulfilled, and the value is ${val}`);
-  })
-  .catch(err => {
-    console.log("catch", err);
-  });
+	.then(val => {
+		console.info(`Status switches to fulfilled, and the value is ${val}`)
+	})
+	.catch(err => {
+		console.log('catch', err)
+	})
 ```
 
 如果将 then 中的 err 回调去掉，则会被 catch 方法捕获
@@ -239,23 +239,23 @@ p()
 ```js
 // bad
 promise.then(
-  function(data) {
-    // success
-  },
-  function(err) {
-    // error
-  }
-);
+	function(data) {
+		// success
+	},
+	function(err) {
+		// error
+	}
+)
 
 // good
 promise
-  .then(function(data) {
-    //cb
-    // success
-  })
-  .catch(function(err) {
-    // error
-  });
+	.then(function(data) {
+		//cb
+		// success
+	})
+	.catch(function(err) {
+		// error
+	})
 ```
 
 那么如果调用多个接口，使用到了多个 .then() 方法来处理，该怎么办？
@@ -263,84 +263,84 @@ promise
 Promise 对象的错误具有 “冒泡” 性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个 catch 语句捕获。
 
 ```js
-getJSON("/post/1.json")
-  .then(function(post) {
-    return getJSON(post.commentURL);
-  })
-  .then(function(comments) {
-    // some code
-  })
-  .catch(function(error) {
-    // 处理前面三个 Promise 产生的错误
-  });
+getJSON('/post/1.json')
+	.then(function(post) {
+		return getJSON(post.commentURL)
+	})
+	.then(function(comments) {
+		// some code
+	})
+	.catch(function(error) {
+		// 处理前面三个 Promise 产生的错误
+	})
 ```
 
 另外，then 方法指定的回调函数，如果运行中抛出错误，也会被 catch 方法捕获。
 
 ```js
-p.then(val => console.log("fulfilled:", val)).catch(err =>
-  console.log("rejected", err)
-);
+p.then(val => console.log('fulfilled:', val)).catch(err =>
+	console.log('rejected', err)
+)
 
 // 等同于
-p.then(val => console.log("fulfilled:", val)).then(null, err =>
-  console.log("rejected:", err)
-);
+p.then(val => console.log('fulfilled:', val)).then(null, err =>
+	console.log('rejected:', err)
+)
 ```
 
 **.catch 其实是一个语法糖**
 
 ```js {2}
 Promise.prototype.catch = function(fn) {
-  return this.then(null, fn);
-};
+	return this.then(null, fn)
+}
 ```
 
 在之前的随机数例子中改造一下
 
 ```js
 const p = function() {
-  let num = Math.random();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      num > 0.1 ? resolve(num) : reject(num);
-    }, 1000);
-  });
-};
+	let num = Math.random()
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			num > 0.1 ? resolve(num) : reject(num)
+		}, 1000)
+	})
+}
 
 const p1 = function() {
-  let num = Math.random();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      num > 0.5 ? resolve(num) : reject(num);
-    }, 2000);
-  });
-};
+	let num = Math.random()
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			num > 0.5 ? resolve(num) : reject(num)
+		}, 2000)
+	})
+}
 
 const p2 = function() {
-  let num = Math.random();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      num > 0.2 ? resolve(num) : reject(num);
-    }, 3000);
-  });
-};
+	let num = Math.random()
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			num > 0.2 ? resolve(num) : reject(num)
+		}, 3000)
+	})
+}
 
 p()
-  .then(val => {
-    console.info(`P is fulfilled, and the value is ${val}`);
-    return p1();
-  })
-  .then(val => {
-    console.info(`P1 is fulfilled, and the value is ${val}`);
-    return p2();
-  })
-  .then(val => {
-    console.info(`P2 is fulfilled, and the value is ${val}`);
-  })
-  .catch(err => {
-    console.log("catch", err);
-  });
+	.then(val => {
+		console.info(`P is fulfilled, and the value is ${val}`)
+		return p1()
+	})
+	.then(val => {
+		console.info(`P1 is fulfilled, and the value is ${val}`)
+		return p2()
+	})
+	.then(val => {
+		console.info(`P2 is fulfilled, and the value is ${val}`)
+	})
+	.catch(err => {
+		console.log('catch', err)
+	})
 ```
 
 :::warning

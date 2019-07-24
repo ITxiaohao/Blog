@@ -1,7 +1,7 @@
 ---
-title: "六：Lazy Loading、Prefetching"
+title: '六：Lazy Loading、Prefetching'
 date: 2019-03-20
-permalink: "webpack4-lazyLoading-prefetching"
+permalink: 'webpack4-lazyLoading-prefetching'
 ---
 
 [demo6 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo06)
@@ -9,11 +9,11 @@ permalink: "webpack4-lazyLoading-prefetching"
 在 demo5 的基础上修改 index.js 文件，并删除了多余的 js 文件
 
 ```js
-document.addEventListener("click", function() {
-  import(/* webpackChunkName: 'use-lodash'*/ "lodash").then(function(_) {
-    console.log(_.join(["3", "4"]));
-  });
-});
+document.addEventListener('click', function() {
+	import(/* webpackChunkName: 'use-lodash'*/ 'lodash').then(function(_) {
+		console.log(_.join(['3', '4']))
+	})
+})
 ```
 
 这段代码表示的是，当点击页面的时候，异步加载 lodash 并输出内容，打包后打开 index.html 文件，演示如下：
@@ -37,11 +37,11 @@ import 后面返回的是一个 then，说明这是一个 **promise** 类型，�
 更改 index.js 文件
 
 ```js
-document.addEventListener("click", function() {
-  const element = document.createElement("div");
-  element.innerHTML = "Hello World";
-  document.body.appendChild(element);
-});
+document.addEventListener('click', function() {
+	const element = document.createElement('div')
+	element.innerHTML = 'Hello World'
+	document.body.appendChild(element)
+})
 ```
 
 重新打包，并打开 index.html ，打开浏览器控制台，按 `ctrl + shift + p` ，输入 `coverage`
@@ -66,22 +66,22 @@ document.addEventListener("click", function() {
 
 ```js
 function handleClick() {
-  const element = document.createElement("div");
-  element.innerHTML = "Dell Lee";
-  document.body.appendChild(element);
+	const element = document.createElement('div')
+	element.innerHTML = 'Dell Lee'
+	document.body.appendChild(element)
 }
 
-export default handleClick;
+export default handleClick
 ```
 
 并且将 index.js 文件改为异步的加载模块：
 
 ```js
-document.addEventListener("click", () => {
-  import("./click.js").then(({ default: func }) => {
-    func();
-  });
-});
+document.addEventListener('click', () => {
+	import('./click.js').then(({ default: func }) => {
+		func()
+	})
+})
 ```
 
 重新打包，使用 **coverage** 分析
@@ -109,11 +109,11 @@ document.addEventListener("click", () => {
 修改 index.js
 
 ```js
-document.addEventListener("click", () => {
-  import(/* webpackPrefetch: true */ "./click.js").then(({ default: func }) => {
-    func();
-  });
-});
+document.addEventListener('click', () => {
+	import(/* webpackPrefetch: true */ './click.js').then(({ default: func }) => {
+		func()
+	})
+})
 ```
 
 `webpackPrefetch: true` 会等你主要的 JS 都加载完了之后，网络带宽空闲的时候，它就会预先帮你加载好

@@ -1,7 +1,7 @@
 ---
-title: "九：JS Tree Shaking"
+title: '九：JS Tree Shaking'
 date: 2019-03-20
-permalink: "webpack4-tree-shaking"
+permalink: 'webpack4-tree-shaking'
 ---
 
 [demo9 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo09)
@@ -19,15 +19,15 @@ permalink: "webpack4-tree-shaking"
 ```js
 // util.js
 export function a() {
-  return 'this is function "a"';
+	return 'this is function "a"'
 }
 
 export function b() {
-  return 'this is function "b"';
+	return 'this is function "b"'
 }
 
 export function c() {
-  return 'this is function "c"';
+	return 'this is function "c"'
 }
 ```
 
@@ -35,8 +35,8 @@ export function c() {
 
 ```js
 // app.js
-import { a } from "./vendor/util";
-console.log(a());
+import { a } from './vendor/util'
+console.log(a())
 ```
 
 命令行运行 webpack 打包后，打开打包后生成的 **/dist/app.bundle.js** 文件。查找我们 `a()` 函数输出的字符串，如下图所示：
@@ -57,8 +57,8 @@ console.log(a());
 
 ```js
 // app.js
-import { chunk } from "lodash";
-console.log(chunk([1, 2, 3], 2));
+import { chunk } from 'lodash'
+console.log(chunk([1, 2, 3], 2))
 ```
 
 命令行打包。如下图所示，打包后大小是 70kb。显然，只引用了一个函数，不应该这么大。并没有进行 Tree Shaking。
@@ -73,8 +73,8 @@ console.log(chunk([1, 2, 3], 2));
 
 ```js
 // app.js
-import { chunk } from "lodash-es";
-console.log(chunk([1, 2, 3], 2));
+import { chunk } from 'lodash-es'
+console.log(chunk([1, 2, 3], 2))
 ```
 
 再次打包，打包结果只有 3.5KB（如下图所示）。显然，tree shaking 成功。

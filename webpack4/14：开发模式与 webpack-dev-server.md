@@ -1,7 +1,7 @@
 ---
-title: "十四：webpack-dev-server"
+title: '十四：webpack-dev-server'
 date: 2019-03-20
-permalink: "webpack-dev-server"
+permalink: 'webpack-dev-server'
 ---
 
 [demo14 源码地址](https://github.com/ITxiaohao/webpack4-learn/tree/master/demo14)
@@ -30,19 +30,19 @@ npm i webpack-dev-server --save-dev
 
 ```json {3,13}
 {
-  "scripts": {
-    "dev": "webpack-dev-server --open",
-    "build": "webpack --mode production"
-  },
-  "devDependencies": {
-    "clean-webpack-plugin": "^2.0.0",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "jquery": "^3.3.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
-  }
+	"scripts": {
+		"dev": "webpack-dev-server --open",
+		"build": "webpack --mode production"
+	},
+	"devDependencies": {
+		"clean-webpack-plugin": "^2.0.0",
+		"html-loader": "^0.5.5",
+		"html-webpack-plugin": "^3.2.0",
+		"jquery": "^3.3.1",
+		"webpack": "^4.29.6",
+		"webpack-cli": "^3.2.3",
+		"webpack-dev-server": "^3.2.1"
+	}
 }
 ```
 
@@ -57,16 +57,16 @@ npm i webpack-dev-server --save-dev
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>webpack-dev-server</title>
-  </head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>webpack-dev-server</title>
+	</head>
 
-  <body>
-    This is Index html
-  </body>
+	<body>
+		This is Index html
+	</body>
 </html>
 ```
 
@@ -75,103 +75,103 @@ npm i webpack-dev-server --save-dev
 ```js
 // minus.js
 module.exports = function(a, b) {
-  return a - b;
-};
+	return a - b
+}
 
 // multi.js
 define(function(require, factory) {
-  "use strict";
-  return function(a, b) {
-    return a * b;
-  };
-});
+	'use strict'
+	return function(a, b) {
+		return a * b
+	}
+})
 
 // sum.js
 export default function(a, b) {
-  console.log("I am sum.js");
-  return a + b;
+	console.log('I am sum.js')
+	return a + b
 }
 ```
 
 app.js 中使用三种引入方式引入 js 文件:
 
 ```js
-import sum from "./vendor/sum";
-console.log("sum(1, 2) = ", sum(1, 2));
+import sum from './vendor/sum'
+console.log('sum(1, 2) = ', sum(1, 2))
 
-var minus = require("./vendor/minus");
-console.log("minus(1, 2) = ", minus(1, 2));
+var minus = require('./vendor/minus')
+console.log('minus(1, 2) = ', minus(1, 2))
 
-require(["./vendor/multi"], function(multi) {
-  console.log("multi(1, 2) = ", multi(1, 2));
-});
+require(['./vendor/multi'], function(multi) {
+	console.log('multi(1, 2) = ', multi(1, 2))
+})
 ```
 
 现在开始更改 webpack.config.js， 完整的配置文件如下：
 
 ```js
-const webpack = require("webpack");
-const path = require("path");
+const webpack = require('webpack')
+const path = require('path')
 
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: {
-    app: "./src/app.js"
-  },
-  output: {
-    publicPath: "/", // js 引用的路径或者 CDN 地址
-    path: path.resolve(__dirname, "dist"), // 打包文件的输出目录
-    filename: "[name].bundle.js", // 代码打包后的文件名
-    chunkFilename: "[name].js" // 代码拆分后的文件名
-  },
-  mode: "development", // 开发模式
-  devtool: "source-map", // 开启调试
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    port: 8000, // 本地服务器端口号
-    hot: true, // 热重载
-    overlay: true, // 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架
-    proxy: {
-      // 跨域代理转发
-      "/comments": {
-        target: "https://m.weibo.cn",
-        changeOrigin: true,
-        logLevel: "debug",
-        headers: {
-          Cookie: ""
-        }
-      }
-    },
-    historyApiFallback: {
-      // HTML5 history模式
-      rewrites: [{ from: /.*/, to: "/index.html" }]
-    }
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      // 打包输出HTML
-      title: "自动生成 HTML",
-      minify: {
-        // 压缩 HTML 文件
-        removeComments: true, // 移除 HTML 中的注释
-        collapseWhitespace: true, // 删除空白符与换行符
-        minifyCSS: true // 压缩内联 css
-      },
-      filename: "index.html", // 生成后的文件名
-      template: "index.html", // 根据此模版生成 HTML 文件
-      chunks: ["app"] // entry中的 app 入口才会被打包
-    }),
-    new webpack.HotModuleReplacementPlugin(), // 热部署模块
-    new webpack.NamedModulesPlugin(),
-    new webpack.ProvidePlugin({
-      $: "jquery", // npm
-      jQuery: "jQuery" // 本地Js文件
-    })
-  ]
-};
+	entry: {
+		app: './src/app.js'
+	},
+	output: {
+		publicPath: '/', // js 引用的路径或者 CDN 地址
+		path: path.resolve(__dirname, 'dist'), // 打包文件的输出目录
+		filename: '[name].bundle.js', // 代码打包后的文件名
+		chunkFilename: '[name].js' // 代码拆分后的文件名
+	},
+	mode: 'development', // 开发模式
+	devtool: 'source-map', // 开启调试
+	devServer: {
+		contentBase: path.join(__dirname, 'dist'),
+		port: 8000, // 本地服务器端口号
+		hot: true, // 热重载
+		overlay: true, // 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架
+		proxy: {
+			// 跨域代理转发
+			'/comments': {
+				target: 'https://m.weibo.cn',
+				changeOrigin: true,
+				logLevel: 'debug',
+				headers: {
+					Cookie: ''
+				}
+			}
+		},
+		historyApiFallback: {
+			// HTML5 history模式
+			rewrites: [{ from: /.*/, to: '/index.html' }]
+		}
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			// 打包输出HTML
+			title: '自动生成 HTML',
+			minify: {
+				// 压缩 HTML 文件
+				removeComments: true, // 移除 HTML 中的注释
+				collapseWhitespace: true, // 删除空白符与换行符
+				minifyCSS: true // 压缩内联 css
+			},
+			filename: 'index.html', // 生成后的文件名
+			template: 'index.html', // 根据此模版生成 HTML 文件
+			chunks: ['app'] // entry中的 app 入口才会被打包
+		}),
+		new webpack.HotModuleReplacementPlugin(), // 热部署模块
+		new webpack.NamedModulesPlugin(),
+		new webpack.ProvidePlugin({
+			$: 'jquery', // npm
+			jQuery: 'jQuery' // 本地Js文件
+		})
+	]
+}
 ```
 
 对上面的配置进行单独分析:
@@ -181,14 +181,14 @@ module.exports = {
 模块热更新需要 **[HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/#root)** 和 **[NamedModulesPlugin](https://www.webpackjs.com/plugins/named-modules-plugin/)** 这两个插件，**并且顺序不能错，并且指定 devServer.hot 为 true**，
 
 ```js {1,5,6}
-const webpack = require("webpack"); // 引入 webpack
+const webpack = require('webpack') // 引入 webpack
 
 module.exports = {
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(), // 热部署模块
-    new webpack.NamedModulesPlugin()
-  ]
-};
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(), // 热部署模块
+		new webpack.NamedModulesPlugin()
+	]
+}
 ```
 
 有了这两个插件，在项目的 **js** 代码中**可以针对侦测到变更的文件并且做出相关处理**，也就不用写完代码**重新刷新页面**，它会自动检测变更的代码并且在页面上更改
@@ -201,11 +201,11 @@ module.exports = {
 
 ```js
 if (module.hot) {
-  // 检测是否有模块热更新
-  module.hot.accept("./vendor/sum.js", function() {
-    // 针对被更新的模块, 进行进一步操作
-    console.log("/vendor/sum.js is changed");
-  });
+	// 检测是否有模块热更新
+	module.hot.accept('./vendor/sum.js', function() {
+		// 针对被更新的模块, 进行进一步操作
+		console.log('/vendor/sum.js is changed')
+	})
 }
 ```
 
@@ -227,16 +227,16 @@ devServer 模块的底层是使用了 [http-proxy-middleware](https://github.com
 
 ```js
 $.get(
-  "/comments/hotflow",
-  {
-    id: "4263554020904293",
-    mid: "4263554020904293",
-    max_id_type: "0"
-  },
-  function(data) {
-    console.log(data);
-  }
-);
+	'/comments/hotflow',
+	{
+		id: '4263554020904293',
+		mid: '4263554020904293',
+		max_id_type: '0'
+	},
+	function(data) {
+		console.log(data)
+	}
+)
 ```
 
 上面代码是使用 jQuery 发送 get 请求，如果是在 vue 项目中，一般是使用 axios 来发送请求
@@ -255,42 +255,42 @@ $.get(
 
 ```js
 historyApiFallback: {
-  // HTML5 history模式
-  rewrites: [{ from: /.*/, to: "/index.html" }];
+	// HTML5 history模式
+	rewrites: [{ from: /.*/, to: '/index.html' }]
 }
 ```
 
 最终 app.js 中的代码如下：
 
 ```js
-import sum from "./vendor/sum";
-console.log("sum(1, 2) = ", sum(1, 2));
+import sum from './vendor/sum'
+console.log('sum(1, 2) = ', sum(1, 2))
 
-var minus = require("./vendor/minus");
-console.log("minus(1, 2) = ", minus(1, 2));
+var minus = require('./vendor/minus')
+console.log('minus(1, 2) = ', minus(1, 2))
 
-require(["./vendor/multi"], function(multi) {
-  console.log("multi(1, 2) = ", multi(1, 2));
-});
+require(['./vendor/multi'], function(multi) {
+	console.log('multi(1, 2) = ', multi(1, 2))
+})
 
 $.get(
-  "/comments/hotflow",
-  {
-    id: "4263554020904293",
-    mid: "4263554020904293",
-    max_id_type: "0"
-  },
-  function(data) {
-    console.log(data);
-  }
-);
+	'/comments/hotflow',
+	{
+		id: '4263554020904293',
+		mid: '4263554020904293',
+		max_id_type: '0'
+	},
+	function(data) {
+		console.log(data)
+	}
+)
 
 if (module.hot) {
-  // 检测是否有模块热更新
-  module.hot.accept("./vendor/sum.js", function() {
-    // 针对被更新的模块, 进行进一步操作
-    console.log("/vendor/sum.js is changed");
-  });
+	// 检测是否有模块热更新
+	module.hot.accept('./vendor/sum.js', function() {
+		// 针对被更新的模块, 进行进一步操作
+		console.log('/vendor/sum.js is changed')
+	})
 }
 ```
 

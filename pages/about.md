@@ -1,7 +1,7 @@
 ---
-title: "关于我"
-permalink: "about"
-sidebar: "auto"
+title: '关于我'
+permalink: 'about'
+sidebar: 'auto'
 single: true
 comment: false
 ---

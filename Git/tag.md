@@ -1,6 +1,6 @@
 ---
-title: "tag 使用"
-permalink: "git-tag"
+title: 'tag 使用'
+permalink: 'git-tag'
 ---
 
 - 新建一个 tag，默认会打在最新提交的 commit 上

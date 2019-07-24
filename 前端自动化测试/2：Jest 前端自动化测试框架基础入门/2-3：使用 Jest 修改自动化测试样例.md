@@ -1,8 +1,10 @@
 ---
-title: '2：前端自动化测试框架 Jest'
+title: '2-3：使用 Jest 修改自动化测试样例'
 date: 2019-07-24
-permalink: 'test-learn-jest'
+permalink: 'test-learn-jest-modify'
 ---
+
+[lesson2 源码]
 
 ### Jest 使用
 
@@ -16,24 +18,28 @@ npm init # 一顿回车
 npm i jest@24.8.0 -D
 ```
 
-安装指定版本，之后就不会因为版本升级的问题而与此教程有冲突，-D 表示 --save-dev 在开发阶段使用测试用例，上线后就不会使用了
+安装指定版本，之后就不会因为版本升级的问题而与此教程有冲突，-D 表示 --save-dev 在开发阶段使用测试用例，上线后就不会使用了，它不是生成打包代码的一部分
+
+安装完之后可以在 node_modules 文件夹下的 bin 文件夹目录中找到
+
+![](https://raw.githubusercontent.com/ITxiaohao/blog-img/master/img/Jest/20190725005931.png)
 
 先导出要测试的方法
 
 ```js
 function add(a, b) {
-	return a + b
+  return a + b
 }
 function minus(a, b) {
-	return a - b
+  return a - b
 }
 function multi(a, b) {
-	return a * b
+  return a * b
 }
 module.exports = {
-	add,
-	minus,
-	multi
+  add,
+  minus,
+  multi
 }
 ```
 
@@ -43,13 +49,13 @@ module.exports = {
 const math = require('./math')
 const { add, minus, multi } = math
 test('测试加法 3 + 7', () => {
-	expect(add(3, 7)).toBe(10)
+  expect(add(3, 7)).toBe(10)
 })
 test('测试减法 3 - 3', () => {
-	expect(minus(3, 3)).toBe(0)
+  expect(minus(3, 3)).toBe(0)
 })
 test('测试乘法 3 * 3', () => {
-	expect(multi(3, 3)).toBe(9)
+  expect(multi(3, 3)).toBe(9)
 })
 ```
 
@@ -57,16 +63,16 @@ test('测试乘法 3 * 3', () => {
 
 ```json
 {
-	"scripts": {
-		"test": "jest"
-	},
-	"devDependencies": {
-		"jest": "^24.8.0"
-	}
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
 ```
 
-npm test 会执行 jest 命令，jest 回去找以 .test.js 为结尾的文件，这样 math.test.js 就会被运行
+npm test 会执行 jest 命令，jest 会去找以 .test.js 为结尾的文件，这样 math.test.js 就会被运行
 
 ![](https://raw.githubusercontent.com/ITxiaohao/blog-img/master/img/Jest/20190724135853.png)
 
@@ -74,7 +80,7 @@ npm test 会执行 jest 命令，jest 回去找以 .test.js 为结尾的文件�
 
 ```js
 test('测试乘法 3 * 3', () => {
-	expect(multi(3, 3)).toBe(10)
+  expect(multi(3, 3)).toBe(10)
 })
 ```
 
@@ -92,20 +98,20 @@ Jest 实际上在前端自动化测试中，帮我们完成的是两类内容。
 
 ```js
 function add(a, b) {
-	return a + b
+  return a + b
 }
 function minus(a, b) {
-	return a - b
+  return a - b
 }
 function multi(a, b) {
-	return a * b
+  return a * b
 }
 try {
-	module.exports = {
-		add,
-		minus,
-		multi
-	}
+  module.exports = {
+    add,
+    minus,
+    multi
+  }
 } catch (error) {}
 ```
 

@@ -91,14 +91,23 @@ const webpack4 = [
 	}
 ]
 
+const testSecond = '2：Jest 前端自动化测试框架基础入门'
+
 const test = [
 	{
 		title: '前端自动化测试',
 		collapsable: false,
+		children: ['1：前端自动化测试/前言.md']
+	},
+	{
+		title: '2. Jest 测试框架基础入门',
+		collapsable: false,
 		children: [
-			'0：前言.md',
-			'1：自动化测试产生的背景及原理.md',
-			'2：前端自动化测试框架 Jest.md'
+			`${testSecond}/2-1：自动化测试产生的背景及原理.md`,
+			`${testSecond}/2-2：前端自动化测试框架.md`,
+			`${testSecond}/2-3：使用 Jest 修改自动化测试样例.md`,
+			`${testSecond}/2-4：Jest 的简单配置.md`,
+			`${testSecond}/2-5：Jest 中的匹配器.md`
 		]
 	}
 ]

@@ -19,6 +19,10 @@ footer: MIT Licensed | Copyright © 2019 Zsh
 - [Vue](/passages/vue-cli3/)
 - [小程序](/passages/miniprogram-note/)
 
+## ✅ 前端自动化测试（完善中 🚧）
+
+- [前端自动化测试基础及实战](/passages/automated-testing-learn-introduction)
+
 ## 🌝 开源项目
 
 - [自定义 CHANGELOG 模版](https://www.npmjs.com/package/conventional-changelog-custom-config)

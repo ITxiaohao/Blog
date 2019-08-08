@@ -110,10 +110,10 @@ const test = [
       `${testSecond}/2-4：Jest 的简单配置.md`,
       `${testSecond}/2-5：Jest 中的匹配器.md`,
       `${testSecond}/2-6：Jest 命令行工具的使用.md`,
-      `${testSecond}/2-7：异步代码的测试方法（1）.md`,
-      `${testSecond}/2-8：异步代码的测试方法（2）.md`,
+      `${testSecond}/2-7：异步代码的测试方法1.md`,
+      `${testSecond}/2-8：异步代码的测试方法2.md`,
       `${testSecond}/2-9：Jest 中的钩子函数.md`,
-      `${testSecond}/2-10：describe 中的作用域.md`,
+      `${testSecond}/2-10：钩子函数的作用域.md`,
       `${testSecond}/2-11：Jest 中的 Mock1.md`,
       `${testSecond}/2-12：Jest 中的 Mock2.md`
     ]
@@ -131,6 +131,31 @@ const test = [
   }
 ]
 
+const LeetCode = [
+  {
+    title: 'LeetCode',
+    collapsable: false,
+    children: ['前言.md']
+  },
+  {
+    title: 'easy',
+    collapsable: false,
+    children: [
+      'easy/1.两数之和.md',
+      'easy/7.整数反转.md',
+      'easy/9.回文数.md',
+      'easy/13.罗马数字转整数.md',
+      'easy/14.最长公共前缀.md',
+      'easy/20.有效的括号.md',
+      'easy/21.合并两个有序链表.md',
+      'easy/26.删除排序数组中的重复项.md',
+      'easy/27.移除元素.md',
+      'easy/28.实现-str-str.md',
+      'easy/35.搜索插入位置.md'
+    ]
+  }
+]
+
 module.exports = {
   '/服务器部署/': server,
   '/Git/': git,
@@ -138,5 +163,6 @@ module.exports = {
   '/前端框架/': frontendFrame,
   '/NodeJS/': node,
   '/webpack4/': webpack4,
-  '/前端自动化测试/': test
+  '/前端自动化测试/': test,
+  '/数据结构与算法/LeetCode/': LeetCode
 }

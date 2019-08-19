@@ -1,6 +1,10 @@
-// const { generateFileName } = require('./utils')
+const { generateFileName } = require('./utils')
 // console.log('webpack4', generateOrderFileName('/webpack4'))
-// console.log('小程序', generateFileName('/前端知识体系/小程序'))
+
+let leetCodeEasy = generateFileName('/数据结构与算法/leetCode/easy').map(
+  v => `easy/${v}`
+)
+// console.log('leetCodeEasy', leetCodeEasy)
 
 const node = [
   {
@@ -140,19 +144,20 @@ const LeetCode = [
   {
     title: 'easy',
     collapsable: false,
-    children: [
-      'easy/1.两数之和.md',
-      'easy/7.整数反转.md',
-      'easy/9.回文数.md',
-      'easy/13.罗马数字转整数.md',
-      'easy/14.最长公共前缀.md',
-      'easy/20.有效的括号.md',
-      'easy/21.合并两个有序链表.md',
-      'easy/26.删除排序数组中的重复项.md',
-      'easy/27.移除元素.md',
-      'easy/28.实现-str-str.md',
-      'easy/35.搜索插入位置.md'
-    ]
+    children: leetCodeEasy
+    // children: [
+    //   'easy/001.两数之和.md',
+    //   'easy/007.整数反转.md',
+    //   'easy/009.回文数.md',
+    //   'easy/013.罗马数字转整数.md',
+    //   'easy/014.最长公共前缀.md',
+    //   'easy/020.有效的括号.md',
+    //   'easy/021.合并两个有序链表.md',
+    //   'easy/026.删除排序数组中的重复项.md',
+    //   'easy/027.移除元素.md',
+    //   'easy/028.实现-str-str.md',
+    //   'easy/035.搜索插入位置.md'
+    // ]
   }
 ]
 

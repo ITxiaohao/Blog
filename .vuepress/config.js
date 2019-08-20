@@ -8,7 +8,31 @@ module.exports = {
   // 要部署的仓库名字
   base: '/',
   // dest: './docs/.vuepress/dist',
-  head: [['link', { rel: 'icon', href: '/avatar.jpg' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/avatar.jpg' }],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'theme-color', content: '#4b8bf5' }],
+    [
+      'meta',
+      {
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'black-translucent'
+      }
+    ],
+    [
+      'link',
+      { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }
+    ]
+    // [
+    //   'link',
+    //   {
+    //     rel: 'mask-icon',
+    //     href: '/icons/safari-pinned-tab.svg',
+    //     color: '#3eaf7c'
+    //   }
+    // ],
+  ],
   markdown: mdConf,
   // 主题配置
   themeConfig: themeConf,

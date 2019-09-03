@@ -131,6 +131,19 @@ const LeetCode = [
   }
 ]
 
+const dataStructures = [
+  {
+    title: '数据结构',
+    collapsable: false,
+    children: ['前言.md']
+  },
+  {
+    title: '链表',
+    collapsable: false,
+    children: ['链表/实现.md']
+  }
+]
+
 module.exports = {
   '/服务器部署/': server,
   '/Git/': git,
@@ -139,5 +152,6 @@ module.exports = {
   '/NodeJS/': node,
   '/webpack4/': webpack4,
   '/前端自动化测试/': test,
+  '/数据结构与算法/数据结构/': dataStructures,
   '/数据结构与算法/LeetCode/': LeetCode
 }

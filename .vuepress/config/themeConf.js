@@ -50,10 +50,6 @@ module.exports = {
             {
               text: '基础',
               link: '/passages/node-modules/'
-            },
-            {
-              text: 'Koa',
-              link: '/passages/node-modules/'
             }
           ]
         },
@@ -106,7 +102,26 @@ module.exports = {
     },
     {
       text: '数据结构与算法',
-      link: '/passages/LeetCode-introduction/'
+      items: [
+        {
+          text: '数据结构',
+          items: [
+            {
+              text: 'data-structures',
+              link: '/passages/data-structures-introduction/'
+            }
+          ]
+        },
+        {
+          text: '算法',
+          items: [
+            {
+              text: 'LeetCode',
+              link: '/passages/LeetCode-introduction/'
+            }
+          ]
+        }
+      ]
     },
     {
       text: '关于我',

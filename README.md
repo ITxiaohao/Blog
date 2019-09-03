@@ -9,6 +9,11 @@ actionLink: '/guide/'
 footer: MIT Licensed | Copyright © 2019 Zsh
 ---
 
+## 🤦‍♂️ 数据结构与算法（完善中 🚧）
+
+- [数据结构](/passages/data-structures-introduction/)
+- [LeetCode](/passages/LeetCode-introduction/)
+
 ## 📚 前端基础（完善中 🚧）
 
 - [JavaScript 基础-上](/passages/javascript-first/)
@@ -19,7 +24,7 @@ footer: MIT Licensed | Copyright © 2019 Zsh
 - [Vue](/passages/vue-cli3/)
 - [小程序](/passages/miniprogram-note/)
 
-## ✅ 前端自动化测试（完善中 🚧）
+## ✅ 前端自动化测试
 
 - [前端自动化测试基础及实战](/passages/automated-testing-learn-introduction)
 

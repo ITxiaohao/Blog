@@ -1,8 +1,8 @@
 const { generateFileName, generateOrderFileName } = require('./utils')
 
-let webpack4Files = generateOrderFileName('/webpack4')
+let webpack4Files = generateOrderFileName('/docs/webpack4')
 
-let leetCodeEasy = generateFileName('/数据结构与算法/leetCode/easy').map(
+let leetCodeEasy = generateFileName('/docs/数据结构与算法/leetCode/easy').map(
   v => `easy/${v}`
 )
 // console.log('leetCodeEasy', leetCodeEasy)
@@ -145,13 +145,13 @@ const dataStructures = [
 ]
 
 module.exports = {
-  '/服务器部署/': server,
-  '/Git/': git,
-  '/前端知识体系/': frontend,
-  '/前端框架/': frontendFrame,
-  '/NodeJS/': node,
-  '/webpack4/': webpack4,
-  '/前端自动化测试/': test,
-  '/数据结构与算法/数据结构/': dataStructures,
-  '/数据结构与算法/LeetCode/': LeetCode
+  '/docs/服务器部署/': server,
+  '/docs/Git/': git,
+  '/docs/前端知识体系/': frontend,
+  '/docs/前端框架/': frontendFrame,
+  '/docs/NodeJS/': node,
+  '/docs/webpack4/': webpack4,
+  '/docs/前端自动化测试/': test,
+  '/docs/数据结构与算法/数据结构/': dataStructures,
+  '/docs/数据结构与算法/LeetCode/': LeetCode
 }

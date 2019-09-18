@@ -15,6 +15,7 @@ module.exports = {
   editLinkText: '在 GitHub 上编辑此页',
   lastUpdated: '更新于',
   sidebar,
+  docsDir: 'docs',
   sidebarDepth: 2,
   nav: [
     { text: '导航', link: '/guide/' },

@@ -1,6 +1,10 @@
 ---
 title: '九：JS Tree Shaking'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-tree-shaking'
 ---
 

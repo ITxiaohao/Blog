@@ -1,6 +1,10 @@
 ---
 title: '3-5：Jest 中对 DOM 节点操作的测试'
 date: 2019-07-28
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-dom'
 ---
 

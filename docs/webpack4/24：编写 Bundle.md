@@ -1,6 +1,10 @@
 ---
 title: '二十四：编写 Bundle'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-bundle'
 ---
 

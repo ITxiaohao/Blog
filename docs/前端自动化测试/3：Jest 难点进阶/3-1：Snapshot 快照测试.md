@@ -1,6 +1,10 @@
 ---
 title: '3-1 Snapshot 快照测试'
 date: 2019-07-27
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-snapshot'
 ---
 

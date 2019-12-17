@@ -1,6 +1,10 @@
 ---
 title: '十：CSS Tree Shaking'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-css-tree-shaking'
 ---
 

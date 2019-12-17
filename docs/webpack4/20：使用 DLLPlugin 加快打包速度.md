@@ -1,6 +1,10 @@
 ---
 title: '二十：使用 DLLPlugin 加快打包速度'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-dllPlugin'
 ---
 

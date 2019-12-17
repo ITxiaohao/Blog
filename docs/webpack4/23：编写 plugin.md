@@ -1,6 +1,10 @@
 ---
 title: '二十三：编写 plugin'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-plugin'
 ---
 

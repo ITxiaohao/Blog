@@ -1,6 +1,10 @@
 ---
 title: '六：Lazy Loading、Prefetching'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-lazyLoading-prefetching'
 ---
 

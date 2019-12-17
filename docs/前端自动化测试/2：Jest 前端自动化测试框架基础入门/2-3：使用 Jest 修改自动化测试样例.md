@@ -1,6 +1,10 @@
 ---
 title: '2-3：使用 Jest 修改自动化测试样例'
 date: 2019-07-24
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-modify'
 ---
 

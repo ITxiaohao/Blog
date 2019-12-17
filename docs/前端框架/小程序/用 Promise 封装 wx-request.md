@@ -1,5 +1,10 @@
 ---
 title: '用 promise 封装 wx.request'
+date: 2019-12-17
+tags:
+  - 小程序
+categories:
+  - 前端框架
 permalink: 'miniprogram-promise'
 ---
 

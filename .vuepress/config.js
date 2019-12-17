@@ -1,6 +1,7 @@
 const { mdConf, themeConf } = require('./config/')
 console.log('process.env.clientSecret', process.env.clientSecret)
 module.exports = {
+  theme: 'reco',
   //网站标题
   title: `Zsh's Blog`,
   // 主页描述
@@ -24,21 +25,28 @@ module.exports = {
       'link',
       { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }
     ]
-    // [
-    //   'link',
-    //   {
-    //     rel: 'mask-icon',
-    //     href: '/icons/safari-pinned-tab.svg',
-    //     color: '#3eaf7c'
-    //   }
-    // ],
   ],
   markdown: mdConf,
   // 主题配置
   themeConfig: themeConf,
   plugins: [
     require('./plugins/my-router'),
-    '@vuepress/back-to-top',
+    [
+      '@vuepress-reco/vuepress-plugin-kan-ban-niang',
+      {
+        theme: ['whiteCat'],
+        clean: true,
+        modelStyle: {
+          position: 'fixed',
+          right: '40px',
+          bottom: '0px',
+          opacity: '0.9',
+          zIndex: 99999
+        }
+      }
+    ],
+    '@vuepress-reco/vuepress-plugin-back-to-top',
+    ['@vuepress-reco/vuepress-plugin-screenfull', false], // disabled
     '@vuepress/medium-zoom',
     ['@vuepress/google-analytics', { ga: 'UA-144131352-1' }],
     [
@@ -70,5 +78,6 @@ module.exports = {
         }
       }
     ]
+    // 'vuepress-plugin-cat'
   ]
 }

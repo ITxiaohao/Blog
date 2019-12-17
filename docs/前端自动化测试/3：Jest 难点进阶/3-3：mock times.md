@@ -1,6 +1,10 @@
 ---
 title: '3-3：mock times'
 date: 2019-07-28
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-mock-times'
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: '四：用 Babel7 转译 ES6'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-Babel7'
 ---
 

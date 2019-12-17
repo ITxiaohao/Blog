@@ -1,6 +1,10 @@
 ---
 title: '五：Code Splitting'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-code-splitting'
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: '2-12：Jest 中的 Mock（2）'
 date: 2019-07-26
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-mock2'
 ---
 

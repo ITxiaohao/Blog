@@ -1,6 +1,10 @@
 ---
 title: '2-4：Jest 的简单配置'
 date: 2019-07-24
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-config'
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: '2-6：Jest 命令行工具的使用'
 date: 2019-07-25
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-command'
 ---
 

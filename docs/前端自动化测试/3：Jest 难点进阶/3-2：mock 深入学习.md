@@ -1,6 +1,10 @@
 ---
 title: '3-2：mock 深入学习'
 date: 2019-07-27
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-mock3'
 ---
 

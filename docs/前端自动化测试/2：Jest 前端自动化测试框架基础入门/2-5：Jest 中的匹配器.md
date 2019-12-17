@@ -1,6 +1,10 @@
 ---
 title: '2-5：Jest 中的匹配器'
 date: 2019-07-24
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-matchers'
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: '二十二：编写 loader'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-loader'
 ---
 

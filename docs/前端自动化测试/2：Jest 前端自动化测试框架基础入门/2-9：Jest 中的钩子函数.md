@@ -1,6 +1,10 @@
 ---
 title: '2-9：Jest 中的钩子函数'
 date: 2019-07-25
+tags:
+  - Jest
+categories:
+  - 自动化测试
 permalink: 'test-learn-jest-hook'
 ---
 

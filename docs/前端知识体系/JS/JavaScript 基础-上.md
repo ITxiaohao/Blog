@@ -1,5 +1,10 @@
 ---
 title: 'JavaScript 基础-上'
+date: 2019-12-17
+tags:
+  - JavaScript
+categories:
+  - JavaScript
 permalink: 'javascript-first'
 ---
 

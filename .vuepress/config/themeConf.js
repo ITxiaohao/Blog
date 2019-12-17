@@ -17,8 +17,18 @@ module.exports = {
   sidebar,
   docsDir: 'docs',
   sidebarDepth: 2,
+  blogConfig: {
+    // category: {
+    //   location: 2,
+    //   text: '分类'
+    // },
+    tag: {
+      location: 3,
+      text: '标签'
+    }
+  },
   nav: [
-    { text: '导航', link: '/guide/' },
+    // { text: '导航', link: '/guide/' },
     {
       text: '大前端',
       items: [
@@ -127,6 +137,7 @@ module.exports = {
     {
       text: '关于我',
       link: '/about/'
-    }
+    },
+    { text: '时间轴', link: '/timeLine/', icon: 'reco-date' }
   ]
 }

@@ -1,6 +1,10 @@
 ---
 title: '三：覆盖默认 entry、output'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-entry-output'
 ---
 

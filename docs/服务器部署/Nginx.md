@@ -1,5 +1,10 @@
 ---
 title: 'Nginx'
+date: 2019-12-17
+tags:
+  - Nginx
+categories:
+  - 部署
 permalink: 'server-nginx'
 ---
 

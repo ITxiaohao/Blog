@@ -19,9 +19,14 @@
   "author": "Zsh",
   "license": "MIT",
   "dependencies": {
+    "@vuepress-reco/vuepress-plugin-back-to-top": "^1.0.7",
+    "@vuepress-reco/vuepress-plugin-kan-ban-niang": "^1.0.5",
+    "@vuepress-reco/vuepress-plugin-screenfull": "^1.0.1",
     "prettier": "^1.18.2",
     "vuepress": "^1.0.2",
-    "vuepress-plugin-comment": "^0.5.4"
+    "vuepress-plugin-cat": "^1.0.3",
+    "vuepress-plugin-comment": "^0.5.4",
+    "vuepress-theme-reco": "^1.2.0-alpha.10"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.2",

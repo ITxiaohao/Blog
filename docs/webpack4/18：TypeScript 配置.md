@@ -1,6 +1,10 @@
 ---
 title: '十八：TypeScript 配置'
 date: 2019-03-20
+tags:
+  - Webpack
+categories:
+  - Webpack
 permalink: 'webpack4-typescript'
 ---
 

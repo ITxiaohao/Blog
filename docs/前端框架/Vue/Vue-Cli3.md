@@ -1,5 +1,10 @@
 ---
 title: 'Vue-Cli3'
+date: 2019-12-17
+tags:
+  - Vue
+categories:
+  - 前端框架
 permalink: 'vue-cli3'
 ---
 

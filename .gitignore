@@ -7,3 +7,5 @@
 /.vscode
 
 CHANGELOG.md
+
+*.log

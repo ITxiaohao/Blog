@@ -1,5 +1,10 @@
 ---
 title: 'Jenkins'
+date: 2019-12-17
+tags:
+  - Jenkins
+categories:
+  - 部署
 permalink: 'server-jenkins'
 ---
 

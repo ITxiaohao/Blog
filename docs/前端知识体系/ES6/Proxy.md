@@ -1,5 +1,10 @@
 ---
 title: 'proxy'
+date: 2019-12-17
+tags:
+  - JavaScript
+categories:
+  - JavaScript
 permalink: 'es6-proxy'
 ---
 

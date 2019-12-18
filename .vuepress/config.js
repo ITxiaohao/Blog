@@ -77,7 +77,8 @@ module.exports = {
             '<%- frontmatter.title %>：<%- window.location.origin %><%- frontmatter.to.path || window.location.pathname %>'
         }
       }
-    ]
+    ],
+    ['vuepress-plugin-code-copy', true]
     // 'vuepress-plugin-cat'
   ]
 }

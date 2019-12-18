@@ -13,7 +13,7 @@
     "cz": "git-cz && git push",
     "cg": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0",
     "r": "release-it",
-    "v": "npm run release && npm run changelog"
+    "v": "npm run release && npm run cg"
   },
   "keywords": [],
   "author": "Zsh",
@@ -25,6 +25,7 @@
     "prettier": "^1.18.2",
     "vuepress": "^1.0.2",
     "vuepress-plugin-cat": "^1.0.3",
+    "vuepress-plugin-code-copy": "^1.0.4",
     "vuepress-plugin-comment": "^0.5.4",
     "vuepress-theme-reco": "^1.2.0-alpha.10"
   },
